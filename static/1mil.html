@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<xmp theme="united" style="display:none;">
+
+<ul class="pager">
+<li class="previous"><a href="example0.html">← Previous example</a></li>
+<li><a href="index.html">Index</a></li>
+<li class="next"><a href="example2.html">Next example →</a></li>
+</ul>
+
+![](https://cdn-images-1.medium.com/max/600/1*K1LfSTrkhGnfvPefMnavMg.jpeg)
+Raspberry Pi Foundation. [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+
+# One Million Events Tracked in a Minute on a Raspberry Pi 3
+
+On PI day this year I started to set up the Commodore 64 of our age, the latest Raspberry PI to see how it rolls our new cloud service agnostic event tracker, [Hamustro](https://github.com/microsoftarchive/hamustro).
+
+## Preparing the RPI3
+
+I burned some time to realize things you just better don’t want to do as of the time of the installation:
+
+* install Ubuntu (both the [Snappy](https://developer.ubuntu.com/en/snappy/start/raspberry-pi-2/) and the [Mate](https://ubuntu-mate.org/raspberry-pi/) images failed to boot),
+* start a VNC Server automatically (update: this [setup](https://github.com/amzn/alexa-avs-raspberry-pi#23-install-vnc-server) works and on OSX you have to use [VNC Viewer](http://www.realvnc.com/download/vnc/latest/) to connect),
+* SSH in via Wifi.
+
+## Get an OS
+
+To get a working set up I put the [Noobs Lite](https://www.raspberrypi.org/downloads/noobs/) with the [SD Card Formatter](https://www.sdcard.org/downloads/formatter_4/) on my OSX and after booting up the RPI I installed a *Raspbian* from the internet. If your install is successful you should be able to login remotely to the RPI.
+
+```
+$ ssh pi@RASPBERRY_IP
+pi@RASPBERRY_IP's password: raspberry
+```
+
+## Set up phoning home
+
+I used a monitor, a keyboard and a mouse for the setup process, but as I wanted to get rid of them I configured the PI that it always mails me the IP of the RPI if it changes — so I can SSH in.
+
+```
+$ sudo apt-get install ssmtp
+$ sudo apt-get install mailutils
+$ sudo nano /etc/ssmtp/ssmtp.conf
+```
+
+Easiest if you set up Gmail as an SMTP provider — if you have two factor authentication switched on you should set up an [App Password](https://support.google.com/accounts/answer/185833?hl=en) for this connection.
+
+```
+# this should go into the ssmtp.conf
+root=postmaster
+mailhub=smtp.gmail.com:587
+hostname=raspberrypi
+AuthUser=YOURGMAIL@gmail.com
+AuthPass=TheGmailPassword
+FromLineOverride=YES
+UseSTARTTLS=YES
+```
+
+Test the setup with sending an email to yourself.
+
+```
+$ echo “talks.” | mail -s “Raspie” YOURGMAIL@gmail.com
+```
+
+Let’s hook the IP check into *cron*. This script checks whether anything changed in the networking setup.
+
+```
+$ sudo nano /home/pi/check_ip.sh
+
+#!/bin/bash
+diff <(/sbin/ifconfig | grep inet) <(cat ~/last_ifconfig)
+/sbin/ifconfig | grep inet > ~/last_ifconfig
+```
+
+Let’s run this check every minute.
+
+```
+$ crontab -e
+
+MAILTO=YOURGMAIL@gmail.com
+*/1 * * * * /home/pi/check_ip.sh
+```
+If your `locale` behaves you can fix it like [this](http://www.jaredwolff.com/blog/raspberry-pi-setting-your-locale/).
+
+## Set up Hamustro
+
+This collector meant to be a highly available RESTful web service that receives events from client devices and secures them agnostic of cloud targets. It has been tested on X64 Ubuntu and OSX and this is the first time we try to get in running on an ARM architecture.
+
+```
+$ git clone https://github.com/wunderlist/hamustro.git
+$ cd hamustro
+```
+
+Hamustro is implemented in Go and utilizes Protobuf. The original documentation and install scripts cover Ubuntu and OSX, but not ARM, so we have to fake the following lines manually.
+
+```
+# sudo make install/go && source ~/.profile
+# sudo make install/protobuf
+```
+
+## Set up Go
+
+First let’s try to [skip compiling Go from source](http://dave.cheney.net/unofficial-arm-tarballs) to save some time.
+
+```
+$ wget http://dave.cheney.net/paste/go1.5.3.linux-arm.tar.gz
+$ sudo tar -C /usr/local -xzf go1.5.3.linux-arm.tar.gz
+$ mkdir -p /usr/local/gopath
+$ sudo chmod 777 /usr/local/gopath
+
+$ sudo nano /etc/profile
+
+# add this line
+export PATH=$PATH:/usr/local/go/bin
+```
+
+## Set up Protobuf
+
+Hamustro can handle both Protobuf and JSON messages, but let’s opt for the first one as it is faster to write and read and is leaner on the amount of data transmitted by each client. Used the [Tensorflow](https://github.com/samjabrahams/tensorflow-on-raspberry-pi/blob/master/GUIDE.md#2-build-protobuf) tutorial here.
+
+```
+$ sudo apt-get update
+$ sudo apt-get install autoconf automake libtool maven
+
+# if you do get a 'Segmentation fault' like me just
+# sudo dpkg — configure -a
+# and try the install again
+
+$ git clone https://github.com/google/protobuf.git
+$ cd protobuf
+$ ./autogen.sh 
+$ ./configure --prefix=/usr
+$ make -j 4
+$ sudo make install
+$ cd java
+$ mvn package
+```
+
+## The Real McCoy
+
+Now we can resume to the original Hamustro install docs.
+
+```
+$ make install/pkg
+$ make install/symlink
+```
+
+We won’t install the latter items as we plan to run the stress test form an other machine. Let’s set up a data store that will receive our test messages in the stress test and start the server. We’ve chosen the Azure Blob Storage — it’s performance is on a par with AWS S3. Worker size is the number of CPUs plus one. Buffer size determines when the workers flush their buffer.
+
+```
+$ nano config/config.json
+
+{
+  "dialect": “abs”,
+  "logfile": “”,
+  "max_worker_size": 5,
+  "max_queue_size": 100,
+  "buffer_size": 5000,
+  "spread_buffer_size": true,
+  "shared_secret": "SECRET",
+  "abs": {
+    "account": “ACCOUNT",
+    "access_key": "KEY",
+    "container": "CONTAINER",
+    "blob_path": "hamustro/{date}/",
+    "file_format": "csv"
+  }
+}
+
+$ export HAMUSTRO_CONFIG="config/config.json"
+$ export HAMUSTRO_HOST="localhost"
+$ export HAMUSTRO_PORT="8080"
+
+$ make server
+```
+
+Maybe now it’s better to [save this image](https://www.raspberrypi.org/documentation/linux/filesystem/backup.md) ;)
+
+## Time for stress test!
+
+I ran the stress test from a separate Ubuntu VM on my OSX where I also installed Hamustro. Let’s prepare some test files containing multiple events for Protobuf and run the attack.
+
+```
+$ cd hamustro
+$ make tests/protobuf/n
+```
+
+The test ran for 1 minute and the RPI3 managed to collect and put into Azure Blob Store 70.063 requests containing multiple messages in a minute (1165.81 req/sec). These requests contained 912.500 events. With a 5k buffer size the memory usage was below 30%, although the workers maxed out the CPU. You can find below more benchmarks on different queue sizes. The 75k buffer size maxes out the 1 Gb memory of the RPI.
+
+```
+|BUFFER| REQ/MIN| REQ/SEC | FILES |     TOTAL |
+| SIZE |        |         |       |    EVENTS |
+----------------------------------------------
+|   5k | 70,063 | 1165.81 | 182,5 |   912,500 |
+|  10k | 78,642 | 1308.78 | 104,5 | 1,045,000 |
+|  15k | 82,893 | 1379.98 |  72,5 | 1,087,500 |
+|  50k | 92,255 | 1535.04 |  24,5 | 1,225,000 |
+|  75k | 97,779 | 1627.05 |  17,5 | 1,312,500 |
+```
+
+To give these numbers a perspective this means that the total client tracking needs of Wunderlist as of March 2016 could be taken over by a single RPI3.
+
+(P.S. Take these benchmarks with a pinch of salt as network connection can severely damage the throughput — in this case the RPI ran on my desk, had a direct cable connection to my OSX and the whole setup reached the corporate network.)
+
+Thanks to [Bence](https://medium.com/@bfaludi) for his help with the setup and providing feedback on legibility.
+
+<footer class="bg-light text-center text-lg-start">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    2020 Copyright:
+    <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+
+</xmp>
+
+<script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
+</html>
