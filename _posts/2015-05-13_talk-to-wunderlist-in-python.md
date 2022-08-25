@@ -2,6 +2,7 @@
 layout: post
 title: Talk to Wunderlist in Python
 category: post
+date: 2015-05-13
 ---
 
 # Talk to Wunderlist in Python
