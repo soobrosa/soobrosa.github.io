@@ -4,7 +4,7 @@ title: User Session Flows with Redshift
 category: post
 ---
 
-[!img](https://cdn-images-1.medium.com/max/800/1*MQwzTgK34YMhxW85oZcPsA.jpeg)
+[image-title-here](https://cdn-images-1.medium.com/max/800/1*MQwzTgK34YMhxW85oZcPsA.jpeg){:class="img-responsive"}
 
 “[Dark Flow](https://www.flickr.com/photos/wumengyu/4649272817/in/photolist-85QJQa-Bvdd3-Bvee1-nKGCrs-pGf5U-bmEQF-qDaMsZ-aCnsvQ-p5EoUj-oCoFE7-qRKVZR-6oQCz4-p7GAdV-4ZQNTG-c9d3i9-mQ8n4A-bUudUS-b3swWg-vykD6U-cH5pf5-ajedD7-kvovFY-r3LED4-9Ak7xt-7bsjEd-2KobTx-shWETS-52twxF-6FbxhH-bd2PkX-cc12Y5-58yNnF-ENLkq-3vsta5-dQZKEj-p2a7HV-GagQb-4G9Gkc-CUxR8-hDEvMW-e3e5UP-dLYHPv-4APTVL-o5AFFA-nP49Tb-dZyPt-9EnorJ-85F9wn-dL3dWf-85TUF1)” by WU MENGYU is licensed under CC BY-NC-ND 2.0.
 
