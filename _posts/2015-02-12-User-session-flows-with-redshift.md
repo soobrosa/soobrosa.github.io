@@ -3,6 +3,11 @@ layout: post
 title: User Session Flows with Redshift
 category: post
 ---
+
+[!img](https://cdn-images-1.medium.com/max/800/1*MQwzTgK34YMhxW85oZcPsA.jpeg)
+
+“[Dark Flow](https://www.flickr.com/photos/wumengyu/4649272817/in/photolist-85QJQa-Bvdd3-Bvee1-nKGCrs-pGf5U-bmEQF-qDaMsZ-aCnsvQ-p5EoUj-oCoFE7-qRKVZR-6oQCz4-p7GAdV-4ZQNTG-c9d3i9-mQ8n4A-bUudUS-b3swWg-vykD6U-cH5pf5-ajedD7-kvovFY-r3LED4-9Ak7xt-7bsjEd-2KobTx-shWETS-52twxF-6FbxhH-bd2PkX-cc12Y5-58yNnF-ENLkq-3vsta5-dQZKEj-p2a7HV-GagQb-4G9Gkc-CUxR8-hDEvMW-e3e5UP-dLYHPv-4APTVL-o5AFFA-nP49Tb-dZyPt-9EnorJ-85F9wn-dL3dWf-85TUF1)” by WU MENGYU is licensed under CC BY-NC-ND 2.0.
+
 [Redshift](http://aws.amazon.com/redshift/) is like crack, it’s so superfast you just can’t go back to anything normal. Feels like an MVP where you don’t get all the jingles of a proper PSQL, but it’s blazing fast and you keep smiling and forget about all the bad parts — if you would like to do something more sophisticated, your options are quite limited like Torsten did on [expanding JSON arrays](http://torsten.io/stdout/expanding-json-arrays-to-rows/) or figuring out [how many bytes long are actually unicode strings](https://twitter.com/t0rsten/status/555389464131166209)
 ?
 
