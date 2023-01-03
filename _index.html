@@ -1,0 +1,47 @@
+---
+layout: default
+title: soobrosa
+---
+
+<div id="home">
+  <h1>No upcoming talks.</h1>
+
+<div id="home">
+  <h1>Blog Posts</h1>
+  <ul class="posts">
+    <li><span>18th Feb 2022</span> &raquo; <a href="https://www.dataengineering.academy/pipeline-data-engineering-academy-blog/learn-data-engineering-on-a-shoestring-free-courses">Learn data engineering on a shoestring - Part 2</a> @ PDAE
+    <li>&nbsp;</li>
+    <li><span>26th July 2021</span> &raquo; <a href="https://www.dataengineering.academy/pipeline-data-engineering-academy-blog/how-to-teach-data-engineering">How to teach data engineering</a> @ Pipeline Data Engineering Academy
+    <li><span>29th Jun 2021</span> &raquo; <a href="https://www.dataengineering.academy/pipeline-data-engineering-academy-blog/pipeline-academy-on-the-data-engineering-podcast-vol2">Pipeline Academy on the Data Engineering Podcast Vol. 2</a> @ PDAE
+    <li>&nbsp;</li>
+    <li><span>15th Dec 2020</span> &raquo; <a href="https://www.dataengineering.academy/pipeline-data-engineering-academy-blog/become-a-data-engineer-on-a-shoestring">Become a data engineer on a shoestring</a> @ PDAE
+    <li><span>3rd Oct 2020</span> &raquo; <a href="https://www.dataengineering.academy/pipeline-data-engineering-academy-blog/presenting-and-teaching-via-zoom-101">Presenting and Teaching via Zoom 101</a> @ PDAE
+    <li><span>23rd Sept 2020</span> &raquo; <a href="https://www.dataengineering.academy/pipeline-data-engineering-academy-blog/data-engineering-podcast-pipeline-academy">Data Engineering Podcast With The Data Janitor</a> @ PDAE
+    <li><span>7th Aug 2020</span> &raquo; <a href="https://www.dataengineering.academy/pipeline-data-engineering-academy-blog/data-engineering-data-janitor-keynotes">I'm not an expert, I have experience</a> @ PDAE
+    <li><span>21st June 2020</span> &raquo; <a href="https://www.dataengineering.academy/pipeline-data-engineering-academy-blog/data-engineering-keynotes-to-remember">Keynotes to remember</a> @ PDAE
+    <li><span>17th May 2020</span> &raquo; <a href="https://www.dataengineering.academy/pipeline-data-engineering-academy-blog/own-your-data-like-fo-real">Own Your Data - like fo' real.</a> @ PDAE
+    <li>&nbsp;</li>
+    <li><span>10th April 2018</span> &raquo; POSTER: "Towards an IoT platform with long-range wireless communication for atmospheric sensing" at <a href="https://www.egu2018.eu">EGU 2018</a> in Vienna (<a href="https://meetingorganizer.copernicus.org/EGU2018/EGU2018-12200.pdf">pdf</a>)
+    <li>&nbsp;</li>
+    <li><span>6th September 2017</span> &raquo; <a href="http://soobrosa.info/static/2017-09-06_deep-learning-on-the-edge-first-impressions-of-the-movidius-neural-compute-stick.html">Deep Learning on the Edge — First Impressions of the Movidius Neural Compute Stick</a>
+    <li>&nbsp;</li>
+    <li><span>6 September 2016</span> &raquo; <a href="http://soobrosa.info/static/iot.html">Venturing down the IoT Rabbit Hole</a>
+    <li><span>5 April 2016</span> &raquo; <a href="http://soobrosa.info/static/2016-04-05_my-humble-james-mickens-shrine-aka-the-only-real-combined-cs-degree-and-mba-you-will-ever-need.html">My humble James Mickens Shrine a.k.a. the only _real_ combined CS degree and MBA you will ever need </a>
+    <li><span>22 March 2016</span> &raquo; <a href="http://soobrosa.info/static/1mil.html">1M Events Tracked in a Minute on a RPI3</a>
+    <li><span>5 Feb 2016</span> &raquo; Own the list of your favourite tracks on Spotify (<a href="https://gist.github.com/soobrosa/a6119b2ee35555c296f3">Gist</a>)
+    <li><span>2 Feb 2016</span> &raquo; <a href="http://soobrosa.info/static/2016-02-02_is-yelp-international-an-excuse-to-roll-data-with-the-command-line.html">Is Yelp international? — An excuse to roll data with the command line</a>
+    <li>&nbsp;</li>
+    <li><span>13 Nov 2015</span> &raquo; <a href="http://soobrosa.info/static/2015-11-13_presenting-101.html">Presenting 101</a>
+    <li><span>13 May 2015</span> &raquo; <a href="http://soobrosa.info/static/2015-05-13_talk-to-wunderlist-in-python.html">Talk to Wunderlist in Python</a>
+    
+    {% for post in site.categories["post"] %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+
+  <h1>Archives</h1>
+  <ul class="posts">
+    <li><span>2009-2013</span> &raquo; <a href="http://adatkelet.blog.hu/">adatkelet.blog.hu</a> (mostly Hungarian language data blog)</li>
+  </ul>
+
+</div>
