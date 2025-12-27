@@ -61,6 +61,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 20px;
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -73,6 +74,17 @@
             font-size: 60px;
             color: white;
             user-select: none;
+            cursor: pointer;
+            transition: transform 0.2s, color 0.2s;
+        }
+
+        .icon:hover {
+            transform: scale(1.1);
+            color: var(--accent);
+        }
+
+        .download-icon {
+            font-size: 50px;
         }
 
         /* Loading Spinner */
@@ -124,10 +136,25 @@
                 <img src="${mix.cover}" alt="${mix.title}">
                 <div class="overlay">
                     <div class="spinner"></div>
-                    <div class="icon">▶</div>
+                    <div class="icon play-icon">▶</div>
+                    <div class="icon download-icon" title="Download">⬇</div>
                 </div>
             `;
 
+            const playIcon = card.querySelector('.play-icon');
+            const downloadIcon = card.querySelector('.download-icon');
+
+            playIcon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                handlePlayPause(mix, card);
+            });
+
+            downloadIcon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                downloadMix(mix);
+            });
+
+            // Keep card click for play/pause as fallback
             card.addEventListener('click', () => {
                 handlePlayPause(mix, card);
             });
@@ -160,7 +187,7 @@
 
         function updateUI() {
             if (!currentCard) return;
-            const icon = currentCard.querySelector('.icon');
+            const icon = currentCard.querySelector('.play-icon');
             
             if (currentAudio.paused) {
                 icon.innerText = '▶';
@@ -169,6 +196,15 @@
                 icon.innerText = '⏸';
                 currentCard.classList.add('playing');
             }
+        }
+
+        function downloadMix(mix) {
+            const link = document.createElement('a');
+            link.href = mix.url;
+            link.download = `${mix.title}.mp3`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         // Buffering Events
