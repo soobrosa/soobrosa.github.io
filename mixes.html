@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Mixes | Cloudflare R2 + GitHub</title>
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --card-bg: #1e1e1e;
+            --accent: #1DB954; /* Spotify Green style */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 { margin-bottom: 40px; font-weight: 800; letter-spacing: -1px; }
+
+        /* The Responsive Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .mix-card {
+            position: relative;
+            background: var(--card-bg);
+            aspect-ratio: 1 / 1;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .mix-card:hover { transform: scale(1.05); }
+
+        .mix-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s;
+        }
+
+        /* Overlay & Icons */
+        .overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .mix-card:hover .overlay, .mix-card.playing .overlay, .mix-card.loading .overlay {
+            opacity: 1;
+        }
+
+        .icon {
+            font-size: 60px;
+            color: white;
+            user-select: none;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* State Classes */
+        .mix-card.loading .spinner { display: block; }
+        .mix-card.loading .icon { display: none; }
+        
+        .mix-card.playing .icon { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <h1>My Mixes</h1>
+
+    <div class="grid" id="mix-grid"></div>
+
+    <script>
+        // CONFIGURATION: Replace with your actual R2 URLs and cover image paths
+        const mixes = [
+            { id: 1, title: "Mix One", url: "https://c1a2cf4ff7b99223b53cbc7a2685b989.r2.cloudflarestorage.com/mixes/ertnezeit.mp3", cover: "covers/erntezeit.jpg" },
+            { id: 2, title: "Mix Two", url: "https://c1a2cf4ff7b99223b53cbc7a2685b989.r2.cloudflarestorage.com/mixes/mi_ti_se_kunemo.mp3", cover: "covers/mi_ti_se_kunemo.jpg" },
+            { id: 3, title: "Mix One", url: "https://c1a2cf4ff7b99223b53cbc7a2685b989.r2.cloudflarestorage.com/mixes/staatsräson.mp3", cover: "covers/staatsräson.jpg" },
+            { id: 4, title: "Mix Two", url: "https://c1a2cf4ff7b99223b53cbc7a2685b989.r2.cloudflarestorage.com/mixes/witness_the_fitness.mp3", cover: "covers/witness_the_fitness.png" },
+        ];
+
+        const grid = document.getElementById('mix-grid');
+        let currentAudio = new Audio();
+        let currentCard = null;
+
+        // Setup the Grid
+        mixes.forEach(mix => {
+            const card = document.createElement('div');
+            card.className = 'mix-card';
+            card.innerHTML = `
+                <img src="${mix.cover}" alt="${mix.title}">
+                <div class="overlay">
+                    <div class="spinner"></div>
+                    <div class="icon">▶</div>
+                </div>
+            `;
+
+            card.addEventListener('click', () => {
+                handlePlayPause(mix, card);
+            });
+
+            grid.appendChild(card);
+        });
+
+        function handlePlayPause(mix, card) {
+            // If clicking the same track
+            if (currentAudio.src === mix.url) {
+                if (currentAudio.paused) {
+                    currentAudio.play();
+                } else {
+                    currentAudio.pause();
+                }
+                updateUI();
+                return;
+            }
+
+            // If playing a new track
+            if (currentCard) {
+                currentCard.classList.remove('playing', 'loading');
+            }
+            
+            currentAudio.src = mix.url;
+            currentCard = card;
+            currentAudio.play();
+            updateUI();
+        }
+
+        function updateUI() {
+            if (!currentCard) return;
+            const icon = currentCard.querySelector('.icon');
+            
+            if (currentAudio.paused) {
+                icon.innerText = '▶';
+                currentCard.classList.remove('playing');
+            } else {
+                icon.innerText = '⏸';
+                currentCard.classList.add('playing');
+            }
+        }
+
+        // Buffering Events
+        currentAudio.onwaiting = () => currentCard?.classList.add('loading');
+        currentAudio.onplaying = () => currentCard?.classList.remove('loading');
+        currentAudio.onpause = () => updateUI();
+        currentAudio.onplay = () => updateUI();
+
+    </script>
+</body>
+</html>
