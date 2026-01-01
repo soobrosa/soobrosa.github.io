@@ -116,25 +116,26 @@
     <div class="grid" id="mix-grid"></div>
 
     <script>
-        // CONFIGURATION: Replace with your actual R2 URLs and cover image paths
-        const mixes = [
-            { id: 1, title: "Mix One", url: "https://pub-98cfcab6206649ca880955ca14b9253e.r2.dev/ertnezeit.mp3", cover: "covers/erntezeit.jpg" },
-            { id: 2, title: "Mix Two", url: "https://pub-98cfcab6206649ca880955ca14b9253e.r2.dev/mi_ti_se_kunemo.mp3", cover: "covers/mi_ti_se_kunemo.jpg" },
-            { id: 3, title: "Mix One", url: "https://pub-98cfcab6206649ca880955ca14b9253e.r2.dev/staatsr%C3%A4son.mp3", cover: "covers/staatsr%C3%A4son.jpg" },
-            { id: 4, title: "Mix Two", url: "https://pub-98cfcab6206649ca880955ca14b9253e.r2.dev/witness_the_fitness.mp3", cover: "covers/witness_the_fitness.png" },
-            { id: 5, title: "Acid Balcony Covid Disco", url: "https://pub-98cfcab6206649ca880955ca14b9253e.r2.dev/acid_balcony_covid_disco.mp3", cover: "covers/acid_balcony_covid_disco.jpg" },
-            { id: 6, title: "Sommerfest", url: "https://pub-98cfcab6206649ca880955ca14b9253e.r2.dev/sommerfest.mp3", cover: "covers/sommerfest.jpg" },
-            { id: 7, title: "Soobrosa Dojo", url: "https://pub-98cfcab6206649ca880955ca14b9253e.r2.dev/soobrosa-dojo.mp3", cover: "covers/soobrosa-dojo.png" },
-            { id: 8, title: "Soobrosa Zweiheit", url: "https://pub-98cfcab6206649ca880955ca14b9253e.r2.dev/soobrosa-zweiheit.mp3", cover: "covers/soobrosa-zweiheit.png" },
-            { id: 9, title: "Unzerstörbar", url: "https://pub-98cfcab6206649ca880955ca14b9253e.r2.dev/unzerstoerbar.mp3", cover: "covers/unzerstoerbar.jpeg" },
-        ];
-
         const grid = document.getElementById('mix-grid');
         let currentAudio = new Audio();
         let currentCard = null;
+        let mixes = [];
+
+        // Load mixes from external JSON file
+        fetch('mixes.json')
+            .then(response => response.json())
+            .then(data => {
+                mixes = data;
+                setupGrid();
+            })
+            .catch(error => {
+                console.error('Error loading mixes:', error);
+                grid.innerHTML = '<p style="color: red;">Failed to load mixes. Please check mixes.json</p>';
+            });
 
         // Setup the Grid
-        mixes.forEach(mix => {
+        function setupGrid() {
+            mixes.forEach(mix => {
             const card = document.createElement('div');
             card.className = 'mix-card';
             card.innerHTML = `
@@ -165,7 +166,8 @@
             });
 
             grid.appendChild(card);
-        });
+            });
+        }
 
         function handlePlayPause(mix, card) {
             // If clicking the same track
