@@ -143,7 +143,7 @@
         fetch('mixes.json')
             .then(response => response.json())
             .then(data => {
-                mixes = data;
+                mixes = data.sort((a, b) => b.id - a.id);
                 setupGrid();
             })
             .catch(error => {
