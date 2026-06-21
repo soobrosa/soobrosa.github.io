@@ -1,0 +1,34 @@
+---
+title: My humble James Mickens Shrine a.k.a. the only **real** combined CS degree and MBA you will ever need
+date: 
+kind: essay
+tags: data
+---
+
+Whenever I feel sad I just come here. Thank you, [~James](https://twitter.com/markovmickens)!
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ajGX7odA87k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[To Wash It All Away](https://scholar.harvard.edu/files/mickens/files/towashitallaway.pdf)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/15RTC22Z2xI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mDwUJa4_IJE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[This World of Ours](https://www.usenix.org/system/files/1401_08-12_mickens.pdf)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7Nj9ZjwOdFQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe src="https://player.vimeo.com/video/95066828?h=2b5433dc49&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+<iframe src="https://player.vimeo.com/video/146524997?h=c6941020b7" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+[The Night Watch](http://scholar.harvard.edu/files/mickens/files/thenightwatch.pdf)
+
+<iframe src="https://player.vimeo.com/video/135347162?h=70be5b1cf9" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+[The Saddest Moment](http://scholar.harvard.edu/files/mickens/files/thesaddestmoment.pdf)
+
+<iframe src="https://player.vimeo.com/video/111122950?h=3cc6cbc66b&color=ffffff" width="640" height="384" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+[The Slow Winter](http://scholar.harvard.edu/files/mickens/files/theslowwinter.pdf)

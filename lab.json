@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Mixes Player",
+    "blurb": "A self-hosted grid player streaming two decades of DJ mixes from R2.",
+    "url": "/mixes.html",
+    "external": false,
+    "tech": ["html", "js", "cloudflare-r2"]
+  },
+  {
+    "name": "REPLACE ME — external app",
+    "blurb": "Edit lab.json to add your apps. Set external:true for things hosted elsewhere.",
+    "url": "https://example.com",
+    "external": true,
+    "tech": ["python", "fastapi"]
+  },
+  {
+    "name": "REPLACE ME — in-repo app",
+    "blurb": "Drop an app folder in the repo and point url to /myapp/ with external:false.",
+    "url": "/index.html",
+    "external": false,
+    "tech": ["react"]
+  }
+]
