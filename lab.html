@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAB // soobrosa</title>
+<meta name="description" content="Apps and experiments by Daniel Molnar.">
+<link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+<main class="wrap">
+  <nav class="topnav">
+    <a class="brand" href="/index.html">soobrosa</a>
+    <a href="/index.html">BIO</a>
+    <a href="/mixes.html">MIXES</a>
+    <a href="/words.html">WORDS</a>
+    <a href="/lab.html" class="active">LAB</a>
+  </nav>
+
+  <h1 class="title">LAB</h1>
+  <p class="hint">Apps and experiments. Some self-hosted here, some living elsewhere.</p>
+
+  <div class="lab-grid" id="grid"></div>
+  <div class="empty" id="empty" style="display:none">! NOTHING SHIPPED YET !</div>
+
+  <footer class="foot">DANIEL MOLNAR &middot; soobrosa@gmail.com &middot; <a href="https://github.com/soobrosa">github</a></footer>
+</main>
+
+<script>
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  fetch('/lab.json')
+    .then(r => r.json())
+    .then(apps => {
+      if (!apps.length) { empty.style.display = 'block'; return; }
+      grid.innerHTML = apps.map(a => {
+        const ext = a.external ? ' target="_blank" rel="noopener"' : '';
+        const tag = a.external ? '<div class="ext">EXTERNAL &#8599;</div>' : '<div class="ext">SELF-HOSTED</div>';
+        const techs = (a.tech || []).map(t => `<span>${t}</span>`).join('');
+        return `<a class="card" href="${a.url}"${ext}>${tag}<h2>${a.name}</h2><p>${a.blurb}</p><div class="techs">${techs}</div></a>`;
+      }).join('');
+    })
+    .catch(() => { empty.textContent = '! FAILED TO LOAD lab.json !'; empty.style.display = 'block'; });
+</script>
+</body>
+</html>
