@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniel Molnar — soobrosa</title>
+<style>
+  :root {
+    --bg:#08080b; --text:#ededf2; --muted:#7a7a86; --line:#1c1c22;
+    --g1:#f0abfc; --g2:#818cf8; --g3:#22d3ee; --accent:#a78bfa;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.7; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  body::before {
+    content:""; position:fixed; inset:0; z-index:-1;
+    background:
+      radial-gradient(60% 50% at 75% 0%, rgba(129,140,248,.18), transparent 70%),
+      radial-gradient(50% 40% at 10% 20%, rgba(236,72,153,.12), transparent 70%);
+  }
+  .wrap { max-width:760px; margin:0 auto; padding:48px 24px 110px; }
+
+  nav { display:flex; align-items:center; gap:22px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; letter-spacing:.02em; margin-bottom:80px; }
+  nav .brand { color:var(--text); font-weight:600; margin-right:auto; }
+  nav a { color:var(--muted); text-decoration:none; transition:color .2s; }
+  nav a:hover, nav a.active { color:var(--text); }
+
+  .kicker { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:22px; display:flex; gap:14px; align-items:center; }
+  .kicker .slash { color:var(--accent); }
+  .kicker .geo { margin-left:auto; color:#55555f; }
+
+  h1 {
+    font-size:clamp(40px,8vw,72px); font-weight:800; letter-spacing:-.03em; line-height:1.02; margin-bottom:24px;
+    background:linear-gradient(110deg,var(--g1),var(--g2),var(--g3),var(--g2),var(--g1));
+    background-size:300% 100%; -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:shimmer 8s ease-in-out infinite;
+  }
+  @keyframes shimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+
+  .lead { font-size:20px; color:#c4c4cf; max-width:60ch; margin-bottom:40px; }
+
+  p { margin-bottom:20px; font-size:16px; color:#b8b8c4; }
+  a.inline { color:var(--text); text-decoration:none; border-bottom:1px solid rgba(167,139,250,.5); transition:color .2s,border-color .2s; }
+  a.inline:hover { color:var(--accent); border-color:var(--accent); }
+
+  .cta { display:flex; gap:14px; flex-wrap:wrap; margin:36px 0 64px; }
+  .btn { font-size:14px; font-weight:600; text-decoration:none; padding:13px 22px; border-radius:999px; transition:transform .15s, box-shadow .2s; }
+  .btn.primary { color:#0a0a0f; background:linear-gradient(110deg,var(--g1),var(--g3)); box-shadow:0 8px 30px rgba(129,140,248,.35); }
+  .btn.primary:hover { transform:translateY(-2px); box-shadow:0 12px 38px rgba(129,140,248,.5); }
+  .btn.ghost { color:var(--text); border:1px solid var(--line); }
+  .btn.ghost:hover { border-color:var(--accent); }
+
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+  .stat { background:var(--bg); padding:24px 20px; }
+  .stat .n { font-size:30px; font-weight:800; background:linear-gradient(110deg,var(--g2),var(--g3)); -webkit-background-clip:text; background-clip:text; color:transparent; letter-spacing:-.02em; }
+  .stat .l { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-top:6px; }
+
+  .socials { display:flex; flex-wrap:wrap; gap:12px; margin-top:48px; }
+  .socials a { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; color:var(--muted); text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:8px 16px; transition:all .2s; }
+  .socials a:hover { color:var(--text); border-color:var(--accent); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <span class="brand">soobrosa</span>
+      <a href="#" class="active">bio</a>
+      <a href="../mixes.html">mixes</a>
+      <a href="words-flashy.html">words</a>
+    </nav>
+
+    <div class="kicker"><span class="slash">///</span> 00 — bio <span class="geo">[47.50°N, 19.04°E] Budapest</span></div>
+    <h1>Daniel Molnar.<br>Data janitor &amp; DJ.</h1>
+    <p class="lead">Two decades of building data, companies and dancefloors. aka soobrosa / b2men.</p>
+
+    <div class="cta">
+      <a class="btn primary" href="../mixes.html">Play the mixes ↗</a>
+      <a class="btn ghost" href="words-flashy.html">Read the words</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="n">5+</div><div class="l">companies cofounded</div></div>
+      <div class="stat"><div class="n">20yr</div><div class="l">behind the decks</div></div>
+      <div class="stat"><div class="n">10M+</div><div class="l">users served data</div></div>
+    </div>
+
+    <p style="margin-top:48px">I cofounded companies like <a class="inline" href="https://dataengineering.academy">Pipeline Data Engineering Academy</a>, the world's first data engineering bootcamp, <a class="inline" href="http://www.digitalnatives.hu/">Digital Natives</a>, Coedu E-learning, Carnation (acquired by <a class="inline" href="https://www.adhugger.net/2012/04/04/possible-worldwide-aquired-carnation-group-also-active-on-romanian-market/">WPP</a>) and <a class="inline" href="http://tyrell.hu/">Tyrell Hungary</a>.</p>
+    <p>Built <a class="inline" href="https://www.shopify.com/">Shopify</a>, <a class="inline" href="http://www.microsoft.com/">Microsoft</a>, <a class="inline" href="https://en.wikipedia.org/wiki/Wunderlist">Wunderlist</a>. Did my part on the <a class="inline" href="https://speakerdeck.com/soobrosa">conference circuit</a>.</p>
+    <p>I was a DJ for two decades. We rolled <a class="inline" href="http://www.facebook.com/pages/BUDAPESTI-BOOTLEG-BALH%C3%89/109380179084493">Bootleg Balhé</a>, the music blog <a class="inline" href="http://web.archive.org/web/20060203033641/http://mangare.newfocus.hu/?">mangare</a>, and <a class="inline" href="http://getupat9.tyrell.hu/">Getup@9 Records</a>. My last album is <a class="inline" href="https://soundcloud.com/soobrosa/sets/auto-mito-logi">auto mito logi</a> for <a class="inline" href="https://mychvr.ch">mychvr.ch</a>.</p>
+
+    <div class="socials">
+      <a href="http://www.mixcloud.com/soobrosa/">Mixcloud</a>
+      <a href="http://soundcloud.com/soobrosa">SoundCloud</a>
+      <a href="http://www.linkedin.com/in/soobrosa">LinkedIn</a>
+      <a href="https://github.com/soobrosa">GitHub</a>
+      <a href="https://pinboard.in/u:soobrosa">Pinboard</a>
+    </div>
+  </div>
+</body>
+</html>

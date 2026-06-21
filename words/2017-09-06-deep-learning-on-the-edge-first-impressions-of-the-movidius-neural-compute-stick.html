@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep Learning on the Edge — First Impressions of the Movidius Neural Compute Stick // soobrosa</title>
+<link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+<main class="wrap narrow">
+<nav class="topnav"><a class="brand" href="/index.html">soobrosa</a><a href="/index.html">BIO</a><a href="/mixes.html">MIXES</a><a href="/words.html" class="active">WORDS</a><a href="/lab.html">LAB</a></nav>
+<a class="back" href="/words.html">&lt;&lt; ALL WORDS</a>
+<article class="post">
+<h1>Deep Learning on the Edge — First Impressions of the Movidius Neural Compute Stick</h1>
+<div class="meta">soobrosa</div>
+<h2>tl;dr It is cheap, fast and low-powered.</h2>
+<p><strong>(Updated with Raspberry PI and Tensorflow developments.)</strong></p>
+<p>I still remember my excitement in April 2016 when Movidius <a href="https://www.movidius.com/news/movidius-announces-deep-learning-accelerator-and-fathom-software-framework">announced</a> the soon-availability of the Fathom Neural Compute Stick that promised low-power ML capabilities for end devices. I tried to move mountains to get hold of a piece to no avail. Intel seemed to be more interested than me as they <a href="https://www.movidius.com/news/ceo-post-september-2016">acquired</a> the company in September — this definitely didn’t got me closer to grab the hardware. I waited patiently, hinted to my excitement of the possibility of distributed deep learning in my <a href="https://speakerdeck.com/soobrosa/tensorflow-for-janitors">Tensorflow for Janitors</a> presentation at the <a href="https://craft-conf.com/">CRAFT Conference</a>. Then on July 20th 2017 I managed to order one of the first few hundreds of sticks made available for the general audience.</p>
+<h1>The good and the bad</h1>
+<p>Opening the box and playing a lot came with the following pros and cons.</p>
+<p>Pros:</p>
+<ul>
+<li>it’s a lovely piece of rugged hardware,</li>
+<li>it delivers speed as it’s promised (although figuring that out was a bit trickier than expected),</li>
+<li>Python binding (okay, it’s just Python 3)</li>
+<li>full-fledged Raspberry PI support,</li>
+<li>Tensorflow support besides Caffe,</li>
+<li>open source, no GitHub repo,</li>
+<li>documentation (more like a sparse reference).</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>need Ubuntu host to compile neural network (no Windows, no OSX, although a VM could do wonders).</li>
+</ul>
+<p>When I originally published this piece I had 3 more cons, now that’s the only one left.</p>
+<p>I am really impressed by the idea of giving low-power end devices the chance to run neural networks so I set out to benchmark the finally released Movidius Neural Compute Stick with great hopes. I’m a big believer of hard facts so I wanted to benchmark this little beast.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*dSZglyBR0MoPGXu143RSqA.jpeg"></p>
+<p>Unfortunately it’s hard to come by to some kind of industry standard on ML speed benchmarks so after some considerations (NCS runs just <a href="http://caffe.berkeleyvision.org/">Caffe</a> models for now) I wanted to see execution time for different devices seeing a cat in ‘cat.jpg’ with <a href="https://github.com/DeepScale/SqueezeNet">Squeezenet</a>.</p>
+<p><strong>Getting Caffe running on plain vanilla OSX, Ubuntu and Raspbian Jessie is a horrible experience.</strong></p>
+<p>A major finding is the general sad state of software deployment related to Caffe. There are exactly none working installation scripts for OSX, Ubuntu and Raspbian Jessie, so I had to spend quite some time to cook up my own recipes. All OSes were either freshly installed or close to it, so these plain vanilla recipes should work for most. For now I don’t delve into how much crap do you really need to install to have things running although I tried to add dependencies one by one so this could be considered as a minimal setup.</p>
+<p>Gist: <a href="https://gist.github.com/soobrosa/cf53d484a4afafb8d9cb8601a5429bee">Caffe install + benchmark script for OSX</a></p>
+<p>The Ubuntu 16.04 installation doc is just missing the following lines.</p>
+<pre><code>$ find . -type f -exec sed -i -e ‘s^”hdf5.h”^”hdf5/serial/hdf5.h”^g’ -e ‘s^”hdf5_hl.h”^”hdf5/serial/hdf5_hl.h”^g’ ‘{}’ \;
+$ cd /usr/lib/x86_64-linux-gnu
+$ sudo ln -s libhdf5_serial.so.10.1.0 libhdf5.so
+$ sudo ln -s libhdf5_serial_hl.so.10.0.2 libhdf5_hl.so
+</code></pre>
+<p>Gist: <a href="https://gist.github.com/soobrosa/bb068f8484edd112641c98e9d1771e28">Caffe install + benchmark for RPi3</a></p>
+<p>Putting this aside I still wanted to see the hard numbers of milliseconds for devices seeing a cat in ‘cat.jpg’ with Squeezenet.</p>
+<p>With Caffe on CPU gives me following averages:</p>
+<ul>
+<li>150 ms (Macbook Air 13", early 2015, 1,6 Ghz Intel Core i5, 8Gb RAM running macOS Sierra)</li>
+<li>190 ms (Lenovo Thinkpad T420S running Ubuntu 16.04)</li>
+<li>1100 ms (RasPi 3 running Raspbian Jessie July 2017)</li>
+</ul>
+<p>Now hacking <code>ncapi/py_examples/classification_example.py</code> as follows</p>
+<pre><code>print (str(datetime.now()))
+output, userobj = graph.GetResult()
+print (str(datetime.now()))
+</code></pre>
+<p>the Movidius stick gives me from an Ubuntu averages of 307 ms on <code>cat.jpg</code>.</p>
+<p><img src="https://cdn-images-1.medium.com/max/800/1*eouVIuXXLVW2P3U5-u9AHA.jpeg"></p>
+<p>Running this test on the Raspberry Pi involves installing OpenCV and compiling something like OpenCV on a RasPi is far from being instant. I posted my seminal results to the <a href="https://ncsforum.movidius.com/discussion/146/raspberry-pi-3-benchmarks">official forum</a> and coming home from vacation I could carry on with the measurements.</p>
+<p><em>Chrispete</em> kindly served a working <a href="https://ncsforum.movidius.com/discussion/comment/299/#Comment%5C_299">OpenCV install script</a> — I only had to pimp it with two extra lines to make it work on my device (<a href="https://ahmedibrahimvt.wordpress.com/2017/02/19/fatal-error-hdf5-h-no-such-file-or-directory/">source 1</a>, <a href="http://www.pyimagesearch.com/2015/07/20/install-opencv-3-0-and-python-3-4-on-ubuntu/">source 2</a>).</p>
+<pre><code>$ export CPATH=”/usr/include/hdf5/serial/”
+$ ln -s /usr/local/lib/python3.4/site-packages/cv2.cpython-34m.so cv2.so
+</code></pre>
+<p>I finally got a working OpenCV on the Raspberry and I can confirm that the Movidius stick is behaving properly also showing the same timing benchmarks as testing from an Ubuntu.</p>
+<p>Gist: <a href="https://gist.github.com/soobrosa/7061661cd7bbea988ce470f9191bc1c1">OpenCV install script for Raspbian Jessie</a></p>
+<p><a href="https://ncsforum.movidius.com/discussion/comment/307/#Comment%5C_307">Tome</a> revealed that changing batch size to 1 and using all 12 SHAVE processors simultaneously should speed up things.</p>
+<p>In another forum post he <a href="https://ncsforum.movidius.com/discussion/149/inference-performance">shared</a> some measurements and based on that this should be a 5(x)! speed-up — and “continous inference speed from webcam is about 9.5 FPS for GoogleNet.”</p>
+<p>I changed in the <code>/ncapi/networks/Squeezenet/NetworkConfig.prototxt</code></p>
+<pre><code>input_param { shape: { dim: 10 dim: 3 dim: 227 dim: 227 } }
+</code></pre>
+<p>to</p>
+<pre><code>input_param { shape: { dim: 1 dim: 3 dim: 227 dim: 227 } }
+</code></pre>
+<p>I added <code>-s12</code> to all lines in <code>ncapi/tools/convert_models.sh</code>. Double-checked all files are Squeezenet 1.1, recompiled, updated files on Raspberry.</p>
+<p>I did some re-runs to believe what I see.</p>
+<p><strong>41 ms is definitely impressive. That’s 4 times faster than my Macbook Air for 1/6th of the price with an energy consumption of 1/7th.</strong></p>
+<p>(Macbook consumes approximately 35 Watts per hour, Raspberry and Movidius should end up at 4 W + 1 W = 5 W).</p>
+<p>Soon after this write-up Tensorflow support arrived and it’s still on my to-do list to build a precompiled Raspbian Jessie image to be at hand for all this mess — Tensorflow already has <a href="https://petewarden.com/2017/08/20/cross-compiling-tensorflow-for-the-raspberry-pi/">cross-compiled versions.</a></p>
+</article>
+<footer class="foot">DANIEL MOLNAR &middot; soobrosa@gmail.com &middot; <a href="https://github.com/soobrosa">github</a></footer>
+</main>
+</body>
+</html>
