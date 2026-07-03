@@ -117,3 +117,35 @@ ul.words .main { flex:1; }
 /* ---- footer ---- */
 footer.foot { font-family:var(--pixel); font-size:9px; color:var(--dim); margin-top:60px; padding-top:20px; border-top:2px dotted #29293a; }
 footer.foot a { color:var(--cyan); text-decoration:none; } footer.foot a:hover { color:var(--yellow); }
+
+/* ---- print: white paper, black typewriter ink ---- */
+@media print {
+  @page { margin:18mm; }
+  html, body {
+    background:#fff !important; color:#000 !important;
+    font-family:"Courier New", Courier, monospace;
+    font-size:12pt; line-height:1.4; image-rendering:auto;
+  }
+  body::after { display:none !important; }
+  .wrap, .narrow { max-width:none; margin:0; padding:0; }
+
+  .topnav, .back, .filters, .socials, .hint, .count, .grp-label, .empty { display:none !important; }
+
+  h1, h2, h3, h4, .post h1, .post h2, .post h3, .post .meta,
+  p, a, li, code, pre, blockquote, footer.foot {
+    color:#000 !important; text-shadow:none !important;
+  }
+  .post h1 { font-family:"Courier New", Courier, monospace; font-weight:700; font-size:20pt; margin-bottom:8px; }
+  .post .meta { font-size:11pt; margin-bottom:24px; }
+  .post h2 { font-size:15pt; } .post h3 { font-size:13pt; }
+
+  a, a.inline, .post a { text-decoration:underline; border:none !important; }
+  .post a[href^="http"]::after { content:" (" attr(href) ")"; font-size:9pt; word-break:break-all; }
+
+  .post img { box-shadow:none !important; border:1px solid #000; filter:grayscale(1) contrast(1.1); }
+  .post pre, .post code { background:#fff !important; box-shadow:none !important; }
+  .post pre { border:1px solid #000; font-size:10pt; }
+  .post ul li::before, .post ol li::before { color:#000 !important; }
+  .post blockquote { border-left:3px solid #000; }
+  footer.foot { border-top:1px solid #000; font-family:"Courier New", Courier, monospace; font-size:9pt; }
+}
