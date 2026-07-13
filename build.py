@@ -79,25 +79,34 @@ def nav_html(active):
     return '<nav class="topnav">' + "".join(out) + "</nav>"
 
 
-FOOTER = ('<footer class="foot">DANIEL MOLNAR &middot; soobrosa@gmail.com &middot; '
-          '<a href="https://github.com/soobrosa">github</a></footer>')
+SITE_FOOTER = ('<footer class="site-foot">'
+               '<div class="callout">&#128161; This site is handcoded pixel art &mdash; '
+               '<a href="https://github.com/soobrosa/soobrosa.github.io">open source and easy to fork</a>.</div>'
+               '<nav class="foot-nav">'
+               '<a href="/index.html"><span class="ico">&#128075;</span>BIO</a>'
+               '<a href="/mixes.html"><span class="ico">&#127911;</span>MIXES</a>'
+               '<a href="/words.html"><span class="ico">&#128221;</span>WORDS</a>'
+               '<a href="/lab.html"><span class="ico">&#129514;</span>LAB</a>'
+               '</nav>'
+               '<div class="foot-credit">DANIEL MOLNAR &middot; soobrosa@gmail.com &middot; '
+               '<a href="https://github.com/soobrosa">github</a></div></footer>')
 
 
-def page(title, body, active, narrow=False, extra_head=""):
-    wrap = "wrap narrow" if narrow else "wrap"
+def page(title, body, active, wrap="wrap wide", extra_head=""):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{html.escape(title)}</title>
-<link rel="stylesheet" href="{CSS}">{extra_head}
+<link rel="stylesheet" href="{CSS}">
+<script src="/assets/js/theme.js"></script>{extra_head}
 </head>
 <body>
 <main class="{wrap}">
 {nav_html(active)}
 {body}
-{FOOTER}
+{SITE_FOOTER}
 </main>
 </body>
 </html>
@@ -127,23 +136,33 @@ def load_entries():
     return entries
 
 
+KIND_GLYPH = {"essay": "ES", "talk": "TK", "translation": "TR", "print": "PR", "app": "AP"}
+
+
+def px_variant(seed):
+    return f'px-{(sum(ord(c) for c in seed) % 8) + 1}'
+
+
 def render_article(entry):
     body_html = md_lib.markdown(entry["body"], extensions=["fenced_code", "tables", "sane_lists"])
     d = entry["date"]
     meta = f'&gt; {d.strftime("%-d %b %Y").upper()} :: soobrosa' if d else "soobrosa"
-    inner = f"""<a class="back" href="/words.html">&lt;&lt; ALL WORDS</a>
+    px = px_variant(entry["slug"])
+    glyph = KIND_GLYPH.get(entry["kind"], "ES")
+    inner = f"""<div class="hero hero-slim {px}"><span class="hero-title">{glyph}</span></div>
+<a class="back" href="/words.html">&lt;&lt; ALL WORDS</a>
 <article class="post">
 <h1>{html.escape(entry["title"])}</h1>
 <div class="meta">{meta}</div>
 {body_html}
 </article>"""
-    return page(entry["title"] + " // soobrosa", inner, "words", narrow=True)
+    return page(entry["title"] + " // soobrosa", inner, "words", wrap="wrap narrow")
 
 
 def render_words(entries):
-    rows = []
+    cards = []
     kinds_present, tags_present = [], []
-    for e in entries:
+    for i, e in enumerate(entries):
         if e["kind"] not in kinds_present:
             kinds_present.append(e["kind"])
         for t in e["tags"]:
@@ -152,14 +171,19 @@ def render_words(entries):
         href = e["external"] or f'/words/{e["slug"]}.html'
         ext = ' target="_blank" rel="noopener"' if e["external"] else ""
         year = e["date"].year if e["date"] else "&mdash;"
+        px = f'px-{(i % 8) + 1}'
+        glyph = KIND_GLYPH.get(e["kind"], "ES")
+        feat = " featured" if i == 0 else ""
+        summ = f'<p>{html.escape(e["summary"])}</p>' if e["summary"] else ""
         chips = "".join(
-            f'<span class="tag" data-filter="tag:{t}">{t}</span>' for t in e["tags"])
-        rows.append(
-            f'<li data-kind="{e["kind"]}" data-tags="{",".join(e["tags"])}" '
-            f'data-date="{e["date"] or ""}"><span class="date">{year}</span>'
-            f'<span class="badge {e["kind"]}" data-filter="kind:{e["kind"]}">{e["kind"][:6].upper()}</span>'
-            f'<span class="main"><a class="title-link" href="{href}"{ext}>{html.escape(e["title"])}</a>'
-            f'<span class="tags">{chips}</span></span></li>')
+            f'<span class="chip" data-filter="tag:{t}">{t}</span>' for t in e["tags"])
+        cards.append(
+            f'<a class="gcard{feat}" data-kind="{e["kind"]}" data-tags="{",".join(e["tags"])}" '
+            f'data-date="{e["date"] or ""}" href="{href}"{ext}>'
+            f'<div class="cover {px}"><span class="glyph">{glyph}</span></div>'
+            f'<div class="body"><div class="k" data-filter="kind:{e["kind"]}">{e["kind"].upper()}</div>'
+            f'<h3>{html.escape(e["title"])}</h3>{summ}'
+            f'<div class="meta-row"><span class="date">{year}</span>{chips}</div></div></a>')
 
     kind_btns = "".join(
         f'<button class="fbtn" data-filter="kind:{k}">{k.upper()}</button>'
@@ -168,17 +192,22 @@ def render_words(entries):
         f'<button class="fbtn" data-filter="tag:{t}">{t.upper()}</button>'
         for t in sorted(tags_present))
 
-    body = f"""<h1 class="title">WORDS</h1>
-<p class="hint">One chronological stream. Click a <b>TYPE</b> or a <b>#tag</b> to filter in place.</p>
+    body = f"""<div class="hero"></div>
+<header class="page-head">
+  <div class="avatar">W</div>
+  <h1 class="title">WORDS</h1>
+  <div class="sub">One chronological stream of essays, talks &amp; print.</div>
+</header>
+<p class="hint">Click a <b>TYPE</b> or a <b>#tag</b> to filter the gallery in place.</p>
 <div class="filters" id="filters">
   <button class="fbtn active" data-filter="all">ALL</button>
   <span class="grp-label">&gt; TYPE</span>{kind_btns}
   <span class="grp-label">&gt; TOPIC</span>{tag_btns}
 </div>
 <div class="count" id="count"></div>
-<ul class="words" id="list">
-{chr(10).join(rows)}
-</ul>
+<div class="gallery" id="list">
+{chr(10).join(cards)}
+</div>
 <div class="empty" id="empty">! NO ENTRIES !</div>
 {FILTER_JS}"""
     return page("WORDS // soobrosa", body, "words")
@@ -186,7 +215,7 @@ def render_words(entries):
 
 FILTER_JS = """<script>
 const list=document.getElementById('list');
-const items=[...list.querySelectorAll('li')];
+const items=[...list.querySelectorAll('.gcard')];
 const buttons=[...document.querySelectorAll('.fbtn')];
 const countEl=document.getElementById('count');
 const emptyEl=document.getElementById('empty');
