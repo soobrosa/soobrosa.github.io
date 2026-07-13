@@ -130,6 +130,107 @@ ul.words .main { flex:1; }
 footer.foot { font-family:var(--pixel); font-size:9px; color:var(--dim); margin-top:60px; padding-top:20px; border-top:2px dotted #29293a; }
 footer.foot a { color:var(--cyan); text-decoration:none; } footer.foot a:hover { color:var(--yellow); }
 
+/* =========================================================================
+   transitivebullsh.it-inspired layout (placements/ratios/grid), demoscene skin
+   ========================================================================= */
+.wrap.wide { max-width:1100px; }
+
+/* ---- full-bleed hero cover banner (synthwave pixel scene) ---- */
+.hero { position:relative; margin:6px -20px 0; height:clamp(170px,32vw,320px); overflow:hidden;
+  background:linear-gradient(180deg,#1a0033 0%,#3a0a4f 40%,var(--magenta) 72%,var(--yellow) 100%);
+  box-shadow:0 6px 0 var(--dim); }
+.hero.hero-slim { height:clamp(120px,20vw,190px); }
+/* neon grid horizon */
+.hero::before { content:""; position:absolute; left:-20%; right:-20%; bottom:0; height:56%;
+  background:repeating-linear-gradient(90deg,transparent 0 38px,var(--cyan) 38px 40px),
+             repeating-linear-gradient(0deg,transparent 0 24px,var(--cyan) 24px 26px);
+  transform:perspective(300px) rotateX(64deg); transform-origin:bottom; opacity:.45; }
+/* pixel sun */
+.hero::after { content:""; position:absolute; left:50%; top:24%; width:110px; height:110px; transform:translateX(-50%);
+  background:radial-gradient(circle,var(--yellow) 0 44%,var(--magenta) 44% 62%,transparent 62%);
+  -webkit-mask:repeating-linear-gradient(0deg,#000 0 7px,transparent 7px 11px);
+          mask:repeating-linear-gradient(0deg,#000 0 7px,transparent 7px 11px); }
+.hero .hero-title { position:absolute; left:22px; right:22px; bottom:18px; z-index:2;
+  font-family:var(--pixel); font-size:clamp(14px,3.4vw,26px); line-height:1.4; color:var(--white);
+  text-shadow:4px 4px 0 var(--magenta),8px 8px 0 rgba(0,0,0,.4); }
+
+/* ---- page header: avatar overlapping cover + title ---- */
+.page-head { position:relative; margin-bottom:24px; }
+.avatar { width:clamp(72px,12vw,104px); height:clamp(72px,12vw,104px);
+  margin-top:calc(-1 * clamp(34px,6vw,50px)); position:relative; z-index:3;
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+  font-family:var(--pixel); font-size:clamp(20px,4.5vw,32px); color:var(--bg); background:var(--cyan);
+  box-shadow:-5px 0 0 var(--white),5px 0 0 var(--white),0 -5px 0 var(--white),0 5px 0 var(--white); }
+.page-head .title { margin-top:22px; }
+
+/* ---- intro column (constrained like reference) ---- */
+.intro { max-width:720px; margin-bottom:6px; }
+.intro p { margin-bottom:16px; } .intro p:last-child { margin-bottom:0; }
+
+/* ---- section heading ---- */
+.section-head { font-family:var(--pixel); font-size:12px; color:var(--yellow); margin:46px 0 20px; }
+.section-head::before { content:"\25BC  "; color:var(--magenta); }
+
+/* ---- gallery grid of cards ---- */
+.gallery { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
+.gcard { display:flex; flex-direction:column; text-decoration:none; color:var(--text); background:var(--panel);
+  box-shadow:-4px 0 0 var(--dim),4px 0 0 var(--dim),0 -4px 0 var(--dim),0 4px 0 var(--dim); transition:transform .1s; }
+.gcard:hover { transform:translate(-2px,-2px); }
+.gcard.hidden { display:none; }
+.gcard .cover { aspect-ratio:16/9; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.gcard .cover::before { content:""; position:absolute; inset:0;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 5px,transparent 5px 10px),
+             repeating-linear-gradient(90deg,rgba(255,255,255,.08) 0 5px,transparent 5px 10px); }
+.gcard .cover .glyph { position:relative; z-index:1; font-family:var(--pixel); font-size:clamp(24px,5vw,36px);
+  color:var(--bg); text-shadow:3px 3px 0 rgba(0,0,0,.28); }
+.gcard .body { padding:16px 18px 18px; display:flex; flex-direction:column; gap:9px; flex:1; }
+.gcard .k { font-family:var(--pixel); font-size:9px; color:var(--magenta); }
+.gcard h3 { font-family:var(--pixel); font-size:12px; line-height:1.55; color:var(--cyan); }
+.gcard:hover h3 { color:var(--yellow); }
+.gcard p { color:var(--text); font-size:20px; flex:1; }
+.gcard .meta-row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+.gcard .date { font-family:var(--pixel); font-size:8px; color:var(--dim); }
+.gcard .chip { color:var(--dim); font-size:18px; } .gcard .chip::before { content:"#"; color:var(--magenta); }
+
+/* featured (first) card spans the row, split cover|text like the reference */
+.gcard.featured { grid-column:1 / -1; flex-direction:row; }
+.gcard.featured .cover { aspect-ratio:auto; flex:1 1 46%; min-height:230px; }
+.gcard.featured .cover .glyph { font-size:clamp(30px,6vw,52px); }
+.gcard.featured .body { flex:1 1 54%; justify-content:center; padding:26px 30px; }
+.gcard.featured h3 { font-size:16px; }
+.gcard.featured p { flex:none; }
+@media (max-width:640px) { .gcard.featured { flex-direction:column; } .gcard.featured .cover { aspect-ratio:16/9; min-height:0; } }
+
+/* ---- pixel-art placeholder covers (deterministic neon variants) ---- */
+.px-1 { background-color:var(--magenta); }
+.px-2 { background-color:var(--cyan); }
+.px-3 { background-color:var(--yellow); }
+.px-4 { background:linear-gradient(135deg,var(--magenta) 0 50%,var(--cyan) 50%); }
+.px-5 { background:linear-gradient(135deg,var(--cyan) 0 50%,var(--yellow) 50%); }
+.px-6 { background:linear-gradient(135deg,var(--yellow) 0 50%,var(--magenta) 50%); }
+.px-7 { background:conic-gradient(from 45deg,var(--magenta),var(--cyan),var(--yellow),var(--magenta)); }
+.px-8 { background:repeating-linear-gradient(45deg,var(--magenta) 0 16px,var(--cyan) 16px 32px); }
+
+/* ---- site footer: open-source callout + emoji nav pills ---- */
+.site-foot { margin-top:64px; border-top:2px dotted #29293a; padding-top:30px; }
+.callout { background:var(--panel); padding:16px 18px; margin-bottom:26px; font-size:20px;
+  box-shadow:-4px 0 0 var(--dim),4px 0 0 var(--dim),0 -4px 0 var(--dim),0 4px 0 var(--dim); }
+.callout a { color:var(--cyan); text-decoration:none; border-bottom:2px solid var(--dim); }
+.callout a:hover { color:var(--yellow); border-color:var(--yellow); }
+.foot-nav { display:flex; flex-wrap:wrap; gap:14px; }
+.foot-nav a { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text);
+  font-family:var(--pixel); font-size:10px; background:var(--panel); padding:14px 16px;
+  box-shadow:-3px 0 0 var(--dim),3px 0 0 var(--dim),0 -3px 0 var(--dim),0 3px 0 var(--dim); transition:color .1s,background .1s; }
+.foot-nav a:hover { color:var(--bg); background:var(--cyan);
+  box-shadow:-3px 0 0 var(--white),3px 0 0 var(--white),0 -3px 0 var(--white),0 3px 0 var(--white); }
+.foot-nav .ico { font-family:var(--body); font-size:22px; line-height:1; }
+.foot-credit { font-family:var(--pixel); font-size:9px; color:var(--dim); margin-top:24px; }
+.foot-credit a { color:var(--cyan); text-decoration:none; } .foot-credit a:hover { color:var(--yellow); }
+
+/* ---- light (Bauhaus) theme adjustments for new blocks ---- */
+:root[data-theme="light"] .hero { background:linear-gradient(180deg,#e7e3d8 0%,#c9c4b6 55%,#8a857a 100%); }
+:root[data-theme="light"] .avatar { color:var(--bg); background:#141414; }
+
 /* ---- print: white paper, black typewriter ink ---- */
 @media print {
   @page { margin:18mm; }
@@ -141,7 +242,13 @@ footer.foot a { color:var(--cyan); text-decoration:none; } footer.foot a:hover {
   body::after { display:none !important; }
   .wrap, .narrow { max-width:none; margin:0; padding:0; }
 
-  .topnav, .back, .filters, .socials, .hint, .count, .grp-label, .empty { display:none !important; }
+  .topnav, .back, .filters, .socials, .hint, .count, .grp-label, .empty,
+  .hero, .avatar, .foot-nav, .callout { display:none !important; }
+  .gallery { display:block !important; }
+  .gcard { box-shadow:none !important; border-bottom:1px solid #000; }
+  .gcard .cover { display:none !important; }
+  .site-foot { border-top:1px solid #000; }
+  .foot-credit { color:#000 !important; font-family:"Courier New", Courier, monospace; }
 
   h1, h2, h3, h4, .post h1, .post h2, .post h3, .post .meta,
   p, a, li, code, pre, blockquote, footer.foot {
