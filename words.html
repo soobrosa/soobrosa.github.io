@@ -5,6 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WORDS // soobrosa</title>
 <link rel="stylesheet" href="/assets/css/site.css">
+<script src="/assets/js/theme.js"></script>
+<style>
+.filters{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px;position:relative;z-index:5;}
+.dropdown{position:relative;}
+.drop-head{display:inline-flex;align-items:center;gap:6px;}
+.drop-head .lbl{color:var(--dim);}
+.drop-head .cur{color:var(--yellow);}
+.drop-head .arw{color:var(--cyan);font-size:7px;}
+.dropdown.set .drop-head{color:var(--bg);background:var(--cyan);box-shadow:-3px 0 0 var(--white),3px 0 0 var(--white),0 -3px 0 var(--white),0 3px 0 var(--white);}
+.dropdown.set .drop-head .lbl,.dropdown.set .drop-head .cur,.dropdown.set .drop-head .arw{color:var(--bg);}
+.drop-menu{position:absolute;top:100%;left:0;padding-top:8px;display:none;flex-direction:column;gap:4px;min-width:150px;}
+.dropdown:hover .drop-menu,.dropdown:focus-within .drop-menu{display:flex;}
+.drop-menu-inner{display:flex;flex-direction:column;gap:4px;background:var(--panel);padding:8px;box-shadow:-3px 0 0 var(--dim),3px 0 0 var(--dim),0 -3px 0 var(--dim),0 3px 0 var(--dim);}
+.drop-menu .fbtn{width:100%;text-align:left;box-shadow:none;background:transparent;}
+.drop-menu .fbtn:hover{color:var(--yellow);background:#20202f;}
+:root[data-theme="light"] .drop-menu .fbtn:hover{background:#d8d3c6;}
+.drop-menu .fbtn.active{color:var(--bg);background:var(--cyan);box-shadow:none;}
+</style>
 </head>
 <body>
 <main class="wrap">
@@ -13,11 +31,22 @@
 <p class="hint">One chronological stream. Click a <b>TYPE</b> or a <b>#tag</b> to filter in place.</p>
 <div class="filters" id="filters">
   <button class="fbtn active" data-filter="all">ALL</button>
-  <span class="grp-label">&gt; TYPE</span><button class="fbtn" data-filter="kind:essay">ESSAY</button><button class="fbtn" data-filter="kind:talk">TALK</button><button class="fbtn" data-filter="kind:translation">TRANSLATION</button><button class="fbtn" data-filter="kind:print">PRINT</button><button class="fbtn" data-filter="kind:app">APP</button>
-  <span class="grp-label">&gt; TOPIC</span><button class="fbtn" data-filter="tag:career">CAREER</button><button class="fbtn" data-filter="tag:culture">CULTURE</button><button class="fbtn" data-filter="tag:data">DATA</button><button class="fbtn" data-filter="tag:hardware">HARDWARE</button><button class="fbtn" data-filter="tag:learning">LEARNING</button><button class="fbtn" data-filter="tag:music">MUSIC</button>
+  <div class="dropdown" data-group="kind">
+    <button class="fbtn drop-head" type="button"><span class="lbl">TYPE</span><span class="arw">&#9662;</span><span class="cur">ALL</span></button>
+    <div class="drop-menu"><div class="drop-menu-inner">
+      <button class="fbtn" data-filter="all">ALL</button><button class="fbtn" data-filter="kind:essay">ESSAY</button><button class="fbtn" data-filter="kind:talk">TALK</button><button class="fbtn" data-filter="kind:translation">TRANSLATION</button><button class="fbtn" data-filter="kind:print">PRINT</button><button class="fbtn" data-filter="kind:app">APP</button>
+    </div></div>
+  </div>
+  <div class="dropdown" data-group="tag">
+    <button class="fbtn drop-head" type="button"><span class="lbl">TOPIC</span><span class="arw">&#9662;</span><span class="cur">ALL</span></button>
+    <div class="drop-menu"><div class="drop-menu-inner">
+      <button class="fbtn" data-filter="all">ALL</button><button class="fbtn" data-filter="tag:berlin">BERLIN</button><button class="fbtn" data-filter="tag:career">CAREER</button><button class="fbtn" data-filter="tag:culture">CULTURE</button><button class="fbtn" data-filter="tag:data">DATA</button><button class="fbtn" data-filter="tag:hardware">HARDWARE</button><button class="fbtn" data-filter="tag:learning">LEARNING</button><button class="fbtn" data-filter="tag:music">MUSIC</button>
+    </div></div>
+  </div>
 </div>
 <div class="count" id="count"></div>
 <ul class="words" id="list">
+<li data-kind="essay" data-tags="berlin" data-date="2026-07-04"><span class="date">2026</span><span class="badge essay" data-filter="kind:essay">ESSAY</span><span class="main"><a class="title-link" href="/words/berlin-male-hobby-guide.html">Berlin Male Hobby Guide</a><span class="tags"><span class="tag" data-filter="tag:berlin">berlin</span></span></span></li>
 <li data-kind="essay" data-tags="data,career" data-date="2022-02-18"><span class="date">2022</span><span class="badge essay" data-filter="kind:essay">ESSAY</span><span class="main"><a class="title-link" href="https://www.dataengineering.academy/pipeline-data-engineering-academy-blog/learn-data-engineering-on-a-shoestring-free-courses" target="_blank" rel="noopener">Learn data engineering on a shoestring - Part 2</a><span class="tags"><span class="tag" data-filter="tag:data">data</span><span class="tag" data-filter="tag:career">career</span></span></span></li>
 <li data-kind="essay" data-tags="data,career" data-date="2021-07-26"><span class="date">2021</span><span class="badge essay" data-filter="kind:essay">ESSAY</span><span class="main"><a class="title-link" href="https://www.dataengineering.academy/pipeline-data-engineering-academy-blog/how-to-teach-data-engineering" target="_blank" rel="noopener">How to teach data engineering</a><span class="tags"><span class="tag" data-filter="tag:data">data</span><span class="tag" data-filter="tag:career">career</span></span></span></li>
 <li data-kind="talk" data-tags="data" data-date="2021-06-29"><span class="date">2021</span><span class="badge talk" data-filter="kind:talk">TALK</span><span class="main"><a class="title-link" href="https://www.dataengineering.academy/pipeline-data-engineering-academy-blog/pipeline-academy-on-the-data-engineering-podcast-vol2" target="_blank" rel="noopener">Pipeline Academy on the Data Engineering Podcast Vol. 2</a><span class="tags"><span class="tag" data-filter="tag:data">data</span></span></span></li>
@@ -83,8 +112,12 @@ const items=[...list.querySelectorAll('li')];
 const buttons=[...document.querySelectorAll('.fbtn')];
 const countEl=document.getElementById('count');
 const emptyEl=document.getElementById('empty');
+const heads={kind:document.querySelector('.dropdown[data-group="kind"]'),tag:document.querySelector('.dropdown[data-group="tag"]')};
+function setHead(g,val){const d=heads[g];d.querySelector('.cur').textContent=val;d.classList.toggle('set',val!=='ALL');}
 function apply(f){let shown=0;items.forEach(li=>{let m=f==='all';if(!m){const[t,v]=f.split(':');if(t==='kind')m=li.dataset.kind===v;else if(t==='tag')m=li.dataset.tags.split(',').includes(v);}li.classList.toggle('hidden',!m);if(m)shown++;});
 buttons.forEach(b=>b.classList.toggle('active',b.dataset.filter===f));
+let kindVal='ALL',tagVal='ALL';if(f!=='all'){const[t,v]=f.split(':');if(t==='kind')kindVal=v.toUpperCase();else if(t==='tag')tagVal=v.toUpperCase();}
+setHead('kind',kindVal);setHead('tag',tagVal);
 countEl.textContent=f==='all'?shown+' ENTRIES':shown+'/'+items.length+' \u00b7 ';
 if(f!=='all'){const r=document.createElement('a');r.href='#';r.textContent='CLEAR';r.onclick=e=>{e.preventDefault();go('all');};countEl.appendChild(r);}
 emptyEl.style.display=shown?'none':'block';}
