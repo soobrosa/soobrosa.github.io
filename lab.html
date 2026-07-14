@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAB // soobrosa</title>
+<meta name="description" content="Apps and experiments by Daniel Molnar.">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script src="/assets/js/theme.js"></script>
+</head>
+<body>
+<main class="wrap wide">
+  <nav class="topnav">
+    <a class="brand" href="/index.html">soobrosa</a>
+    <a href="/index.html">BIO</a>
+    <a href="/mixes.html">MIXES</a>
+    <a href="/words.html">WORDS</a>
+    <a href="/lab.html" class="active">LAB</a>
+  </nav>
+
+  <div class="hero"></div>
+  <header class="page-head">
+    <div class="avatar">LB</div>
+    <h1 class="title">LAB</h1>
+    <div class="sub">Apps and experiments.</div>
+  </header>
+  <p class="hint">Some self-hosted here, some living elsewhere.</p>
+
+  <div class="lab-grid" id="grid"></div>
+  <div class="empty" id="empty" style="display:none">! NOTHING SHIPPED YET !</div>
+
+  <footer class="site-foot">
+    <div class="callout">&#128161; This site is handcoded pixel art &mdash; <a href="https://github.com/soobrosa/soobrosa.github.io">open source and easy to fork</a>.</div>
+    <nav class="foot-nav">
+      <a href="/index.html"><span class="ico">&#128075;</span>BIO</a>
+      <a href="/mixes.html"><span class="ico">&#127911;</span>MIXES</a>
+      <a href="/words.html"><span class="ico">&#128221;</span>WORDS</a>
+      <a href="/lab.html"><span class="ico">&#129514;</span>LAB</a>
+    </nav>
+    <div class="foot-credit">DANIEL MOLNAR &middot; soobrosa@gmail.com &middot; <a href="https://github.com/soobrosa">github</a></div>
+  </footer>
+</main>
+
+<script>
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  fetch('/lab.json')
+    .then(r => r.json())
+    .then(apps => {
+      if (!apps.length) { empty.style.display = 'block'; return; }
+      grid.innerHTML = apps.map(a => {
+        const ext = a.external ? ' target="_blank" rel="noopener"' : '';
+        const tag = a.external ? '<div class="ext">EXTERNAL &#8599;</div>' : '<div class="ext">SELF-HOSTED</div>';
+        const techs = (a.tech || []).map(t => `<span>${t}</span>`).join('');
+        return `<a class="card" href="${a.url}"${ext}>${tag}<h2>${a.name}</h2><p>${a.blurb}</p><div class="techs">${techs}</div></a>`;
+      }).join('');
+    })
+    .catch(() => { empty.textContent = '! FAILED TO LOAD lab.json !'; empty.style.display = 'block'; });
+</script>
+</body>
+</html>
