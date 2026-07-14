@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open Berlin Exhibitions — Map & Transit · July 2026</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+  :root {
+    --paper: #f4f4f3; --card: #ffffff; --ink: #17170f; --ink-soft: #55554c;
+    --line: #dcdcd6; --accent: #b23a2e; --origin: #1c4fb2; --open: #1f7a4d;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #131311; --card: #1c1c19; --ink: #f0efe8; --ink-soft: #a3a399;
+      --line: #33332e; --accent: #e7796c; --origin: #7ba1f0; --open: #5bc98d;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+    line-height: 1.5; -webkit-font-smoothing: antialiased;
+    display: flex; flex-direction: column; height: 100vh;
+  }
+  .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  .eyebrow { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+
+  header {
+    padding: .9rem clamp(1rem, 3vw, 1.6rem);
+    border-bottom: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 1rem; flex-wrap: wrap; flex: none;
+  }
+  header h1 { font-size: clamp(1.05rem, 2.5vw, 1.4rem); margin: 0; letter-spacing: -.01em; font-weight: 800; }
+  header .sub { color: var(--ink-soft); font-size: .82rem; }
+
+  .layout { flex: 1; display: flex; min-height: 0; }
+  #map { flex: 1; min-width: 0; background: var(--paper); z-index: 1; }
+
+  aside {
+    width: 380px; max-width: 42vw; flex: none; overflow-y: auto;
+    border-right: 1px solid var(--line); background: var(--card);
+  }
+  .origin-card {
+    padding: 1rem 1.2rem; border-bottom: 2px solid var(--line);
+    display: flex; gap: .7rem; align-items: flex-start;
+  }
+  .origin-card .glyph {
+    width: 26px; height: 26px; border-radius: 50%; flex: none; margin-top: 1px;
+    background: var(--origin); color: #fff; display: grid; place-items: center;
+    font-size: .8rem; font-weight: 700;
+  }
+  .origin-card b { display: block; }
+  .origin-card small { color: var(--ink-soft); }
+
+  .route {
+    padding: 1rem 1.2rem; border-bottom: 1px solid var(--line);
+    cursor: pointer; transition: background .12s;
+  }
+  .route:hover, .route.active { background: color-mix(in srgb, var(--open) 8%, transparent); }
+  .route-top { display: flex; gap: .7rem; align-items: flex-start; }
+  .rank {
+    width: 26px; height: 26px; border-radius: 50%; flex: none; margin-top: 1px;
+    background: var(--open); color: #fff; display: grid; place-items: center;
+    font-size: .82rem; font-weight: 700;
+  }
+  .route h3 { margin: 0; font-size: 1rem; line-height: 1.2; letter-spacing: -.01em; }
+  .route .venue { color: var(--ink-soft); font-size: .78rem; margin-top: .1rem; }
+  .time {
+    margin-left: auto; flex: none; font-weight: 700; font-size: .82rem;
+    color: var(--open); font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .steps { margin: .7rem 0 0 calc(26px + .7rem); }
+  .steps ol { margin: 0; padding-left: 1.1rem; font-size: .84rem; color: var(--ink); }
+  .steps li { margin-bottom: .28rem; }
+  .steps .line {
+    display: inline-block; font-weight: 700; padding: 0 .32rem; border-radius: 3px;
+    font-size: .78rem; color: #fff; font-family: ui-monospace, Menlo, monospace;
+  }
+  .U { background: #1c4fb2; } .S { background: #1f7a4d; } .RE { background: #b23a2e; }
+  .T { background: #b5451b; } .walk { color: var(--ink-soft); font-style: italic; }
+  .steps .until { color: var(--ink-soft); font-size: .8rem; margin-top: .35rem; }
+  .steps a {
+    color: var(--ink); font-size: .8rem; font-weight: 600; text-decoration: none;
+    border-bottom: 1.5px solid var(--accent); padding-bottom: 1px;
+  }
+  .steps a:hover { color: var(--accent); }
+
+  footer {
+    padding: .6rem 1.2rem; font-size: .72rem; color: var(--ink-soft);
+    border-top: 1px solid var(--line);
+  }
+
+  /* Reset control */
+  .reset-ctl {
+    background: var(--card); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: .45rem .7rem; font: 700 .8rem/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.25);
+    display: inline-flex; align-items: center; gap: .4rem;
+  }
+  .reset-ctl:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Leaflet marker labels */
+  .pin {
+    display: grid; place-items: center; border-radius: 50%;
+    color: #fff; font-weight: 700; font-size: .85rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,.4); border: 2px solid #fff;
+  }
+  .leaflet-popup-content { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .leaflet-popup-content b { font-size: .95rem; }
+  .leaflet-popup-content small { color: #555; }
+
+  @media (max-width: 720px) {
+    .layout { flex-direction: column-reverse; }
+    aside { width: 100%; max-width: none; border-right: none; border-top: 1px solid var(--line); max-height: 50vh; }
+    #map { min-height: 45vh; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Open exhibitions — map &amp; transit</h1>
+      <div class="sub">4 shows currently on · routes from <b>U Schwartzkopffstraße / Invalidenpark</b> · fastest first</div>
+    </div>
+    <span class="eyebrow mono">11 Jul 2026</span>
+  </header>
+
+  <div class="layout">
+    <aside id="sidebar">
+      <div class="origin-card">
+        <span class="glyph">◆</span>
+        <div>
+          <b>Start · U Schwartzkopffstraße (U6)</b>
+          <small>On the north edge of Invalidenpark. Times below are door-to-door estimates.</small>
+        </div>
+      </div>
+      <!-- routes injected by JS -->
+    </aside>
+    <div id="map"></div>
+  </div>
+
+  <footer>
+    Transit routes are suggested from network knowledge, not live-checked — confirm departures in the BVG / VBB Jelbi app before you go. Straight dashed lines are visual links to each venue, not the actual route.
+  </footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+  const ORIGIN = { name: "U Schwartzkopffstraße", lat: 52.5333, lng: 13.3778 };
+
+  const VENUES = [
+    {
+      rank: 1, time: "≈ 12 min",
+      name: "Anton Corbijn — “Corbijn, Anton”",
+      venue: "Fotografiska · Oranienburger Str. 54",
+      lat: 52.5250, lng: 13.3920,
+      until: "Runs to 20 Sep 2026 · open daily 10:00–23:00",
+      url: "https://berlin.fotografiska.com/en/exhibitions/anton-corbijn",
+      steps: [
+        ['U', 'U6', 'dir. Alt-Mariendorf → 1 stop to Oranienburger Tor'],
+        ['walk', '', '≈ 5 min east on Oranienburger Straße'],
+        ['walk', '', 'or just walk the whole way, ≈ 15 min via Torstraße']
+      ]
+    },
+    {
+      rank: 2, time: "≈ 18 min",
+      name: "Marina Abramović — Balkan Erotic Epic",
+      venue: "Gropius Bau · Niederkirchnerstr. 7",
+      lat: 52.5076, lng: 13.3826,
+      until: "Runs to 30 Aug 2026",
+      url: "https://www.berlinerfestspiele.de/en/gropius-bau/programm/2026/ausstellungen/marina-abramovic",
+      steps: [
+        ['U', 'U6', 'dir. Alt-Mariendorf → 6 stops to Kochstraße/Checkpoint Charlie (≈ 9 min)'],
+        ['walk', '', '≈ 8 min west to the Gropius Bau']
+      ]
+    },
+    {
+      rank: 3, time: "≈ 40 min",
+      name: "Dandies · Decadence · Modernism — Godwin & Wilde",
+      venue: "Bröhan-Museum · Schlossstr. 1a (Charlottenburg)",
+      lat: 52.5203, lng: 13.2954,
+      until: "Runs to 30 Aug 2026",
+      url: "https://www.broehan-museum.de/en/exhibition/edward-w-godwin-and-oscar-wilde-dandies-decadence-modernism/",
+      steps: [
+        ['U', 'U6', 'dir. Alt-Mariendorf → 4 stops to Stadtmitte'],
+        ['U', 'U2', 'change, dir. Ruhleben → to Sophie-Charlotte-Platz'],
+        ['walk', '', '≈ 10 min north to Schloss Charlottenburg / Schlossstraße']
+      ]
+    },
+    {
+      rank: 4, time: "≈ 55 min",
+      name: "Paul Signac & Neo-Impressionism",
+      venue: "Museum Barberini · Alter Markt, Potsdam",
+      lat: 52.3958, lng: 13.0592,
+      until: "Runs to 11 Oct 2026 · also Oscar Murillo at MINSK to 09 Aug",
+      url: "https://www.museum-barberini.de/en/ausstellungen/",
+      steps: [
+        ['T', 'M5/M8/M10', 'or ≈ 10 min walk to Berlin Hauptbahnhof'],
+        ['RE', 'RE1', 'dir. Brandenburg/Magdeburg → Potsdam Hbf (≈ 23 min)'],
+        ['T', 'Tram 91', '2 stops to Alter Markt/Landtag, or ≈ 12 min walk'],
+        ['walk', '', 'alt: U6 → Friedrichstraße, then S7 direct to Potsdam Hbf (slower, one-seat)']
+      ]
+    }
+  ];
+
+  const map = L.map('map', { scrollWheelZoom: true });
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  function pin(color, label, size) {
+    size = size || 30;
+    return L.divIcon({
+      className: '',
+      html: `<div class="pin" style="width:${size}px;height:${size}px;background:${color}">${label}</div>`,
+      iconSize: [size, size], iconAnchor: [size/2, size/2]
+    });
+  }
+
+  const OPEN = '#1f7a4d', ORIGIN_C = '#1c4fb2';
+  const TRAIL = { 1: '#d9660a', 2: '#0f8a8a', 3: '#7b3fb5', 4: '#b23a2e' };
+  const pts = [[ORIGIN.lat, ORIGIN.lng]];
+
+  L.marker([ORIGIN.lat, ORIGIN.lng], { icon: pin(ORIGIN_C, '◆', 32) })
+    .addTo(map)
+    .bindPopup(`<b>Start</b><br><small>${ORIGIN.name} · Invalidenpark</small>`);
+
+  const sidebar = document.getElementById('sidebar');
+  const markers = {};
+  const trails = {};
+  const cards = {};
+
+  function setActive(rank) {
+    Object.entries(cards).forEach(([r, el]) => el.classList.toggle('active', +r === rank));
+    Object.entries(trails).forEach(([r, pl]) => {
+      const on = +r === rank;
+      pl.setStyle({ weight: on ? 5 : 3, opacity: on ? 1 : .45 });
+      if (on) pl.bringToFront();
+    });
+  }
+
+  function clearActive() {
+    Object.values(cards).forEach(el => el.classList.remove('active'));
+    Object.values(trails).forEach(pl => pl.setStyle({ weight: 3, opacity: .55 }));
+  }
+
+  VENUES.forEach(v => {
+    pts.push([v.lat, v.lng]);
+    const color = TRAIL[v.rank];
+
+    // trail: straight fallback first, replaced by street-routed geometry when it loads
+    const pl = L.polyline([[ORIGIN.lat, ORIGIN.lng], [v.lat, v.lng]], {
+      color, weight: 3, opacity: .55, dashArray: '4 6', lineCap: 'round'
+    }).addTo(map);
+    trails[v.rank] = pl;
+
+    fetch(`https://router.project-osrm.org/route/v1/driving/${ORIGIN.lng},${ORIGIN.lat};${v.lng},${v.lat}?overview=full&geometries=geojson`)
+      .then(r => r.json())
+      .then(d => {
+        const route = d.routes && d.routes[0];
+        if (route) {
+          pl.setLatLngs(route.geometry.coordinates.map(c => [c[1], c[0]]));
+          pl.setStyle({ dashArray: null });
+        }
+      })
+      .catch(() => { /* keep straight fallback */ });
+
+    const m = L.marker([v.lat, v.lng], { icon: pin(OPEN, v.rank) })
+      .addTo(map)
+      .bindPopup(`<b>${v.name}</b><br><small>${v.venue}</small><br><small>${v.time} from Invalidenpark</small><br><a href="${v.url}" target="_blank" rel="noopener">Details →</a>`);
+    m.on('click', () => setActive(v.rank));
+    markers[v.rank] = m;
+
+    // sidebar card
+    const stepsHtml = v.steps.map(([kind, line, txt]) => {
+      const badge = kind === 'walk'
+        ? `<span class="walk">walk</span> ${txt}`
+        : `<span class="line ${kind}">${line}</span> ${txt}`;
+      return `<li>${badge}</li>`;
+    }).join('');
+
+    const el = document.createElement('div');
+    el.className = 'route';
+    el.style.setProperty('--trail', color);
+    el.innerHTML = `
+      <div class="route-top">
+        <span class="rank" style="background:${color}">${v.rank}</span>
+        <div>
+          <h3>${v.name}</h3>
+          <div class="venue">${v.venue}</div>
+        </div>
+        <span class="time">${v.time}</span>
+      </div>
+      <div class="steps">
+        <ol>${stepsHtml}</ol>
+        <div class="until">${v.until}</div>
+        <div style="margin-top:.4rem"><a href="${v.url}" target="_blank" rel="noopener">Exhibition page →</a></div>
+      </div>`;
+    el.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') return;
+      map.setView([v.lat, v.lng], 14, { animate: true });
+      m.openPopup();
+      setActive(v.rank);
+    });
+    cards[v.rank] = el;
+    sidebar.appendChild(el);
+  });
+
+  // Reset control
+  const ResetControl = L.Control.extend({
+    options: { position: 'topright' },
+    onAdd() {
+      const btn = L.DomUtil.create('button', 'reset-ctl');
+      btn.type = 'button';
+      btn.innerHTML = '↺ Reset view';
+      L.DomEvent.disableClickPropagation(btn);
+      L.DomEvent.on(btn, 'click', resetView);
+      return btn;
+    }
+  });
+  map.addControl(new ResetControl());
+
+  function resetView() {
+    map.closePopup();
+    clearActive();
+    map.fitBounds(pts, { padding: [50, 50] });
+  }
+
+  resetView();
+</script>
+</body>
+</html>
