@@ -1,5 +1,12 @@
 [
   {
+    "name": "RaveDownloads",
+    "blurb": "4,168 rave tapes and radio rips, 369.8 GB, filterable by artist, year and genre. The audio itself lives on archive.org.",
+    "url": "/ravedownloads.html",
+    "external": false,
+    "tech": ["html", "js", "archive-org"]
+  },
+  {
     "name": "Mixes Player",
     "blurb": "A self-hosted grid player streaming two decades of DJ mixes from R2.",
     "url": "/mixes.html",
@@ -7,24 +14,45 @@
     "tech": ["html", "js", "cloudflare-r2"]
   },
   {
+    "name": "burp",
+    "blurb": "A corpus of Hungarian business-lunch menus, plus the pipeline that keeps collecting them.",
+    "url": "https://soobrosa.github.io/burp/",
+    "external": true,
+    "tech": ["html", "python"]
+  },
+  {
+    "name": "MC-101 Firmware Analysis",
+    "blurb": "SysEx parameter mapping for the Roland MC-101 and MC-707, recovered by reading the firmware.",
+    "url": "https://soobrosa.github.io/mc101-firmware-re/",
+    "external": true,
+    "tech": ["html", "python", "sysex"]
+  },
+  {
+    "name": "Foursquare Exports",
+    "blurb": "Pull your own Foursquare lists back out into something you keep.",
+    "url": "https://own-your-foursquare-lists.vercel.app",
+    "external": true,
+    "tech": ["html", "vercel"]
+  },
+  {
+    "name": "soobrosa likes",
+    "blurb": "A serverless page listing everything I have liked on SoundCloud.",
+    "url": "https://sc-likes.vercel.app",
+    "external": true,
+    "tech": ["js", "vercel"]
+  },
+  {
+    "name": "check-games",
+    "blurb": "Cross-references a game wishlist against Steam, GOG, Humble and Epic, then scores every owned title for Apple Silicon. This is the pipeline; it has no interface of its own.",
+    "url": "https://github.com/soobrosa/check-games",
+    "external": true,
+    "tech": ["python", "steam", "applegamingwiki"]
+  },
+  {
     "name": "The Blockbuster Meter",
     "blurb": "An interactive dashboard that scores what to watch tonight. Built in Tableau in 2012.",
     "url": "https://public.tableau.com/app/profile/balazs.krich/viz/Whatmovieshouldwewatchtonight/Opinionmeter",
     "external": true,
     "tech": ["tableau", "dataviz"]
-  },
-  {
-    "name": "REPLACE ME — external app",
-    "blurb": "Edit lab.json to add your apps. Set external:true for things hosted elsewhere.",
-    "url": "https://example.com",
-    "external": true,
-    "tech": ["python", "fastapi"]
-  },
-  {
-    "name": "REPLACE ME — in-repo app",
-    "blurb": "Drop an app folder in the repo and point url to /myapp/ with external:false.",
-    "url": "/index.html",
-    "external": false,
-    "tech": ["react"]
   }
 ]
