@@ -29,8 +29,11 @@ lab.json                App list (name, blurb, url, external, tech)
 Makefile                make build | make serve | make migrate
 ```
 
-Legacy Jekyll files (`_posts/`, `_layouts/`, `_config.yml`, old map
-experiments, etc.) are kept in the repo but no longer used.
+`_layouts/`, `_config.yml` and the old Jekyll `_index.html` are gone;
+`.nojekyll` meant nothing read them any more. `_posts/` stays: 10 of its
+16 posts never made it into `content/` and are still live in production
+under `/post/...` and `/translation/...`, so it is the source for that
+migration, not dead weight. Run `make migrate` to continue it.
 
 ## Add a piece of writing
 
