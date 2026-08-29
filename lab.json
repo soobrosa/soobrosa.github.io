@@ -7,6 +7,13 @@
     "tech": ["html", "js", "cloudflare-r2"]
   },
   {
+    "name": "The Blockbuster Meter",
+    "blurb": "An interactive dashboard that scores what to watch tonight. Built in Tableau in 2012.",
+    "url": "https://public.tableau.com/app/profile/balazs.krich/viz/Whatmovieshouldwewatchtonight/Opinionmeter",
+    "external": true,
+    "tech": ["tableau", "dataviz"]
+  },
+  {
     "name": "REPLACE ME — external app",
     "blurb": "Edit lab.json to add your apps. Set external:true for things hosted elsewhere.",
     "url": "https://example.com",

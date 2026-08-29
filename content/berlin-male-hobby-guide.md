@@ -2,7 +2,7 @@
 title: Berlin Male Hobby Guide
 date: 2026-07-04
 kind: essay
-tags: berlin
+tags: culture
 summary: A guide from "just curious" to "please take my wallet away from me."
 ---
 

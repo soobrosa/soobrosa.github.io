@@ -29,7 +29,10 @@ ROOT = pathlib.Path(__file__).parent
 CONTENT = ROOT / "content"
 WORDS_DIR = ROOT / "words"
 
-KINDS = ["essay", "talk", "translation", "print", "app"]
+KINDS = ["essay", "talk", "translation", "print"]
+# The TOPIC filter is built from whatever tags appear in front matter, so a typo
+# or a one-off word silently becomes a permanent dropdown row. Keep this closed.
+TAGS = ["career", "culture", "data", "hardware", "learning"]
 CSS = "/assets/css/site.css"
 
 NAV_ITEMS = [("bio", "/index.html"), ("mixes", "/mixes.html"),
@@ -115,6 +118,10 @@ def load_entries():
         if kind not in KINDS:
             kind = "essay"
         tags = [t.strip().lower() for t in meta.get("tags", "").split(",") if t.strip()]
+        unknown = [t for t in tags if t not in TAGS]
+        if unknown:
+            sys.exit(f"{path.name}: unknown tag(s) {', '.join(unknown)}. "
+                     f"Add to TAGS in build.py or fix the front matter.")
         date = parse_date(meta.get("date"))
         external = meta.get("external", "").strip()
         slug = slugify(meta.get("slug") or path.stem)
