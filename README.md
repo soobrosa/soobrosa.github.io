@@ -29,11 +29,14 @@ lab.json                App list (name, blurb, url, external, tech)
 Makefile                make build | make serve | make migrate
 ```
 
-`_layouts/`, `_config.yml` and the old Jekyll `_index.html` are gone;
-`.nojekyll` meant nothing read them any more. `_posts/` stays: 10 of its
-16 posts never made it into `content/` and are still live in production
-under `/post/...` and `/translation/...`, so it is the source for that
-migration, not dead weight. Run `make migrate` to continue it.
+The Jekyll layer is gone: `_layouts/`, `_config.yml`, `_index.html` and
+`_posts/`. All 16 of those posts are in `content/`, verified body for body,
+so nothing was lost with the directory.
+
+Their URLs did change, though. Jekyll served them at
+`/post/<yyyy>/<mm>/<dd>/<Title>.html` (and `/translation/...` for the
+translated ones); they are now `/words/<slug>.html`. Nothing redirects the
+old paths, so those inbound links will 404 once this branch ships.
 
 ## Add a piece of writing
 
