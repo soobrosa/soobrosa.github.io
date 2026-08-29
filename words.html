@@ -8,11 +8,13 @@
 <script src="/assets/js/theme.js"></script>
 <style>
 .filters{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px;position:relative;z-index:5;}
-.dropdown{position:relative;}
+/* display:flex, not block: an inline-block button in a block sits on the line
+   box baseline, which pushed the heads 3px below the plain ALL button. */
+.dropdown{position:relative;display:flex;}
 .drop-head{display:inline-flex;align-items:center;gap:6px;}
-.drop-head .lbl{color:var(--dim);}
+.drop-head .lbl{color:var(--meta);}
 .drop-head .cur{color:var(--yellow);}
-.drop-head .arw{color:var(--cyan);font-size:7px;}
+.drop-head .arw{color:var(--cyan);font-size:9px;}
 .dropdown.set .drop-head{color:var(--bg);background:var(--cyan);box-shadow:-3px 0 0 var(--white),3px 0 0 var(--white),0 -3px 0 var(--white),0 3px 0 var(--white);}
 .dropdown.set .drop-head .lbl,.dropdown.set .drop-head .cur,.dropdown.set .drop-head .arw{color:var(--bg);}
 .drop-menu{position:absolute;top:100%;left:0;padding-top:8px;display:none;flex-direction:column;gap:4px;min-width:150px;}
