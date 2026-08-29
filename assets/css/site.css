@@ -76,11 +76,28 @@ a.inline:hover, .post a:hover { color:var(--yellow); border-color:var(--yellow);
 
 /* ---- words list + filters ---- */
 .hint { color:var(--cyan); margin-bottom:26px; } .hint b { color:var(--yellow); }
-.filters { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
-.grp-label { width:100%; font-family:var(--pixel); font-size:10px; color:var(--meta); letter-spacing:1px; margin-top:14px; }
+.filters { display:flex; flex-wrap:wrap; align-items:flex-start; gap:8px; position:relative; z-index:5; }
 .fbtn { font-family:var(--pixel); font-size:11px; color:var(--text); background:var(--panel); border:none; padding:9px 10px; cursor:pointer; box-shadow:-3px 0 0 var(--dim),3px 0 0 var(--dim),0 -3px 0 var(--dim),0 3px 0 var(--dim); transition:color .1s,background .1s; }
 .fbtn:hover { color:var(--yellow); }
 .fbtn.active { color:var(--bg); background:var(--cyan); box-shadow:-3px 0 0 var(--white),3px 0 0 var(--white),0 -3px 0 var(--white),0 3px 0 var(--white); }
+
+/* ---- TYPE / TOPIC dropdowns ---- */
+/* display:flex, not block: an inline-block button in a block sits on the line
+   box baseline, which pushed the heads 3px below the plain ALL button. */
+.dropdown { position:relative; display:flex; }
+.drop-head { display:inline-flex; align-items:center; gap:6px; }
+.drop-head .lbl { color:var(--meta); }
+.drop-head .cur { color:var(--yellow); }
+.drop-head .arw { color:var(--cyan); font-size:9px; }
+.dropdown.set .drop-head { color:var(--bg); background:var(--cyan); box-shadow:-3px 0 0 var(--white),3px 0 0 var(--white),0 -3px 0 var(--white),0 3px 0 var(--white); }
+.dropdown.set .drop-head .lbl, .dropdown.set .drop-head .cur, .dropdown.set .drop-head .arw { color:var(--bg); }
+.drop-menu { position:absolute; top:100%; left:0; padding-top:8px; display:none; flex-direction:column; gap:4px; min-width:150px; }
+.dropdown:hover .drop-menu, .dropdown:focus-within .drop-menu { display:flex; }
+.drop-menu-inner { display:flex; flex-direction:column; gap:4px; background:var(--panel); padding:8px; box-shadow:-3px 0 0 var(--dim),3px 0 0 var(--dim),0 -3px 0 var(--dim),0 3px 0 var(--dim); }
+.drop-menu .fbtn { width:100%; text-align:left; box-shadow:none; background:transparent; }
+.drop-menu .fbtn:hover { color:var(--yellow); background:#20202f; }
+:root[data-theme="light"] .drop-menu .fbtn:hover { background:#d8d3c6; }
+.drop-menu .fbtn.active { color:var(--bg); background:var(--cyan); box-shadow:none; }
 .count { font-family:var(--pixel); font-size:11px; color:var(--meta); margin:26px 0 10px; }
 .count a { color:var(--yellow); cursor:pointer; text-decoration:none; }
 
@@ -168,7 +185,7 @@ footer.foot a { color:var(--cyan); text-decoration:none; } footer.foot a:hover {
   body::after { display:none !important; }
   .wrap, .narrow { max-width:none; margin:0; padding:0; }
 
-  .topnav, .back, .filters, .socials, .hint, .count, .grp-label, .empty { display:none !important; }
+  .topnav, .back, .filters, .socials, .hint, .count, .empty { display:none !important; }
 
   h1, h2, h3, h4, .post h1, .post h2, .post h3, .post .meta,
   p, a, li, code, pre, blockquote, footer.foot {

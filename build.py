@@ -34,6 +34,9 @@ KINDS = ["essay", "talk", "translation", "print"]
 # or a one-off word silently becomes a permanent dropdown row. Keep this closed.
 TAGS = ["career", "culture", "data", "hardware", "learning"]
 CSS = "/assets/css/site.css"
+# Every hand-written page loads this; generated pages have to as well or the
+# T-key light theme silently stops working on articles only.
+THEME_JS = "/assets/js/theme.js"
 
 NAV_ITEMS = [("bio", "/index.html"), ("mixes", "/mixes.html"),
              ("words", "/words.html"), ("lab", "/lab.html")]
@@ -94,7 +97,8 @@ def page(title, body, active, narrow=False, extra_head=""):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{html.escape(title)}</title>
-<link rel="stylesheet" href="{CSS}">{extra_head}
+<link rel="stylesheet" href="{CSS}">
+<script src="{THEME_JS}"></script>{extra_head}
 </head>
 <body>
 <main class="{wrap}">
@@ -147,6 +151,17 @@ def render_article(entry):
     return page(entry["title"] + " // soobrosa", inner, "words", narrow=True)
 
 
+def dropdown(group, label, btns):
+    """One collapsed filter facet. The leading ALL resets just this group."""
+    return f"""  <div class="dropdown" data-group="{group}">
+    <button class="fbtn drop-head" type="button"><span class="lbl">{label}</span>\
+<span class="arw">&#9662;</span><span class="cur">ALL</span></button>
+    <div class="drop-menu"><div class="drop-menu-inner">
+      <button class="fbtn" data-filter="all">ALL</button>{btns}
+    </div></div>
+  </div>"""
+
+
 def render_words(entries):
     rows = []
     kinds_present, tags_present = [], []
@@ -179,8 +194,8 @@ def render_words(entries):
 <p class="hint">One chronological stream. Click a <b>TYPE</b> or a <b>#tag</b> to filter in place.</p>
 <div class="filters" id="filters">
   <button class="fbtn active" data-filter="all">ALL</button>
-  <span class="grp-label">&gt; TYPE</span>{kind_btns}
-  <span class="grp-label">&gt; TOPIC</span>{tag_btns}
+{dropdown("kind", "TYPE", kind_btns)}
+{dropdown("tag", "TOPIC", tag_btns)}
 </div>
 <div class="count" id="count"></div>
 <ul class="words" id="list">
@@ -197,8 +212,12 @@ const items=[...list.querySelectorAll('li')];
 const buttons=[...document.querySelectorAll('.fbtn')];
 const countEl=document.getElementById('count');
 const emptyEl=document.getElementById('empty');
+const heads={kind:document.querySelector('.dropdown[data-group="kind"]'),tag:document.querySelector('.dropdown[data-group="tag"]')};
+function setHead(g,val){const d=heads[g];d.querySelector('.cur').textContent=val;d.classList.toggle('set',val!=='ALL');}
 function apply(f){let shown=0;items.forEach(li=>{let m=f==='all';if(!m){const[t,v]=f.split(':');if(t==='kind')m=li.dataset.kind===v;else if(t==='tag')m=li.dataset.tags.split(',').includes(v);}li.classList.toggle('hidden',!m);if(m)shown++;});
 buttons.forEach(b=>b.classList.toggle('active',b.dataset.filter===f));
+let kindVal='ALL',tagVal='ALL';if(f!=='all'){const[t,v]=f.split(':');if(t==='kind')kindVal=v.toUpperCase();else if(t==='tag')tagVal=v.toUpperCase();}
+setHead('kind',kindVal);setHead('tag',tagVal);
 countEl.textContent=f==='all'?shown+' ENTRIES':shown+'/'+items.length+' \\u00b7 ';
 if(f!=='all'){const r=document.createElement('a');r.href='#';r.textContent='CLEAR';r.onclick=e=>{e.preventDefault();go('all');};countEl.appendChild(r);}
 emptyEl.style.display=shown?'none':'block';}
