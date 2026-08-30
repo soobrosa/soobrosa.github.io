@@ -1,12 +1,17 @@
 # soobrosa.info
 
-Daniel Molnar's personal site. Pure static HTML in an 8-bit pixel theme,
-built from markdown by a tiny Python script. No Jekyll.
+Daniel Molnar's personal site. Pure static HTML in a black-on-white monospace
+theme, built from markdown by a tiny Python script. No Jekyll.
+
+The design is a technical-readout look: system monospace throughout, a hairline
+cell grid, uppercase micro-labels, oversized numerals and solid bars. No colour,
+no border radius, no shadows, no webfonts — weight, rule and fill carry every
+distinction. Press `T` to invert the polarity.
 
 ## Structure
 
 ```
-index.html              Bio / landing page
+index.html              Bio / landing page (its counts + bars are build-written)
 mixes.html              DJ mix player (reads mixes.json, streams from R2)
 words.html              GENERATED: one chronological list of all writing
 words/<slug>.html       GENERATED: one page per markdown post
@@ -20,10 +25,11 @@ post/, translation/     GENERATED: redirect stubs for the old Jekyll URLs
 
 content/*.md            SOURCE for writing — drop markdown here
 build.py                content/*.md -> words/<slug>.html + words.html,
-                        plus atom.xml and the redirect stubs
+                        plus atom.xml and the redirect stubs, and rewrites
+                        index.html's counts + words-by-type bars
 migrate.py              One-time importer (old _posts/ + static/ -> content/)
 
-assets/css/site.css     Single shared stylesheet (the pixel theme)
+assets/css/site.css     Single shared stylesheet (the whole design)
 covers/                 Mix cover art
 mixes.json              Mix list (id, title, url, cover)
 lab.json                App list (name, blurb, url, external, tech)
@@ -55,8 +61,8 @@ Drop a markdown file into `content/`. Front matter:
 ---
 title: My Post Title
 date: 2026-06-21
-kind: essay            # essay | talk | translation | print | app
-tags: data, music      # freeform topical tags (kept small)
+kind: essay            # essay | talk | translation | print
+tags: data, career     # from the closed TAGS list in build.py
 external:              # optional — if set, the item links out and no page is built
 summary:               # optional
 ---
@@ -66,9 +72,12 @@ Body in **markdown**...
 
 - Notion exports work directly: drop the `.md` in `content/` (the build
   slugifies the filename and strips Notion's hash suffixes).
-- `kind` becomes the colored type badge in the list; `tags` become the
-  clickable `#topic` filters. Both filter the single chronological list
-  in place — no extra pages or nav.
+- `kind` becomes the type badge in the list; `tags` become the clickable
+  `#topic` filters. Both filter the single chronological list in place —
+  no extra pages or nav.
+- `kind` and `tags` are both closed vocabularies (`KINDS` and `TAGS` in
+  `build.py`). An unknown value fails the build rather than silently adding
+  a permanent dropdown row for a typo.
 - `external:` is for talks, podcasts, print pieces, etc. that live
   elsewhere — they appear in the list but link out instead of generating
   a page.

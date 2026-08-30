@@ -5,7 +5,7 @@ Front matter (YAML-ish) per markdown file:
     ---
     title: Some Title
     date: 2016-09-06
-    kind: essay            # essay | talk | translation | print | app
+    kind: essay            # essay | talk | translation | print
     tags: data, hardware
     external: https://...  # optional; if set, item links out and no page is generated
     summary: one line       # optional
@@ -307,6 +307,57 @@ def render_feed(entries):
     return "\n".join(out)
 
 
+DIST_REGION = re.compile(r"(<!-- build:dist -->).*?(<!-- /build:dist -->)", re.S)
+
+
+def render_dist(entries):
+    """The words-by-type block on index.html: label, bar, count."""
+    counts = {k: 0 for k in KINDS}
+    for e in entries:
+        counts[e["kind"]] += 1
+    rows = sorted(((n, k) for k, n in counts.items() if n), reverse=True)
+    top = rows[0][0]
+    lines = ['<div class="hp">Words by type</div>', '<ul class="dist">']
+    for n, kind in rows:
+        lines.append(
+            f'  <li><span class="dk">{kind}</span>'
+            f'<span class="db"><i style="width:{n / top * 100:.4g}%"></i></span>'
+            f'<span class="dv">{n}</span></li>'
+        )
+    lines.append("</ul>")
+    return "\n  ".join(lines)
+
+
+def count_json(name):
+    path = ROOT / name
+    if not path.exists():
+        sys.exit(f"{name} is missing; index.html metrics would go stale")
+    return len(json.loads(path.read_text(encoding="utf-8")))
+
+
+def update_index(metrics, dist_html):
+    """Rewrite the generated regions of index.html: the metric cell values and
+    the words-by-type block.
+
+    Hand-editing these counts means they are wrong the day a post is added, so
+    the build owns them. Idempotent: rebuilding an up-to-date file is a no-op.
+    """
+    path = ROOT / "index.html"
+    text = original = path.read_text(encoding="utf-8")
+    for name, value in metrics.items():
+        pattern = re.compile(r'(data-metric="%s"\s*>)[^<]*' % re.escape(name))
+        text, n = pattern.subn(lambda m: m.group(1) + str(value), text)
+        if n != 1:
+            sys.exit(f'index.html: expected 1 data-metric="{name}", found {n}')
+    text, n = DIST_REGION.subn(
+        lambda m: f"{m.group(1)}\n  {dist_html}\n  {m.group(2)}", text)
+    if n != 1:
+        sys.exit(f"index.html: expected 1 build:dist region, found {n}")
+    if text != original:
+        path.write_text(text, encoding="utf-8")
+    return text != original
+
+
 def main():
     entries = load_entries()
     if WORDS_DIR.exists():
@@ -321,8 +372,15 @@ def main():
     (ROOT / "words.html").write_text(render_words(entries), encoding="utf-8")
     (ROOT / "atom.xml").write_text(render_feed(entries), encoding="utf-8")
     redirects = write_redirects()
+    changed = update_index({
+        "words": len(entries),
+        "articles": generated,
+        "mixes": count_json("mixes.json"),
+        "lab": count_json("lab.json"),
+    }, render_dist(entries))
     print(f"built words.html with {len(entries)} entries, {generated} article pages")
     print(f"wrote atom.xml and {redirects} redirect stubs")
+    print("index.html metrics " + ("updated" if changed else "already current"))
 
 
 if __name__ == "__main__":
