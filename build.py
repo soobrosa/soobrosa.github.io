@@ -15,6 +15,7 @@ Front matter (YAML-ish) per markdown file:
 import re
 import sys
 import html
+import json
 import shutil
 import pathlib
 import datetime
@@ -33,6 +34,7 @@ KINDS = ["essay", "talk", "translation", "print"]
 # The TOPIC filter is built from whatever tags appear in front matter, so a typo
 # or a one-off word silently becomes a permanent dropdown row. Keep this closed.
 TAGS = ["career", "culture", "data", "hardware", "learning"]
+SITE = "https://soobrosa.info"
 CSS = "/assets/css/site.css"
 # Every hand-written page loads this; generated pages have to as well or the
 # T-key light theme silently stops working on articles only.
@@ -227,6 +229,84 @@ apply(location.hash.slice(1)||'all');
 </script>"""
 
 
+REDIRECT_STUB = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Moved &mdash; soobrosa</title>
+<link rel="canonical" href="{site}{new}">
+<meta http-equiv="refresh" content="0; url={new}">
+<link rel="stylesheet" href="{css}">
+</head>
+<body>
+<main class="wrap narrow">
+  <div class="panel"><p>This page moved to <a class="inline" href="{new}">{new}</a>.</p></div>
+</main>
+</body>
+</html>
+"""
+
+
+def write_redirects():
+    """Emit a stub at every URL the Jekyll site used to serve.
+
+    Jekyll published posts at /<category>/<yyyy>/<mm>/<dd>/<Title>.html. Those
+    paths are all still live and indexed, and deleting _posts/ would turn every
+    one of them into a 404, so each gets a canonical + meta-refresh stub.
+
+    Nothing is deleted first: these paths are historical facts that only ever
+    get added to, and rmtree-ing top-level directories by name is too blunt a
+    tool to point at a site root.
+    """
+    mapping = json.loads((ROOT / "redirects.json").read_text(encoding="utf-8"))
+    for old, new in sorted(mapping.items()):
+        target = ROOT / old.lstrip("/")
+        if not (ROOT / new.lstrip("/")).exists():
+            sys.exit(f"redirects.json: {old} points at {new}, which does not exist")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(
+            REDIRECT_STUB.format(site=SITE, new=new, css=CSS), encoding="utf-8")
+    return len(mapping)
+
+
+def render_feed(entries):
+    """Atom feed for the whole stream, newest first.
+
+    <updated> is the newest entry date rather than the build time, so that
+    rebuilding without content changes leaves the file byte-identical.
+    """
+    dated = [e for e in entries if e["date"]][:25]
+    stamp = lambda d: d.strftime("%Y-%m-%dT00:00:00+00:00")
+    out = ['<?xml version="1.0" encoding="utf-8"?>',
+           '<feed xmlns="http://www.w3.org/2005/Atom">',
+           " <title>soobrosa aka Daniel Molnar</title>",
+           f' <link href="{SITE}/atom.xml" rel="self"/>',
+           f' <link href="{SITE}/"/>',
+           f" <updated>{stamp(dated[0]['date'])}</updated>",
+           f" <id>{SITE}/</id>",
+           " <author>",
+           "   <name>Daniel Molnar</name>",
+           "   <email>soobrosa@gmail.com</email>",
+           " </author>"]
+    for e in dated:
+        link = e["external"] or f'{SITE}/words/{e["slug"]}.html'
+        out += [" <entry>",
+                f'   <title>{html.escape(e["title"])}</title>',
+                f'   <link href="{html.escape(link)}"/>',
+                f"   <updated>{stamp(e['date'])}</updated>",
+                f'   <id>{html.escape(link)}</id>',
+                f'   <category term="{e["kind"]}"/>']
+        if e["summary"]:
+            out.append(f'   <summary>{html.escape(e["summary"])}</summary>')
+        if not e["external"]:
+            body = md_lib.markdown(e["body"],
+                                   extensions=["fenced_code", "tables", "sane_lists"])
+            out.append(f'   <content type="html">{html.escape(body)}</content>')
+        out.append(" </entry>")
+    out += ["</feed>", ""]
+    return "\n".join(out)
+
+
 def main():
     entries = load_entries()
     if WORDS_DIR.exists():
@@ -239,7 +319,10 @@ def main():
         (WORDS_DIR / f'{e["slug"]}.html').write_text(render_article(e), encoding="utf-8")
         generated += 1
     (ROOT / "words.html").write_text(render_words(entries), encoding="utf-8")
+    (ROOT / "atom.xml").write_text(render_feed(entries), encoding="utf-8")
+    redirects = write_redirects()
     print(f"built words.html with {len(entries)} entries, {generated} article pages")
+    print(f"wrote atom.xml and {redirects} redirect stubs")
 
 
 if __name__ == "__main__":

@@ -14,9 +14,13 @@ lab.html                Apps & experiments (reads lab.json)
 musings.html            Static link archive (campervan / tinyhouse / houseboat)
 elearning.html          Static link archive (e-learning courses)
 404.html
+atom.xml                GENERATED: Atom feed of the newest 25 entries
+redirects.json          Old Jekyll URL -> new URL, one row per moved page
+post/, translation/     GENERATED: redirect stubs for the old Jekyll URLs
 
 content/*.md            SOURCE for writing — drop markdown here
-build.py                content/*.md -> words/<slug>.html + words.html
+build.py                content/*.md -> words/<slug>.html + words.html,
+                        plus atom.xml and the redirect stubs
 migrate.py              One-time importer (old _posts/ + static/ -> content/)
 
 assets/css/site.css     Single shared stylesheet (the pixel theme)
@@ -34,9 +38,14 @@ The Jekyll layer is gone: `_layouts/`, `_config.yml`, `_index.html` and
 so nothing was lost with the directory.
 
 Their URLs did change, though. Jekyll served them at
-`/post/<yyyy>/<mm>/<dd>/<Title>.html` (and `/translation/...` for the
-translated ones); they are now `/words/<slug>.html`. Nothing redirects the
-old paths, so those inbound links will 404 once this branch ships.
+`/post/<yyyy>/<mm>/<dd>/<Title>.html` (and `/translation/...` for the two
+translated ones); they are now `/words/<slug>.html`.
+
+`redirects.json` maps every one of those 16 old paths to its new page, and
+`build.py` writes a canonical + meta-refresh stub at each. GitHub Pages has
+no server-side redirects, so a stub file is the only option. Add a row to
+`redirects.json` whenever a URL moves; the build fails if a row points at a
+page that does not exist.
 
 ## Add a piece of writing
 

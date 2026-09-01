@@ -1,27 +1,628 @@
----
-layout: nil
----
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
- 
  <title>soobrosa aka Daniel Molnar</title>
- <link href="http://soobrosa.info/atom.xml" rel="self"/>
- <link href="http://soobrosa.info/"/>
- <updated>{{ site.time | date_to_xmlschema }}</updated>
- <id>http://soobrosa.info/</id>
+ <link href="https://soobrosa.info/atom.xml" rel="self"/>
+ <link href="https://soobrosa.info/"/>
+ <updated>2026-07-04T00:00:00+00:00</updated>
+ <id>https://soobrosa.info/</id>
  <author>
    <name>Daniel Molnar</name>
    <email>soobrosa@gmail.com</email>
  </author>
-
- {% for post in site.posts %}
  <entry>
-   <title>{{ post.title }}</title>
-   <link href="http://soobrosa.info{{ post.url }}"/>
-   <updated>{{ post.date | date_to_xmlschema }}</updated>
-   <id>http://soobrosa.info{{ post.id }}</id>
-   <content type="html">{{ post.content | xml_escape }}</content>
+   <title>Berlin Male Hobby Guide</title>
+   <link href="https://soobrosa.info/words/berlin-male-hobby-guide.html"/>
+   <updated>2026-07-04T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/berlin-male-hobby-guide.html</id>
+   <category term="essay"/>
+   <summary>A guide from &quot;just curious&quot; to &quot;please take my wallet away from me.&quot;</summary>
+   <content type="html">&lt;p&gt;A guide from &quot;just curious&quot; to &quot;please take my wallet away from me.&quot;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;1. MODULAR SYNTHS&lt;/h2&gt;
+&lt;h3&gt;What You&#x27;re Getting Into&lt;/h3&gt;
+&lt;p&gt;Eurorack modular synthesis is essentially building your own synthesizer from individual modules, each doing one thing — generating a sound, shaping it, modulating it, sequencing it. You connect them with patch cables, and the result is a completely unique instrument that no one else in the world has. The creative freedom is intoxicating. The financial damage is real.&lt;/p&gt;
+&lt;h3&gt;The Progression (a.k.a. How You Go Broke)&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Phase 1 — &quot;Just Dipping My Toes&quot; (~€200–600)&lt;/strong&gt;
+Start with a semi-modular synth. These are self-contained instruments with patch points that let you learn the concepts without committing to a full rack. The Arturia MiniBrute 2 (~€450–550) or the Cre8Audio East Beast / West Pest (~€200–250 each) are popular starting points. They work out of the box but can later be mounted in a Eurorack case. This phase is where you learn the language: oscillators, filters, envelopes, LFOs, VCAs, CV, gates.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 2 — &quot;I Need a Case&quot; (~€1,500–3,000)&lt;/strong&gt;
+You buy a powered case (the Arturia RackBrute 3U at ~€255–300 or a TipTop Audio Mantis at ~€330–370 are popular starters), and your first real modules. Mutable Instruments Plaits is one of the best and most popular oscillators in Eurorack — it originally shipped with 16 synthesis algorithms and was later updated to 24 via the December 2022 firmware 1.2 update (Émilie Gillet&#x27;s parting update before Mutable closed). It&#x27;s a common first oscillator for good reason. Add a filter (Doepfer A-124 Wasp or TipTop Forbidden Planet), a VCA, an envelope generator, a sequencer, and some utilities. The key is keeping a good balance of sound generators, sound modifiers, and modulators, and making each module as multi-functional as possible.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 3 — &quot;This Is My Instrument Now&quot; (~€5,000–10,000)&lt;/strong&gt;
+Bigger case. More voices. Complex oscillators like the Make Noise DPO or Instruo Cs-L (~€550–650). Dedicated effects modules, clock dividers, quantizers, a Maths (the Make Noise Maths is practically mandatory — it does everything). You start having opinions about patch cable brands.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 4 — &quot;The Wall&quot; (~€15,000–30,000+)&lt;/strong&gt;
+Multiple cases. Buchla-style stuff. You&#x27;re buying modules from tiny manufacturers who hand-solder everything in a shed. You attend Superbooth religiously. You have a ModularGrid account with seventeen saved system plans.&lt;/p&gt;
+&lt;h3&gt;Berlin Specifics&lt;/h3&gt;
+&lt;p&gt;Berlin is &lt;em&gt;the&lt;/em&gt; city for this hobby:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SchneidersLaden&lt;/strong&gt; has been the beating heart of the modular scene for over 25 years, with deep expertise in Eurorack, hardware synthesizers, and sequencers. The main location relocated in 2024 to Karl-Marx-Straße 186 in Neukölln (the former Musikhaus Bading building), with themed rooms full of gear you can play. A second site at Ganghofer Straße 1 hosts polysynths and electroacoustic instruments, and the original Kottbusser Tor space remains for repairs and workshops. This is the shop. Go there first.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Patch Point&lt;/strong&gt; — specializes in handcrafted electronic instruments (Bugbrand, Ciat-Lonbarde, Serge Modular, Fenix, Gieskes, eKalimba, Banana) at a Berlin showroom on Lenaustraße 20. Hours have varied between Mon–Thu and Mon–Fri afternoons; check the site before visiting.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Superbooth&lt;/strong&gt; — the world&#x27;s biggest synth trade show, held annually in Berlin. The 2025 edition drew 8,800+ attendees and 301 exhibitors from 31 countries; Superbooth 26 runs 7–9 May 2026 at FEZ-Berlin.&lt;/p&gt;
+&lt;h3&gt;The Snob Hierarchy&lt;/h3&gt;
+&lt;p&gt;Semi-modular → starter Eurorack → all-analog purist system → Buchla → custom one-off modules from a builder you met at Superbooth → you &lt;em&gt;are&lt;/em&gt; a module builder now.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;2. SPECIALTY COFFEE&lt;/h2&gt;
+&lt;h3&gt;What You&#x27;re Getting Into&lt;/h3&gt;
+&lt;p&gt;This splits neatly into two parallel obsessions: &lt;em&gt;drinking&lt;/em&gt; great coffee out in the world, and &lt;em&gt;making&lt;/em&gt; it at home. Both are rewarding. Both are expensive. The home game is where the real money disappears.&lt;/p&gt;
+&lt;h3&gt;The Progression&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Phase 1 — &quot;Better Than Instant&quot; (~€50–150)&lt;/strong&gt;
+A Hario V60 dripper (€8), some filters (€5), a basic stovetop gooseneck kettle (~€30 generic, ~€50 for a branded one like the Hario Buono), a decent hand grinder like the Timemore C2 (~€70–80), and fresh beans from a local roaster. This is all you need to make coffee that&#x27;s dramatically better than 95% of what most people drink. The V60 pour-over ritual is meditative and satisfying.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 2 — &quot;Properly Obsessed Pour-Over&quot; (~€400–800)&lt;/strong&gt;
+Upgrade the grinder to a Comandante C40 (~€269–299 for standard MK4 Nitro Blade variants — LAB Series Tigershark variants run higher) or 1Zpresso K-Ultra (~€245–260) — these hand grinders produce incredibly uniform particles. Get a Fellow Stagg EKG electric kettle with temperature control (~€155–170 for the standard, ~€195–215 for the Pro). Add a Brewista Smart Scale (~€70–90). Now you&#x27;re weighing your water, timing your pours, and adjusting grind size by single clicks. You start buying single-origin beans and tracking tasting notes.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 3 — &quot;I Want Espresso&quot; (~€1,500–3,500)&lt;/strong&gt;
+This is where the money really starts flowing. A common quote among coffee geeks is that the grinder is more important than the machine itself, and this is actually true — especially for espresso. Two classic entry points: a Gaggia Classic Pro (~€499–530) or a Rancilio Silvia (~€600–700), paired with a Eureka Mignon Specialita (~€430–530) or a DF64-style grinder (~€500–600 in EU clones). You also need a tamper, WDT tool, precision basket, knock box, and scale.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 4 — &quot;Endgame Machine&quot; (~€3,500–7,000+)&lt;/strong&gt;
+The Lelit Bianca V3 (~€1,700–1,950 EU retail, deals from ~€1,575 — a dual boiler with E61 group and flow control paddle), the Decent DE1Pro (~€3,400–3,700, the tech-nerd&#x27;s dream with real-time pressure/flow/temperature profiling via tablet), or the La Marzocco Linea Mini (~€5,000–5,300 in Europe, the iconic café machine shrunk for your kitchen). Pair with a Niche Zero (~€570–650) — note that the Lagom P64, long a favorite, was discontinued in early 2026 and replaced by the Lagom P80. Now you&#x27;re pressure profiling your shots and discussing extraction yield percentages on Reddit.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 5 — &quot;Collector/Roaster&quot; (~€5,000–15,000+)&lt;/strong&gt;
+You start home-roasting with an Aillio Bullet R2 (~€3,390, or ~€4,290 for the R2 Pro). You&#x27;re sourcing green beans directly. You have opinions about processing methods (washed vs. natural vs. anaerobic). Your kitchen counter looks like a small café.&lt;/p&gt;
+&lt;h3&gt;Berlin Specifics&lt;/h3&gt;
+&lt;p&gt;Berlin&#x27;s specialty coffee scene is world-class:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Barn&lt;/strong&gt; is the most iconic name — uncompromisingly focused on single-origin, light-roasted coffee served with minimal distraction. Multiple locations across the city. Note: roasting long ago moved out of the old Schönhauser Allee 8 space (Prenzlauer Berg, and their roastery from 2012) to a larger facility on Wattstraße in Wedding, which added a production floor, bakery, and an on-site &quot;Annex&quot; café facing Voltastraße — that&#x27;s now the closest thing to a flagship roastery experience. Schönhauser Allee 8 still operates as a café, and the original Scheunenviertel shop on Auguststraße 58 in Mitte is where it all started in 2010.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bonanza Coffee Roasters&lt;/strong&gt;, founded in 2006 by Kiduk Reus and Yumi Choi, is one of the great pioneers of Berlin&#x27;s specialty scene. Their Kreuzberg roastery-café on Adalbertstraße 70 is gorgeous, with the Probat roaster visible to visitors. Their Gendarmenmarkt location is built around 55 m² of fine green marble flooring and worktops.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Five Elephant&lt;/strong&gt; — renowned for both their coffee and their cheesecake. Direct-trade relationships with farmers in Ethiopia, Guatemala, and Colombia. Locations in Kreuzberg (Reichenberger Str. 101, the original flagship), Mitte (Alte Schönhauser Str. 14), and Prenzlauer Berg (Kollwitzstr. 98 and Schwedter Str. 11). Their KaDeWe café has closed.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Father Carpenter&lt;/strong&gt; in Mitte — widely considered one of the best spots for specialty coffee, and since 2023 they&#x27;ve run their own independent roastery (after splitting from Fjord). Also famous for possibly the best breakfast in Berlin.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;19grams&lt;/strong&gt; — one of the original pioneers (founded 2002 as Tres Cabezas, rebranded 19grams in 2018), with four cafés today (Alex flagship, Boxhagener/Friedrichshain, Schlesi/Kreuzberg, Chaussee/Mitte) and a strong education and accessibility focus.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fjord Coffee Roasters&lt;/strong&gt; — founded in 2016 by Kresten Thøgersen, Morgan Love, and James Maguire, working on bridging quality coffee and sustainable production.&lt;/p&gt;
+&lt;p&gt;For &lt;strong&gt;equipment shopping&lt;/strong&gt;, Berlin has several dedicated home-barista gear shops:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;KaffeeKombinat Berlin&lt;/strong&gt; in Friedrichshain (Wühlischstraße 55) — a specialist shop for home-barista equipment: espresso machines, grinders, repairs, accessories, plus hands-on training and machine introductions. They carry Rancilio, Lelit, La Pavoni, Bezzera, BFC, Rocket, and Wega, and do E61 group repairs.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Espressomeisterei&lt;/strong&gt; in Charlottenburg — a dedicated espresso machine retailer carrying ECM, Profitec, Rocket, and Ascaso, with Eureka and Mahlkönig grinders. They also run home-barista courses and offer in-house service and repair.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Röststätte Berlin&lt;/strong&gt; in Mitte (Ackerstraße 173) — describes itself as Berlin&#x27;s largest store for coffee accessories. They carry La Marzocco, Victoria Arduino, and Mahlkönig, plus home gear from Fellow, Hario, Timemore, Brewista, Cafelat, Kinto, and Rhinowares. Showroom for testing and comparing machines, plus a full barista academy with courses for home users.&lt;/p&gt;
+&lt;h3&gt;The Snob Hierarchy&lt;/h3&gt;
+&lt;p&gt;Nespresso pods → French press → pour-over with pre-ground → pour-over with freshly ground → single-origin pour-over with tasting notes → espresso → pressure-profiled espresso from beans you roasted yourself → you start a roastery.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;3. VINYL &amp;amp; HI-FI&lt;/h2&gt;
+&lt;h3&gt;What You&#x27;re Getting Into&lt;/h3&gt;
+&lt;p&gt;Two intertwined addictions: collecting records and building the system to play them on. The beauty is that a vinyl setup is a physical, tactile, visual thing — the ritual of pulling a record from its sleeve, placing the needle, and sitting with an album for 20 minutes per side is the entire point. Berlin&#x27;s record scene makes this hobby especially dangerous.&lt;/p&gt;
+&lt;h3&gt;The Progression&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Phase 1 — &quot;Just Getting Started&quot; (~€450–700)&lt;/strong&gt;
+A turntable with a built-in phono preamp, like the Audio-Technica AT-LP120X (~€350–400 in EU) — notable for its direct drive motor and fully adjustable tonearm, modeled on the legendary Technics SL-1200. Pair with affordable powered speakers like Edifier R1280DBs (~€120–160) or Kanto YU4 (~€400). Plug in, play records. Done. You&#x27;ll immediately hear the difference from streaming.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 2 — &quot;Separates&quot; (~€1,000–2,500)&lt;/strong&gt;
+This is where hi-fi gets real. You want separate components: a proper turntable, a standalone phono preamp, an amplifier, and passive speakers. A phono stage boosts the tiny signal from the cartridge to line level — it applies the inverse of the RIAA equalization curve baked in during record cutting/mastering, and without it, your records would sound tinny and thin. A solid setup here: Rega Planar 3 turntable (~€850–1,000 with Nd3 cartridge), Cambridge Audio Alva Solo phono stage (~€199), a Cambridge AXA35 integrated amplifier (~€350), and a pair of DALI Oberon 1 bookshelf speakers (~€329–399). Note: DALI is replacing the Oberon range with the new Sonik series starting February 2026, so the Oberon 1 may be on clearance — or check the Sonik successor.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 3 — &quot;Audiophile Sickness&quot; (~€3,000–8,000)&lt;/strong&gt;
+You upgrade the turntable to a Technics SL-1500C (~€1,100–1,200, with the SL-1500CS launching March 2026), Pro-Ject X1 B (~€999), or Rega Planar 6 (~€1,500–1,700 without cartridge, ~€1,900 with Nd7). Better cartridge (moving from Moving Magnet to Moving Coil — an Ortofon 2M Blue at ~€200 or the jump to MC with the Audio-Technica AT-OC9X line, which ranges from ~€280 for the entry XEB to €800+ for the high-end XSL). Dedicated phono preamp (~€500+). Floorstanding speakers. If you actually care about listening to records, most turntables under €300 are fundamentally compromised — spending more on a proper deck lasts decades and protects your records.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 4 — &quot;The Forever System&quot; (~€10,000–30,000+)&lt;/strong&gt;
+Turntables from VPI, Rega (P8/P10), Technics SL-1200G (~€4,300, with a new Master Edition at €5,499 from January 2026). Tube amplification. Reference-grade speakers from KEF, Focal, Harbeth. You&#x27;re treating your listening room acoustically. You buy a record cleaning machine (Degritter Mark II ultrasonic at ~€2,890–3,060). You argue about speaker cable materials on forums at midnight.&lt;/p&gt;
+&lt;h3&gt;Berlin Specifics — Record Shops&lt;/h3&gt;
+&lt;p&gt;Berlin is arguably the best city in Europe for vinyl:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hard Wax&lt;/strong&gt; — legendary since 1989, founded by Basic Channel producer Mark Ernestus, a crucial node in the Berlin-Detroit techno axis. It left its long-time Paul-Lincke-Ufer factory home in Kreuzberg in October 2023 (that building is being turned into luxury flats) and now sits inside the Kraftwerk complex at Köpenicker Str. 70 in Mitte, between the clubs Tresor and OHM — and one flight of stairs instead of three. Listening stations, no-nonsense vibe, incredible selection of techno, house, dub, and reggae. This is hallowed ground.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;OYE Records&lt;/strong&gt; in Prenzlauer Berg (Oderberger Straße 4) — run by DJ Delfonic and disco head Tinko, it&#x27;s become central to Berlin&#x27;s analog house scene. A second location at Friedelstraße 49 in northern Neukölln (the area informally called Kreuzkölln) opened in 2013. Strong in new vinyl, dance music, hip-hop, and jazz.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Spacehall&lt;/strong&gt; in Kreuzberg (Zossener Straße 33/35) — still one of Berlin&#x27;s larger record shops, genre-spanning across three connected rooms with strengths in electronic music. It trades partly on an outsized reputation these days, but the selection is broad and it&#x27;s worth a dig if you&#x27;re in the Bergmannkiez.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;HHV Records&lt;/strong&gt; in Friedrichshain — started as a hip-hop vinyl shop, now covers 150,000+ vinyl titles online plus sneakers and streetwear.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Rough Trade&lt;/strong&gt; at Karl-Marx-Straße 101 in Neukölln — opened April 2024 as the legendary London shop&#x27;s first continental European outpost, covering everything from post-punk to funk to electro.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Dodo Beach&lt;/strong&gt; in Schöneberg (Vorbergstraße 8) — over 30,000 records, with strengths in indie/alternative, reggae/ska/dub, jazz/blues/country, and punk/hardcore.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Satori&lt;/strong&gt; at Wrangelstraße 64 in Kreuzberg — the city&#x27;s best jazz specialist, in a shop that doubles as a wine merchant — half jazz records, half wine, in the same homely space.&lt;/p&gt;
+&lt;p&gt;For &lt;strong&gt;hi-fi equipment&lt;/strong&gt;: Berlin&#x27;s dedicated hi-fi scene has taken a hit. HiFi im Hinterhof — once a beloved institution in Kreuzberg at Großbeerenstraße 65, with over 40 years of history and multiple demo studios — entered preliminary insolvency in July 2025; formal proceedings opened on 1 October 2025 and the company ceased operations on 30 September 2025. For the time being, your best bets are online retailers like Thomann (the world&#x27;s largest online music gear retailer, based in Bavaria), specialist hi-fi shops that remain open (check current listings, as the landscape is shifting), and the used market. PhonoPhono in Kreuzberg (Bergmannstraße 17) is worth checking for turntable-specific gear. For serious auditions, you may need to travel to dealers outside Berlin or arrange home demos through online retailers.&lt;/p&gt;
+&lt;h3&gt;The Snob Hierarchy&lt;/h3&gt;
+&lt;p&gt;Bluetooth speaker → soundbar → powered speakers → passive speakers + amp → separate phono preamp → tube amp → vinyl cleaning ritual → custom isolation platform → you rearrange your entire apartment around speaker placement.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;4. CYCLING&lt;/h2&gt;
+&lt;h3&gt;What You&#x27;re Getting Into&lt;/h3&gt;
+&lt;p&gt;Berlin is one of Europe&#x27;s great cycling cities — flat, well-connected with bike infrastructure, and with a culture that takes cycling seriously as daily transport &lt;em&gt;and&lt;/em&gt; as sport. The surrounding Brandenburg countryside offers hundreds of kilometers of gravel roads, forest tracks, and quiet tarmac. You&#x27;ll ride your bike every single day, which makes investing in a beautiful one feel justified.&lt;/p&gt;
+&lt;h3&gt;The Progression&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Phase 1 — &quot;Solid Commuter&quot; (~€800–1,500)&lt;/strong&gt;
+A quality urban/gravel-ready bike. Something like a Standert Triebwerk (Berlin-designed), 8bar Mitte, or Sour Clueless steel frame with a Shimano GRX or SRAM Apex groupset. Flat or drop bars, fender mounts, rack compatibility. This is Berlin&#x27;s bread and butter — a bike that gets you to work and handles a weekend ride into Brandenburg.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 2 — &quot;Gravel Enthusiast&quot; (~€2,500–4,500)&lt;/strong&gt;
+A proper gravel bike: Canyon Grizl, Orbea Terra, or a steel option like a Bombtrack Beyond. Carbon fork, 1x drivetrain, 40mm+ tires, tubeless setup. You start doing organized rides. Berlin and Brandenburg together form one of Germany&#x27;s most versatile gravel regions — pine forests, sandy tracks, lakeside trails, and wide-open fields in every direction. You join The Gravel Club&#x27;s Berlin chapter (community rides hosted at S3Velo in Friedrichshain) or the Standert Saturday Social Gravel Ride from their Kreuzberg hub.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 3 — &quot;Component Obsession&quot; (~€4,000–7,000)&lt;/strong&gt;
+You upgrade everything. Hand-built wheels (from someone like Light Wolf in Dresden or a Berlin-based wheel builder). Chris King headset and bottom bracket (€200+ each, but they last forever and come in beautiful colors). Brooks Cambium or leather saddle. Ceramic bearings. Carbon seatpost. You start attending the Kolektif Bike Fair in Berlin — founded in 2019 as a successor to the former Berliner Fahrradschau, it&#x27;s become the city&#x27;s own cycling trade show and community gathering. Note: the 2025 edition was postponed to 2026, and as of May 2026 no firm new date has been announced — check the organizer&#x27;s site before planning around it.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Phase 4 — &quot;Custom Build&quot; (~€5,000–10,000+)&lt;/strong&gt;
+This is peak Berlin bike snobbery: a frame built for you by a local builder.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Cicli Bonanno&lt;/strong&gt; in Kreuzberg (Görlitzer Straße 52) — Italian builder Niccolò Bonanno crafts custom steel frames with Columbus tubing and TIG welding. He&#x27;s grown the operation into one of Europe&#x27;s most notable custom fabrication shops, with an annual output of around 70 bikes and a small team. Cicli Bonanno is closely associated with the MoGaSt event — a single-day ride over the Mortirolo, Gavia, and Stelvio. Framesets are custom-priced; contact them directly for current pricing.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Drust Cycles&lt;/strong&gt; — Konstantin Drust handcrafts steel frames in Berlin specializing in bikepacking and adventure builds. His distinctive frames lean toward adventure-ready machines informed by his own extensive travels through the Middle East, Asia, and Eastern Europe.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Santucci Cycles&lt;/strong&gt; in Prenzlauer Berg (Danziger Straße 49) — classically inspired custom steel builds with elegant styling, individually built.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Big Forest Frameworks&lt;/strong&gt; in Potsdam-Babelsberg — custom steel frames tailored to your body and riding style. They also offer a full range of frame-building courses (lugged, fillet brazed, cargo, MTB) if you want to learn the craft yourself.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fern Fahrräder&lt;/strong&gt; in Lichtenberg (Josef-Orlopp-Straße 56) — touring, randonneur, and allroad frames built with Italian steel tubing and fillet brazing, the kind that consistently triggers the must-have reflex.&lt;/p&gt;
+&lt;h3&gt;Berlin Rides &amp;amp; Routes&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Grunewald Loop&lt;/strong&gt; — a 42 km gravel route right on Berlin&#x27;s doorstep, weaving through trails and paths before reaching the shores of Wannsee.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lost-in-Brandenburg Loop&lt;/strong&gt; — a multi-day mixed-surface bikepacking route through the forests and former East German towns northeast of Berlin. Rideable on any gravel bike with 40mm+ tires. Wild camping is legal for one night in Brandenburg (§49 BbgNatSchG — excluding nature reserves, national parks, and private land without permission).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Müggelwald / Köpenicker Forst&lt;/strong&gt; — popular community ride destinations east of the city.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Märkische Schweiz / Oderbruch&lt;/strong&gt; — longer day rides into Brandenburg&#x27;s rolling hills and river valleys.&lt;/p&gt;
+&lt;h3&gt;Community&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Standert Bicycles&lt;/strong&gt; (Friedrichstraße 23a, 10969 Berlin) — Berlin bike brand with a café and cycling hub in Kreuzberg (in the FRIZZ23 development, right at the historic Kreuzberg/Mitte border). They run regular Saturday social gravel rides. Times vary seasonally: in warmer months they typically meet from 09:30 for coffee and roll out at 10:00; in winter, meet from 10:30 and roll out at 11:00. Rides typically cover ~65 km at 26–29 km/h pace. Check &lt;a href=&quot;http://grouprides.cc/&quot;&gt;grouprides.cc&lt;/a&gt; for current schedules and sign-up.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;S3Velo&lt;/strong&gt; in Friedrichshain (Karl-Marx-Allee 76) — gravel-focused shop carrying Orbea, Stevens, Wilier, and Scott, plus custom builds. Berlin home base for The Gravel Club.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Steel Vintage Bikes&lt;/strong&gt; in Mitte (Wilhelmstraße 91, with a second café and workshop at Auguststraße 91) — operating since 2012, it&#x27;s become a destination for classic and vintage steel bicycles with a showroom of 300+ bikes, a café, road bike rentals, and organized group rides. Worth visiting even if you&#x27;re not buying.&lt;/p&gt;
+&lt;h3&gt;The Snob Hierarchy&lt;/h3&gt;
+&lt;p&gt;City bike with basket → single-speed → road bike → gravel bike → steel gravel with nice components → full custom steel from a named Berlin builder → titanium → you &lt;em&gt;build&lt;/em&gt; frames yourself → you organize a gravel event.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;The Cross-Hobby Berlin Saturday&lt;/h2&gt;
+&lt;p&gt;Here&#x27;s what peak snobbish Berlin hobby life looks like:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;9:00&lt;/strong&gt; — Wake up, grind single-origin Ethiopian beans on your Comandante, brew a V60 while the needle drops on a jazz record you found at Satori.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;10:00&lt;/strong&gt; — Ride your Cicli Bonanno steel gravel bike to the Standert Social Ride, stop at Bonanza for an espresso.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;14:00&lt;/strong&gt; — Post-ride flat white at Father Carpenter.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;15:00&lt;/strong&gt; — Swing by SchneidersLaden to &quot;just look&quot; at that module you&#x27;ve been thinking about (you buy it).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;16:00&lt;/strong&gt; — Hit Hard Wax for new 12-inches. Spend an hour at the listening station.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;17:00&lt;/strong&gt; — Home. Put on a fresh record. Patch the new module. Make a pour-over. Stare out the window in deep satisfaction, thinking about how you&#x27;ve spent approximately €400 today without blinking.&lt;/p&gt;
+&lt;p&gt;Welcome to the club.&lt;/p&gt;</content>
  </entry>
- {% endfor %}
- 
+ <entry>
+   <title>Magnifica Humanitas — XIV. Leó pápa enciklikája</title>
+   <link href="/letter-hu.html"/>
+   <updated>2026-05-15T00:00:00+00:00</updated>
+   <id>/letter-hu.html</id>
+   <category term="translation"/>
+   <summary>Enciklika az emberi személy védelméről a működő intelligencia korában. Kelt Rómában, 2026. május 15-én. Copyright Kommunikációs Dikasztérium – Libreria Editrice Vaticana.</summary>
+ </entry>
+ <entry>
+   <title>Learn data engineering on a shoestring - Part 2</title>
+   <link href="https://dataengineering.academy/2022/02/18/learn-data-engineering-on-a-shoestring-free-courses.html"/>
+   <updated>2022-02-18T00:00:00+00:00</updated>
+   <id>https://dataengineering.academy/2022/02/18/learn-data-engineering-on-a-shoestring-free-courses.html</id>
+   <category term="essay"/>
+ </entry>
+ <entry>
+   <title>How to teach data engineering</title>
+   <link href="https://dataengineering.academy/2021/07/26/how-to-teach-data-engineering.html"/>
+   <updated>2021-07-26T00:00:00+00:00</updated>
+   <id>https://dataengineering.academy/2021/07/26/how-to-teach-data-engineering.html</id>
+   <category term="essay"/>
+ </entry>
+ <entry>
+   <title>Pipeline Academy on the Data Engineering Podcast Vol. 2</title>
+   <link href="https://dataengineering.academy/2021/06/29/pipeline-academy-on-the-data-engineering-podcast-vol2.html"/>
+   <updated>2021-06-29T00:00:00+00:00</updated>
+   <id>https://dataengineering.academy/2021/06/29/pipeline-academy-on-the-data-engineering-podcast-vol2.html</id>
+   <category term="talk"/>
+ </entry>
+ <entry>
+   <title>Become a data engineer on a shoestring</title>
+   <link href="https://dataengineering.academy/2020/12/15/become-a-data-engineer-on-a-shoestring.html"/>
+   <updated>2020-12-15T00:00:00+00:00</updated>
+   <id>https://dataengineering.academy/2020/12/15/become-a-data-engineer-on-a-shoestring.html</id>
+   <category term="essay"/>
+ </entry>
+ <entry>
+   <title>Presenting and Teaching via Zoom 101</title>
+   <link href="https://dataengineering.academy/2020/10/03/presenting-and-teaching-via-zoom-101.html"/>
+   <updated>2020-10-03T00:00:00+00:00</updated>
+   <id>https://dataengineering.academy/2020/10/03/presenting-and-teaching-via-zoom-101.html</id>
+   <category term="essay"/>
+ </entry>
+ <entry>
+   <title>Data Engineering Podcast With The Data Janitor</title>
+   <link href="https://dataengineering.academy/2020/09/23/data-engineering-podcast-pipeline-academy.html"/>
+   <updated>2020-09-23T00:00:00+00:00</updated>
+   <id>https://dataengineering.academy/2020/09/23/data-engineering-podcast-pipeline-academy.html</id>
+   <category term="talk"/>
+ </entry>
+ <entry>
+   <title>I&#x27;m not an expert, I have experience</title>
+   <link href="https://dataengineering.academy/2020/08/07/data-engineering-data-janitor-keynotes.html"/>
+   <updated>2020-08-07T00:00:00+00:00</updated>
+   <id>https://dataengineering.academy/2020/08/07/data-engineering-data-janitor-keynotes.html</id>
+   <category term="essay"/>
+ </entry>
+ <entry>
+   <title>Keynotes to remember</title>
+   <link href="https://dataengineering.academy/2020/06/21/data-engineering-keynotes-to-remember.html"/>
+   <updated>2020-06-21T00:00:00+00:00</updated>
+   <id>https://dataengineering.academy/2020/06/21/data-engineering-keynotes-to-remember.html</id>
+   <category term="essay"/>
+ </entry>
+ <entry>
+   <title>What Makes or Breaks a Data Engineer</title>
+   <link href="https://speakerdeck.com/soobrosa/what-makes-or-breaks-a-data-engineer-96635240-6633-4e30-9ed2-9bbfc547a09d"/>
+   <updated>2020-06-01T00:00:00+00:00</updated>
+   <id>https://speakerdeck.com/soobrosa/what-makes-or-breaks-a-data-engineer-96635240-6633-4e30-9ed2-9bbfc547a09d</id>
+   <category term="talk"/>
+ </entry>
+ <entry>
+   <title>Own Your Data - like fo&#x27; real.</title>
+   <link href="https://dataengineering.academy/2020/05/17/own-your-data-like-fo-real.html"/>
+   <updated>2020-05-17T00:00:00+00:00</updated>
+   <id>https://dataengineering.academy/2020/05/17/own-your-data-like-fo-real.html</id>
+   <category term="essay"/>
+ </entry>
+ <entry>
+   <title>The Data Janitor Returns</title>
+   <link href="https://www.youtube.com/watch?v=LTJNnlBBzuw"/>
+   <updated>2018-06-01T00:00:00+00:00</updated>
+   <id>https://www.youtube.com/watch?v=LTJNnlBBzuw</id>
+   <category term="talk"/>
+ </entry>
+ <entry>
+   <title>POSTER: Towards an IoT platform with long-range wireless communication for atmospheric sensing (EGU 2018)</title>
+   <link href="https://meetingorganizer.copernicus.org/EGU2018/EGU2018-12200.pdf"/>
+   <updated>2018-04-10T00:00:00+00:00</updated>
+   <id>https://meetingorganizer.copernicus.org/EGU2018/EGU2018-12200.pdf</id>
+   <category term="talk"/>
+ </entry>
+ <entry>
+   <title>Tensorflow for Janitors</title>
+   <link href="https://www.youtube.com/watch?v=OSkL7AXu6tY"/>
+   <updated>2017-06-01T00:00:00+00:00</updated>
+   <id>https://www.youtube.com/watch?v=OSkL7AXu6tY</id>
+   <category term="talk"/>
+ </entry>
+ <entry>
+   <title>Data Janitor 101</title>
+   <link href="https://www.youtube.com/watch?v=oKWmg3oBJgc"/>
+   <updated>2016-11-01T00:00:00+00:00</updated>
+   <id>https://www.youtube.com/watch?v=oKWmg3oBJgc</id>
+   <category term="talk"/>
+ </entry>
+ <entry>
+   <title>Venturing down the IoT Rabbit Hole</title>
+   <link href="https://soobrosa.info/words/iot.html"/>
+   <updated>2016-09-06T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/iot.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;The &lt;a href=&quot;https://blogs.microsoft.com/firehose/2016/07/25/oneweek-2016-kicks-off-with-hackathon-and-bright-ideas/#sm.00000davkjlyn8d5yzdy4v2krpizx&quot;&gt;Microsoft Hackathon&lt;/a&gt; found us this year tinkering with some IoT-related technologies. &lt;a href=&quot;https://medium.com/@berndplontsch&quot;&gt;Bernd&lt;/a&gt;, &lt;a href=&quot;https://medium.com/@bfaludi&quot;&gt;Bence&lt;/a&gt;, &lt;a href=&quot;https://medium.com/@bbonis&quot;&gt;Balázs&lt;/a&gt; and me also tried to evaluate the reality of the commercially available iOT devices — and found a promising, but somewhat grim landscape.&lt;/p&gt;
+&lt;p&gt;We tried to bring to life the following four devices in different scenarios:&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;&quot; src=&quot;https://raw.githubusercontent.com/soobrosa/soobrosa.github.io/master/images/1*B1BfJm45Y9va9h_WJprIoQ.jpeg&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.artik.io/modules/overview/artik-5/&quot;&gt;Samsung Artik 5&lt;/a&gt;
+* 100 USD
+* ARM Cortex A7x2 @ 1GHz
+* 512MB LPDDR3 + 4GB eMMC
+* WiFi, Bluetooth, Zigbee, Ethernet
+* Fedora, Arduino® IDE, C, C++, Java, JavaScript, Python, (Go)&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;&quot; src=&quot;https://raw.githubusercontent.com/soobrosa/soobrosa.github.io/master/images/1*rDk2uiXtNXLTjP0kf1Piqw.png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.pycom.io/solutions/py-boards/wipy/&quot;&gt;WiPy&lt;/a&gt;
+* 45 USD
+* Texas Instrument CC3200, Cortex-M4 @ 80MHz
+* 256kb RAM + 2Mb Flash
+* WiFi
+* MicroPython&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;&quot; src=&quot;https://raw.githubusercontent.com/soobrosa/soobrosa.github.io/master/images/1*4rjHFHWoMZWTO2THmBpGHg.jpeg&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.raspberrypi.org/products/raspberry-pi-3-model-b/&quot;&gt;Raspberry Pi 3&lt;/a&gt;
+* 40 USD
+* 1.2GHz 64-bit quad-core ARMv8 CPU
+* 1GB RAM
+* WiFi, Bluetooth, Bluetooth LE, Ethernet
+* proper Linux and what not&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;&quot; src=&quot;https://raw.githubusercontent.com/soobrosa/soobrosa.github.io/master/images/1*u5-QluMSyBBVoA4iq1lo8w.jpeg&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.sparkfun.com/products/13794&quot;&gt;Sparkfun Blynk&lt;/a&gt;
+* 30 USD
+* ESP8266
+* Unknown memory
+* WiFi
+* Arduino® IDE, Blynk&lt;/p&gt;
+&lt;h2&gt;The Good&lt;/h2&gt;
+&lt;p&gt;The smoothest learning curve was definitely provided by the WiPy.&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&quot;&quot; src=&quot;https://raw.githubusercontent.com/soobrosa/soobrosa.github.io/master/images/1*oXRF6itgalZfcM2_xAKT1g.jpeg&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;WiPy with an infrared distance sensor connected&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;“When the WiPy boots with the default factory configuration starts in Access Point mode with ssid that starts with: wipy-wlan and key: www.wipy.io. Connect to this network and the WiPy will be reachable at 192.168.1.1. In order to gain access to the interactive prompt, open a telnet session to that IP address on the default port (23). You will be asked for credentials: login: micro and password: python.”&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Connecting a sensor and typing the following lines in the prompt will give you instant gratification — and data.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;gt; from machine import Pin, ADC
+&amp;gt; import time
+&amp;gt; adc = ADC()
+&amp;gt; apin = adc.channel(pin=’GP4&#x27;)
+&amp;gt; while True:
+… print(apin())
+… time.sleep(1)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We also verified that IoT cloud services are abundant (&lt;a href=&quot;https://www.microsoft.com/en-us/cloud-platform/internet-of-things-azure-iot-suite&quot;&gt;MS&lt;/a&gt;, &lt;a href=&quot;https://aws.amazon.com/iot/&quot;&gt;AWS&lt;/a&gt;, &lt;a href=&quot;https://artik.cloud/&quot;&gt;Samsung Artik&lt;/a&gt;, &lt;a href=&quot;http://www.ibm.com/cloud-computing/bluemix/internet-of-things/&quot;&gt;IBM BlueMix&lt;/a&gt; et al) and they are providing a good and free playground for the amateur to start out.&lt;/p&gt;
+&lt;p&gt;The most promising emerging communication technology seems to be &lt;a href=&quot;https://www.lora-alliance.org/&quot;&gt;LoRa&lt;/a&gt; as energy consumption will go down and communication range will go up. &lt;a href=&quot;https://www.thethingsnetwork.org/&quot;&gt;Go and add&lt;/a&gt; your own endpoint ;)&lt;/p&gt;
+&lt;h2&gt;The bad&lt;/h2&gt;
+&lt;p&gt;Getting serious is still hard given the immaturity of the ecosystems:
+* &lt;em&gt;khm&lt;/em&gt; patchy documentation is everywhere as most devices are still works-in-progress,
+* setup and discoverability is far from trivial, default settings raise serious security concerns— remember, even the Amazon Dash has to chirp home,
+* talking securely to remote services is hard — the OAuth dance is very outlandish to iOT (you have to have an own, exposed IP, maybe be able to handle web callbacks, even HTTPS),
+* there’s no de-facto communication model (push/pull, broadcast/poll) and developers are not even nudged in either direction with best practices,
+* the current state of the union is that IoT devices have to be considered as ‘dumb’, local sensors and you need a bridge (at least a RasPi) to connect them to the outer world.&lt;/p&gt;</content>
+ </entry>
+ <entry>
+   <title>Migrating a data stack from AWS to Azure (via Raspberry Pi)</title>
+   <link href="https://www.youtube.com/watch?v=QhXPANTd9nE"/>
+   <updated>2016-06-01T00:00:00+00:00</updated>
+   <id>https://www.youtube.com/watch?v=QhXPANTd9nE</id>
+   <category term="talk"/>
+ </entry>
+ <entry>
+   <title>One Million Events Tracked in a Minute on a Raspberry Pi 3</title>
+   <link href="https://soobrosa.info/words/1mil.html"/>
+   <updated>2016-03-22T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/1mil.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;&lt;img alt=&quot;&quot; src=&quot;https://raw.githubusercontent.com/soobrosa/soobrosa.github.io/master/images/1*K1LfSTrkhGnfvPefMnavMg.jpeg&quot; /&gt;
+Raspberry Pi Foundation. &lt;a href=&quot;https://creativecommons.org/licenses/by-sa/4.0/&quot;&gt;CC BY-SA 4.0&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;On PI day this year I started to set up the Commodore 64 of our age, the latest Raspberry PI to see how it rolls our new cloud service agnostic event tracker, &lt;a href=&quot;https://github.com/microsoftarchive/hamustro&quot;&gt;Hamustro&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Preparing the RPI3&lt;/h2&gt;
+&lt;p&gt;I burned some time to realize things you just better don’t want to do as of the time of the installation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;install Ubuntu (both the &lt;a href=&quot;https://developer.ubuntu.com/en/snappy/start/raspberry-pi-2/&quot;&gt;Snappy&lt;/a&gt; and the &lt;a href=&quot;https://ubuntu-mate.org/raspberry-pi/&quot;&gt;Mate&lt;/a&gt; images failed to boot),&lt;/li&gt;
+&lt;li&gt;start a VNC Server automatically (update: this &lt;a href=&quot;https://github.com/amzn/alexa-avs-raspberry-pi#23-install-vnc-server&quot;&gt;setup&lt;/a&gt; works and on OSX you have to use &lt;a href=&quot;http://www.realvnc.com/download/vnc/latest/&quot;&gt;VNC Viewer&lt;/a&gt; to connect),&lt;/li&gt;
+&lt;li&gt;SSH in via Wifi.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Get an OS&lt;/h2&gt;
+&lt;p&gt;To get a working set up I put the &lt;a href=&quot;https://www.raspberrypi.org/downloads/noobs/&quot;&gt;Noobs Lite&lt;/a&gt; with the &lt;a href=&quot;https://www.sdcard.org/downloads/formatter_4/&quot;&gt;SD Card Formatter&lt;/a&gt; on my OSX and after booting up the RPI I installed a &lt;em&gt;Raspbian&lt;/em&gt; from the internet. If your install is successful you should be able to login remotely to the RPI.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ssh pi@RASPBERRY_IP
+pi@RASPBERRY_IP&#x27;s password: raspberry
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Set up phoning home&lt;/h2&gt;
+&lt;p&gt;I used a monitor, a keyboard and a mouse for the setup process, but as I wanted to get rid of them I configured the PI that it always mails me the IP of the RPI if it changes — so I can SSH in.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get install ssmtp
+$ sudo apt-get install mailutils
+$ sudo nano /etc/ssmtp/ssmtp.conf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Easiest if you set up Gmail as an SMTP provider — if you have two factor authentication switched on you should set up an &lt;a href=&quot;https://support.google.com/accounts/answer/185833?hl=en&quot;&gt;App Password&lt;/a&gt; for this connection.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# this should go into the ssmtp.conf
+root=postmaster
+mailhub=smtp.gmail.com:587
+hostname=raspberrypi
+AuthUser=YOURGMAIL@gmail.com
+AuthPass=TheGmailPassword
+FromLineOverride=YES
+UseSTARTTLS=YES
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Test the setup with sending an email to yourself.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ echo “talks.” | mail -s “Raspie” YOURGMAIL@gmail.com
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s hook the IP check into &lt;em&gt;cron&lt;/em&gt;. This script checks whether anything changed in the networking setup.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ sudo nano /home/pi/check_ip.sh
+
+#!/bin/bash
+diff &amp;lt;(/sbin/ifconfig | grep inet) &amp;lt;(cat ~/last_ifconfig)
+/sbin/ifconfig | grep inet &amp;gt; ~/last_ifconfig
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s run this check every minute.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ crontab -e
+
+MAILTO=YOURGMAIL@gmail.com
+*/1 * * * * /home/pi/check_ip.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If your &lt;code&gt;locale&lt;/code&gt; behaves you can fix it like &lt;a href=&quot;http://www.jaredwolff.com/blog/raspberry-pi-setting-your-locale/&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Set up Hamustro&lt;/h2&gt;
+&lt;p&gt;This collector meant to be a highly available RESTful web service that receives events from client devices and secures them agnostic of cloud targets. It has been tested on X64 Ubuntu and OSX and this is the first time we try to get in running on an ARM architecture.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ git clone https://github.com/wunderlist/hamustro.git
+$ cd hamustro
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Hamustro is implemented in Go and utilizes Protobuf. The original documentation and install scripts cover Ubuntu and OSX, but not ARM, so we have to fake the following lines manually.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# sudo make install/go &amp;amp;&amp;amp; source ~/.profile
+# sudo make install/protobuf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Set up Go&lt;/h2&gt;
+&lt;p&gt;First let’s try to &lt;a href=&quot;http://dave.cheney.net/unofficial-arm-tarballs&quot;&gt;skip compiling Go from source&lt;/a&gt; to save some time.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ wget http://dave.cheney.net/paste/go1.5.3.linux-arm.tar.gz
+$ sudo tar -C /usr/local -xzf go1.5.3.linux-arm.tar.gz
+$ mkdir -p /usr/local/gopath
+$ sudo chmod 777 /usr/local/gopath
+
+$ sudo nano /etc/profile
+
+# add this line
+export PATH=$PATH:/usr/local/go/bin
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Set up Protobuf&lt;/h2&gt;
+&lt;p&gt;Hamustro can handle both Protobuf and JSON messages, but let’s opt for the first one as it is faster to write and read and is leaner on the amount of data transmitted by each client. Used the &lt;a href=&quot;https://github.com/samjabrahams/tensorflow-on-raspberry-pi/blob/master/GUIDE.md#2-build-protobuf&quot;&gt;Tensorflow&lt;/a&gt; tutorial here.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ sudo apt-get update
+$ sudo apt-get install autoconf automake libtool maven
+
+# if you do get a &#x27;Segmentation fault&#x27; like me just
+# sudo dpkg — configure -a
+# and try the install again
+
+$ git clone https://github.com/google/protobuf.git
+$ cd protobuf
+$ ./autogen.sh 
+$ ./configure --prefix=/usr
+$ make -j 4
+$ sudo make install
+$ cd java
+$ mvn package
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;The Real McCoy&lt;/h2&gt;
+&lt;p&gt;Now we can resume to the original Hamustro install docs.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ make install/pkg
+$ make install/symlink
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We won’t install the latter items as we plan to run the stress test form an other machine. Let’s set up a data store that will receive our test messages in the stress test and start the server. We’ve chosen the Azure Blob Storage — it’s performance is on a par with AWS S3. Worker size is the number of CPUs plus one. Buffer size determines when the workers flush their buffer.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ nano config/config.json
+
+{
+  &amp;quot;dialect&amp;quot;: “abs”,
+  &amp;quot;logfile&amp;quot;: “”,
+  &amp;quot;max_worker_size&amp;quot;: 5,
+  &amp;quot;max_queue_size&amp;quot;: 100,
+  &amp;quot;buffer_size&amp;quot;: 5000,
+  &amp;quot;spread_buffer_size&amp;quot;: true,
+  &amp;quot;shared_secret&amp;quot;: &amp;quot;SECRET&amp;quot;,
+  &amp;quot;abs&amp;quot;: {
+    &amp;quot;account&amp;quot;: “ACCOUNT&amp;quot;,
+    &amp;quot;access_key&amp;quot;: &amp;quot;KEY&amp;quot;,
+    &amp;quot;container&amp;quot;: &amp;quot;CONTAINER&amp;quot;,
+    &amp;quot;blob_path&amp;quot;: &amp;quot;hamustro/{date}/&amp;quot;,
+    &amp;quot;file_format&amp;quot;: &amp;quot;csv&amp;quot;
+  }
+}
+
+$ export HAMUSTRO_CONFIG=&amp;quot;config/config.json&amp;quot;
+$ export HAMUSTRO_HOST=&amp;quot;localhost&amp;quot;
+$ export HAMUSTRO_PORT=&amp;quot;8080&amp;quot;
+
+$ make server
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Maybe now it’s better to &lt;a href=&quot;https://www.raspberrypi.org/documentation/linux/filesystem/backup.md&quot;&gt;save this image&lt;/a&gt; ;)&lt;/p&gt;
+&lt;h2&gt;Time for stress test!&lt;/h2&gt;
+&lt;p&gt;I ran the stress test from a separate Ubuntu VM on my OSX where I also installed Hamustro. Let’s prepare some test files containing multiple events for Protobuf and run the attack.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ cd hamustro
+$ make tests/protobuf/n
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The test ran for 1 minute and the RPI3 managed to collect and put into Azure Blob Store 70.063 requests containing multiple messages in a minute (1165.81 req/sec). These requests contained 912.500 events. With a 5k buffer size the memory usage was below 30%, although the workers maxed out the CPU. You can find below more benchmarks on different queue sizes. The 75k buffer size maxes out the 1 Gb memory of the RPI.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;|BUFFER| REQ/MIN| REQ/SEC | FILES |     TOTAL |
+| SIZE |        |         |       |    EVENTS |
+----------------------------------------------
+|   5k | 70,063 | 1165.81 | 182,5 |   912,500 |
+|  10k | 78,642 | 1308.78 | 104,5 | 1,045,000 |
+|  15k | 82,893 | 1379.98 |  72,5 | 1,087,500 |
+|  50k | 92,255 | 1535.04 |  24,5 | 1,225,000 |
+|  75k | 97,779 | 1627.05 |  17,5 | 1,312,500 |
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To give these numbers a perspective this means that the total client tracking needs of Wunderlist as of March 2016 could be taken over by a single RPI3.&lt;/p&gt;
+&lt;p&gt;(P.S. Take these benchmarks with a pinch of salt as network connection can severely damage the throughput — in this case the RPI ran on my desk, had a direct cable connection to my OSX and the whole setup reached the corporate network.)&lt;/p&gt;
+&lt;p&gt;Thanks to &lt;a href=&quot;https://medium.com/@bfaludi&quot;&gt;Bence&lt;/a&gt; for his help with the setup and providing feedback on legibility.&lt;/p&gt;
+&lt;footer class=&quot;bg-light text-center text-lg-start&quot;&gt;
+  &lt;div class=&quot;text-center p-3&quot; style=&quot;background-color: rgba(0, 0, 0, 0.2);&quot;&gt;
+    2021 Daniel Molnar
+  &lt;/div&gt;
+&lt;/footer&gt;</content>
+ </entry>
+ <entry>
+   <title>Own the list of your favourite tracks on Spotify</title>
+   <link href="https://gist.github.com/soobrosa/a6119b2ee35555c296f3"/>
+   <updated>2016-02-05T00:00:00+00:00</updated>
+   <id>https://gist.github.com/soobrosa/a6119b2ee35555c296f3</id>
+   <category term="essay"/>
+ </entry>
+ <entry>
+   <title>Being a Data Janitor for 10m+ Users</title>
+   <link href="https://speakerdeck.com/soobrosa/being-a-data-janitor-for-10m-plus-users"/>
+   <updated>2015-06-01T00:00:00+00:00</updated>
+   <id>https://speakerdeck.com/soobrosa/being-a-data-janitor-for-10m-plus-users</id>
+   <category term="talk"/>
+ </entry>
+ <entry>
+   <title>Product Usage Flows with Redshift</title>
+   <link href="https://soobrosa.info/words/product-usage-flows-with-redshift.html"/>
+   <updated>2015-03-09T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/product-usage-flows-with-redshift.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;Cyclic or acyclic product usage flows stored in Redshift? No probs, visualize them with ease.&lt;/p&gt;
+&lt;p&gt;A second chapter in abusing Redshift with window functions came suddenly on a Tuesday evening when my dear colleague, &lt;a href=&quot;https://twitter.com/twojing&quot;&gt;Jenny&lt;/a&gt;, prepared to shine light on how our users change products.&lt;/p&gt;
+&lt;p&gt;First let’s find the ones who had more than one product during their lifetime.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;with multi_product_users as
+(
+ select user_id 
+ from subscriptions 
+ group by 1
+ having count(distinct product_id) &amp;gt; 1
+),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s get the starting date for each product usage — we have a separate master table for production descriptions named &lt;strong&gt;products&lt;/strong&gt;. Let’s inject a date smaller than any real date for each user plus a row that will end up at the end of our ordered list.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;usage as
+(
+ select p.name, u.user_id, s.started_at
+ from products as p, multi_product_users as u, subscriptions as s
+ where p.id = s.product_id
+ and u.user_id = s.user_id
+ union all
+ select &#x27;&#x27;, user_id, &#x27;1970–01–01&#x27; from multi_product_users
+ union all
+ select &#x27;&#x27;, 999999999999, &#x27;&#x27;
+ order by 2, 3
+),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Construct these lovely strings of ‘first product [$] second product’ with the window function ‘lag’.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;concatenated as 
+(
+ select user_id,
+ started_at,
+ name || &#x27; [$] &#x27; || lag(name, 1)
+ over (order by user_id, started_at) as lag
+ from usage
+),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Count all ‘first product [$] second product’ pairs where neither product name is an empty string — here we end up with edges of a graph weighed.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;counted as
+(
+ select lag, count(*)
+ from concatenated
+ where split_part(lag, &#x27; [$] &#x27;, 1) != &#x27;&#x27;
+ and split_part(lag, &#x27; [$] &#x27;, 2) != &#x27;&#x27;
+ group by 1
+ order by 2 asc
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If we push the weight in between the two product names we end up with a dump that we can transform to a &lt;a href=&quot;http://sankeymatic.com/build/&quot;&gt;Sankey Diagram&lt;/a&gt; with a copy-paste.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;select replace(lag, &#x27;$&#x27;, count) as sankey
+from counted;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The only caveat with the Sankey Diagram is that your product flow must be acyclic.&lt;/p&gt;
+&lt;p&gt;How to handle cyclic product flows? You can pretty easily end up with a &lt;a href=&quot;http://gephi.github.io/users/supported-graph-formats/gdf-format/&quot;&gt;GDF-format&lt;/a&gt; graph descriptor that &lt;a href=&quot;http://gephi.github.io/&quot;&gt;Gephi&lt;/a&gt; can load if you concatenate the two product names with a comma and leave the weigh in the end.&lt;/p&gt;</content>
+ </entry>
+ <entry>
+   <title>User Session Flows with Redshift</title>
+   <link href="https://soobrosa.info/words/user-session-flows-with-redshift.html"/>
+   <updated>2015-02-12T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/user-session-flows-with-redshift.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/800/1*MQwzTgK34YMhxW85oZcPsA.jpeg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;“&lt;a href=&quot;https://www.flickr.com/photos/wumengyu/4649272817/in/photolist-85QJQa-Bvdd3-Bvee1-nKGCrs-pGf5U-bmEQF-qDaMsZ-aCnsvQ-p5EoUj-oCoFE7-qRKVZR-6oQCz4-p7GAdV-4ZQNTG-c9d3i9-mQ8n4A-bUudUS-b3swWg-vykD6U-cH5pf5-ajedD7-kvovFY-r3LED4-9Ak7xt-7bsjEd-2KobTx-shWETS-52twxF-6FbxhH-bd2PkX-cc12Y5-58yNnF-ENLkq-3vsta5-dQZKEj-p2a7HV-GagQb-4G9Gkc-CUxR8-hDEvMW-e3e5UP-dLYHPv-4APTVL-o5AFFA-nP49Tb-dZyPt-9EnorJ-85F9wn-dL3dWf-85TUF1&quot;&gt;Dark Flow&lt;/a&gt;” by WU MENGYU is licensed under CC BY-NC-ND 2.0.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://aws.amazon.com/redshift/&quot;&gt;Redshift&lt;/a&gt; is like crack, it’s so superfast you just can’t go back to anything normal. Feels like an MVP where you don’t get all the jingles of a proper PSQL, but it’s blazing fast and you keep smiling and forget about all the bad parts — if you would like to do something more sophisticated, your options are quite limited like Torsten did on &lt;a href=&quot;http://torsten.io/stdout/expanding-json-arrays-to-rows/&quot;&gt;expanding JSON arrays&lt;/a&gt; or figuring out &lt;a href=&quot;https://twitter.com/t0rsten/status/555389464131166209&quot;&gt;how many bytes long are actually unicode strings&lt;/a&gt;
+?&lt;/p&gt;
+&lt;p&gt;Dear Santa, how about some &lt;a href=&quot;https://forums.aws.amazon.com/thread.jspa?threadID=119186&quot;&gt;UDF&lt;/a&gt;s? And if it’s okay with you just talk to the Eastern Bunny she will deliver them. Until then what you can do is actually juggling with &lt;a href=&quot;http://docs.aws.amazon.com/redshift/latest/dg/c_Window_functions.html&quot;&gt;window functions&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Let’s say we have a table with events and we’re trying to extract user session flows from this source. Also we’re trying to condense this flow to the smallest meaningful representation — possibly a string we can grep and count on.&lt;/p&gt;
+&lt;p&gt;We will cram an event into a two-digit decimal number — if we want properly unambigous grepping on the ‘string’ we can have a maximum of 5*5 = 25 unique events then each digit can be either in an odd or even position in the number we end up with. (Any 10-digit scheme maxes out at 36 as &lt;a href=&quot;http://torsten.io/&quot;&gt;Torsten&lt;/a&gt; properly pointed out.)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;CREATE TEMP TABLE event_dict AS (
+ SELECT 10 AS key, ‘Login’ AS value UNION ALL
+ SELECT 12 AS key, ‘Signup’ AS value UNION ALL
+ SELECT 14 AS key, ‘TaskCreate’ AS value UNION ALL
+ SELECT 16 AS key, ‘ListCreate’ AS value UNION ALL
+ SELECT 18 AS key, ‘TaskUpdate’ AS value UNION ALL
+ SELECT 30 AS key, ‘ListUpdate’ AS value UNION ALL
+ SELECT 32 AS key, ‘Sync’ AS value UNION ALL
+ …
+ SELECT 98 AS key, ‘Logout’ AS value
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s say you keep a segment table with &lt;strong&gt;segment_name&lt;/strong&gt; and &lt;strong&gt;user_id&lt;/strong&gt; rows and you have &lt;a href=&quot;http://chart.io/&quot;&gt;chart.io&lt;/a&gt; to filter them on. Let’s grab a random 10k sample.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;WITH universe AS
+(
+ SELECT s.user_id
+ FROM users u, segments s
+ WHERE u.user_id = s.user_id
+ AND segment_name = {SEGMENT}
+ ORDER BY RANDOM()
+ LIMIT 10000
+),
+events AS
+(
+ SELECT date, u.user_id, event
+ FROM events ew, universe u
+ WHERE u.user_id = ew.user_id
+ ORDER BY 1
+),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let’s number all the events by &lt;strong&gt;user_id&lt;/strong&gt; in time, encode the interesting ones with the event dictionary to two digit numbers then shift the two digit codes one by one by two digits and sum the partials. From 98, 12, 16, 18 we get 18161298 so that the event happened first is the last two digit number. A &lt;strong&gt;bigint&lt;/strong&gt; let us cram 9 events into one column.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;numbered AS
+(
+ SELECT date, user_id, key,
+ ROW_NUMBER() OVER 
+ (
+  PARTITION BY user_id
+  ORDER BY user_id, date ASC
+ )
+ FROM events, event_dict
+ WHERE event_dict.value = event
+ ORDER BY 2, 1
+),
+shifted AS
+(
+ SELECT date, user_id, key, row_number,
+ key * power(100, row_number — 1) AS bits
+ FROM numbered
+ WHERE row_number &amp;lt; 10
+),
+collapsed AS
+(
+ SELECT user_id, SUM(bits)::BIGINT
+ FROM shifted
+ GROUP BY 1
+),
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finally we can see what are the typical flows.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT sum AS onboarding, COUNT(sum),
+ROUND(COUNT(sum)::FLOAT / 
+  (SELECT count(*) FROM collapsed) *100, 2) AS pcent
+FROM collapsed
+GROUP BY 1
+ORDER BY 3 DESC
+LIMIT 20;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Big thanks fly out to &lt;a href=&quot;http://torsten.io/&quot;&gt;Torsten&lt;/a&gt; for encouraging me to delve into the rabbit hole of windows functions.&lt;/p&gt;</content>
+ </entry>
+ <entry>
+   <title>Extract tables from MySQL dumps</title>
+   <link href="https://soobrosa.info/words/extract-tables-from-mysql-dumps.html"/>
+   <updated>2014-11-24T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/extract-tables-from-mysql-dumps.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;Started to tinker with old MySQL dumps of &lt;a href=&quot;http://web.archive.org/web/20100814013313/http://szindbadek.hu/&quot;&gt;Szindbadek&lt;/a&gt;, &lt;a href=&quot;http://web.archive.org/web/20100820094244/http://mangare.newfocus.hu/&quot;&gt;Mangare&lt;/a&gt; and &lt;a href=&quot;http://web.archive.org/web/20100406035522/http://newfocus.hu/&quot;&gt;Newfocus&lt;/a&gt; -- and found easiest to hack up a &lt;a href=&quot;https://github.com/soobrosa/python-tools/blob/master/mysql_to_tsv.py&quot;&gt;small Python script&lt;/a&gt; that extract tables from MySQL dumps to TSV.&lt;/p&gt;
+&lt;p&gt;You can find some example parameters for pulling from &lt;a href=&quot;https://wordpress.org/&quot;&gt;Wordpress&lt;/a&gt; and &lt;a href=&quot;http://sourceforge.net/projects/scuttle/&quot;&gt;Scuttle&lt;/a&gt; in the comments.&lt;/p&gt;</content>
+ </entry>
+ <entry>
+   <title>Extract database connections from Tableau workbooks</title>
+   <link href="https://soobrosa.info/words/extract-tableau-db-connections.html"/>
+   <updated>2014-08-11T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/extract-tableau-db-connections.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;Keeping track of which Tableau workbook depends on which database can be cumbersome.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://gist.github.com/soobrosa/430188859dfd4ac88df8&quot;&gt;View the gist&lt;/a&gt;&lt;/p&gt;</content>
+ </entry>
 </feed>
