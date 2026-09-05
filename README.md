@@ -11,7 +11,7 @@ distinction. Press `T` to invert the polarity.
 ## Structure
 
 ```
-index.html              Bio / landing page (its counts + bars are build-written)
+index.html              Bio / landing page
 mixes.html              DJ mix player (reads mixes.json, streams from R2)
 words.html              GENERATED: one chronological list of all writing
 words/<slug>.html       GENERATED: one page per markdown post
@@ -25,8 +25,7 @@ post/, translation/     GENERATED: redirect stubs for the old Jekyll URLs,
 
 content/*.md            SOURCE for writing — drop markdown here
 build.py                content/*.md -> words/<slug>.html + words.html,
-                        plus atom.xml and the redirect stubs, and rewrites
-                        index.html's counts + words-by-type bars
+                        plus atom.xml and the redirect stubs
 migrate.py              One-time importer (old _posts/ + static/ -> content/)
 
 assets/css/site.css     Single shared stylesheet (the whole design)

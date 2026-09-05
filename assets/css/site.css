@@ -44,8 +44,8 @@ body {
 
 /* ---- shared atoms ---- */
 /* The uppercase micro-label above every cell, list and section. */
-.hp, .badge-line, .count, .socials, .card .ext, footer.foot,
-.cell .k, .post .meta, .drop-head, .fbtn, .topnav a, .empty {
+.badge-line, .count, .socials, .card .ext, footer.foot,
+.post .meta, .drop-head, .fbtn, .topnav a, .empty {
   font-size:11px; letter-spacing:.09em; text-transform:uppercase;
 }
 
@@ -77,35 +77,6 @@ h1.title {
 @keyframes blink { 50%{opacity:0} }
 .sub { font-size:15px; color:var(--ink); margin-bottom:18px; }
 .badge-line { color:var(--muted); margin-bottom:22px; }
-
-/* ---- metric cells: contiguous hairline grid, oversized numerals ---- */
-.cells {
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-  border:1px solid var(--edge); margin-bottom:26px;
-}
-/* Only left borders, so shared edges never double up. */
-.cell { padding:14px 16px 16px; border-left:1px solid var(--edge); }
-.cell:first-child { border-left:0; }
-.cell .k { display:block; color:var(--muted); margin-bottom:6px; }
-.cell .v { display:block; font-size:34px; font-weight:700; line-height:1.1; letter-spacing:-.03em; }
-.cell .v small { font-size:14px; font-weight:700; letter-spacing:0; }
-.cell .n { display:block; font-size:12px; color:var(--muted); margin-top:4px; line-height:1.5; }
-
-/* ---- distribution: label, proportional bar, right-aligned count ---- */
-.hp { color:var(--muted); margin:0 0 6px; }
-.dist { list-style:none; border:1px solid var(--edge); margin-bottom:28px; }
-.dist li {
-  display:flex; align-items:center; gap:16px;
-  padding:8px 16px; border-top:1px solid var(--rule);
-}
-.dist li:first-child { border-top:0; }
-.dist .dk {
-  font-size:11px; letter-spacing:.09em; text-transform:uppercase;
-  color:var(--muted); min-width:108px;
-}
-.dist .db { flex:1; height:10px; border:1px solid var(--edge); }
-.dist .db i { display:block; height:100%; background:var(--ink); }
-.dist .dv { font-weight:700; font-size:13px; min-width:28px; text-align:right; }
 
 /* ---- panel: left-accent callout ---- */
 .panel { border-left:3px solid var(--ink); padding:3px 0 3px 18px; margin-bottom:24px; }
@@ -239,16 +210,9 @@ footer.foot {
   .wrap { padding:20px 14px 56px; }
   .topnav { gap:5px; }
   .topnav .brand { width:100%; margin-right:0; margin-bottom:6px; }
-  .cells { grid-template-columns:1fr 1fr; }
-  .cell { border-left:1px solid var(--edge); border-top:1px solid var(--edge); }
-  .cell:nth-child(2n+1) { border-left:0; }
-  .cell:first-child, .cell:nth-child(2) { border-top:0; }
-  .cell .v { font-size:27px; }
   ul.words li { flex-wrap:wrap; gap:8px; }
   ul.words .main { flex-basis:100%; }
   .lab-grid { grid-template-columns:1fr; }
-  .dist .dk { min-width:0; flex:1; }
-  .dist .db { flex:none; width:34%; }
   .post p, .post ul, .post ol { font-size:14px; }
 }
 
@@ -258,7 +222,7 @@ footer.foot {
   .topnav, .back, .filters, .socials, .hint, .count, .empty { display:none !important; }
   body { font-size:11pt; line-height:1.55; }
   .wrap { max-width:none; padding:0; }
-  .panel, .cells, .cell, .lab-grid, .card { border-color:#000; }
+  .lab-grid, .card { border-color:#000; }
   .post a, a.inline { text-decoration:underline; }
   .post a::after { content:" (" attr(href) ")"; font-size:9pt; color:#444; word-break:break-all; }
 }
