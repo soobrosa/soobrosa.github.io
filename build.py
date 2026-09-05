@@ -168,8 +168,6 @@ def render_words(entries):
             f'</span></li>')
 
     body = f"""<h1 class="title">WORDS</h1>
-<p class="hint">One chronological stream of essays, translations and print.</p>
-<div class="count">{len(entries)} entries</div>
 <ul class="words">
 {chr(10).join(rows)}
 </ul>"""
