@@ -156,80 +156,24 @@ def render_article(entry):
     return page(entry["title"] + " // soobrosa", inner, "words", narrow=True)
 
 
-def dropdown(group, label, btns):
-    """One collapsed filter facet. The leading ALL resets just this group."""
-    return f"""  <div class="dropdown" data-group="{group}">
-    <button class="fbtn drop-head" type="button"><span class="lbl">{label}</span>\
-<span class="arw">&#9662;</span><span class="cur">ALL</span></button>
-    <div class="drop-menu"><div class="drop-menu-inner">
-      <button class="fbtn" data-filter="all">ALL</button>{btns}
-    </div></div>
-  </div>"""
-
-
 def render_words(entries):
     rows = []
-    kinds_present, tags_present = [], []
     for e in entries:
-        if e["kind"] not in kinds_present:
-            kinds_present.append(e["kind"])
-        for t in e["tags"]:
-            if t not in tags_present:
-                tags_present.append(t)
         href = e["external"] or f'/words/{e["slug"]}.html'
         ext = ' target="_blank" rel="noopener"' if e["external"] else ""
         year = e["date"].year if e["date"] else "&mdash;"
-        chips = "".join(
-            f'<span class="tag" data-filter="tag:{t}">{t}</span>' for t in e["tags"])
         rows.append(
-            f'<li data-kind="{e["kind"]}" data-tags="{",".join(e["tags"])}" '
-            f'data-date="{e["date"] or ""}"><span class="date">{year}</span>'
-            f'<span class="badge {e["kind"]}" data-filter="kind:{e["kind"]}">{e["kind"][:6].upper()}</span>'
+            f'<li><span class="date">{year}</span>'
             f'<span class="main"><a class="title-link" href="{href}"{ext}>{html.escape(e["title"])}</a>'
-            f'<span class="tags">{chips}</span></span></li>')
-
-    kind_btns = "".join(
-        f'<button class="fbtn" data-filter="kind:{k}">{k.upper()}</button>'
-        for k in KINDS if k in kinds_present)
-    tag_btns = "".join(
-        f'<button class="fbtn" data-filter="tag:{t}">{t.upper()}</button>'
-        for t in sorted(tags_present))
+            f'</span></li>')
 
     body = f"""<h1 class="title">WORDS</h1>
-<p class="hint">One chronological stream. Click a <b>TYPE</b> or a <b>#tag</b> to filter in place.</p>
-<div class="filters" id="filters">
-  <button class="fbtn active" data-filter="all">ALL</button>
-{dropdown("kind", "TYPE", kind_btns)}
-{dropdown("tag", "TOPIC", tag_btns)}
-</div>
-<div class="count" id="count"></div>
-<ul class="words" id="list">
+<p class="hint">One chronological stream of essays, translations and print.</p>
+<div class="count">{len(entries)} entries</div>
+<ul class="words">
 {chr(10).join(rows)}
-</ul>
-<div class="empty" id="empty">! NO ENTRIES !</div>
-{FILTER_JS}"""
+</ul>"""
     return page("WORDS // soobrosa", body, "words")
-
-
-FILTER_JS = """<script>
-const list=document.getElementById('list');
-const items=[...list.querySelectorAll('li')];
-const buttons=[...document.querySelectorAll('.fbtn')];
-const countEl=document.getElementById('count');
-const emptyEl=document.getElementById('empty');
-const heads={kind:document.querySelector('.dropdown[data-group="kind"]'),tag:document.querySelector('.dropdown[data-group="tag"]')};
-function setHead(g,val){const d=heads[g];d.querySelector('.cur').textContent=val;d.classList.toggle('set',val!=='ALL');}
-function apply(f){let shown=0;items.forEach(li=>{let m=f==='all';if(!m){const[t,v]=f.split(':');if(t==='kind')m=li.dataset.kind===v;else if(t==='tag')m=li.dataset.tags.split(',').includes(v);}li.classList.toggle('hidden',!m);if(m)shown++;});
-buttons.forEach(b=>b.classList.toggle('active',b.dataset.filter===f));
-let kindVal='ALL',tagVal='ALL';if(f!=='all'){const[t,v]=f.split(':');if(t==='kind')kindVal=v.toUpperCase();else if(t==='tag')tagVal=v.toUpperCase();}
-setHead('kind',kindVal);setHead('tag',tagVal);
-countEl.textContent=f==='all'?shown+' ENTRIES':shown+'/'+items.length+' \\u00b7 ';
-if(f!=='all'){const r=document.createElement('a');r.href='#';r.textContent='CLEAR';r.onclick=e=>{e.preventDefault();go('all');};countEl.appendChild(r);}
-emptyEl.style.display=shown?'none':'block';}
-function go(f){location.hash=f==='all'?'':f;apply(f);}
-document.addEventListener('click',e=>{const t=e.target.closest('[data-filter]');if(!t)return;e.preventDefault();go(t.dataset.filter);});
-apply(location.hash.slice(1)||'all');
-</script>"""
 
 
 REDIRECT_STUB = """<!DOCTYPE html>

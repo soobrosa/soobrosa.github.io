@@ -71,12 +71,11 @@ Body in **markdown**...
 
 - Notion exports work directly: drop the `.md` in `content/` (the build
   slugifies the filename and strips Notion's hash suffixes).
-- `kind` becomes the type badge in the list; `tags` become the clickable
-  `#topic` filters. Both filter the single chronological list in place —
-  no extra pages or nav.
+- The stream is a plain chronological list: year, title, nothing else.
+  `kind` and `tags` are metadata only (the feed uses `kind` as its entry
+  category) — they no longer render as badges or filters on the page.
 - `kind` and `tags` are both closed vocabularies (`KINDS` and `TAGS` in
-  `build.py`). An unknown value fails the build rather than silently adding
-  a permanent dropdown row for a typo.
+  `build.py`). An unknown value fails the build.
 - `external:` is for essays, translations and print pieces that live
   elsewhere — they appear in the list but link out instead of generating
   a page. Talks, podcasts, videos and slide decks go on media.html, not in

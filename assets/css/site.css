@@ -45,7 +45,7 @@ body {
 /* ---- shared atoms ---- */
 /* The uppercase micro-label above every cell, list and section. */
 .badge-line, .count, .socials, .card .ext, footer.foot,
-.post .meta, .drop-head, .fbtn, .topnav a, .empty {
+.post .meta, .topnav a, .empty {
   font-size:11px; letter-spacing:.09em; text-transform:uppercase;
 }
 
@@ -83,7 +83,7 @@ h1.title {
 .panel p { margin-bottom:12px; } .panel p:last-child { margin-bottom:0; }
 
 /* ---- links ---- */
-a.inline, .post a, .count a, .title-link, footer.foot a, ul.words .main a {
+a.inline, .post a, .title-link, footer.foot a, ul.words .main a {
   color:var(--ink); text-decoration:underline; text-underline-offset:2px;
   text-decoration-thickness:1px;
 }
@@ -100,59 +100,23 @@ ul.words .main a:hover {
 }
 .socials a:hover { background:var(--ink); color:var(--paper); }
 
-/* ---- words: filters ---- */
+/* ---- words: the stream ---- */
 .hint { color:var(--ink); margin-bottom:18px; }
 .hint b { font-weight:700; }
-.filters { display:flex; flex-wrap:wrap; align-items:flex-start; gap:6px; position:relative; z-index:5; }
-.fbtn {
-  font-family:var(--mono); color:var(--ink); background:var(--paper);
-  border:1px solid var(--edge); padding:6px 9px; cursor:pointer; line-height:1.2;
-}
-.fbtn:hover { background:var(--wash); }
-.fbtn.active { background:var(--ink); color:var(--paper); }
 .count { color:var(--muted); margin:22px 0 8px; }
 
-/* ---- words: TYPE / TOPIC dropdowns ---- */
-/* display:flex, not block: an inline-block button in a block sits on the line
-   box baseline, which pushes the heads below the plain ALL button. */
-.dropdown { position:relative; display:flex; }
-.drop-head { display:inline-flex; align-items:center; gap:6px; }
-.drop-head .lbl { color:var(--muted); }
-.drop-head .cur { font-weight:700; }
-.drop-head .arw { font-size:9px; }
-.dropdown.set .drop-head { background:var(--ink); color:var(--paper); }
-.dropdown.set .drop-head .lbl, .dropdown.set .drop-head .cur { color:var(--paper); }
-.drop-menu { position:absolute; top:100%; left:0; padding-top:5px; display:none; flex-direction:column; min-width:160px; }
-.dropdown:hover .drop-menu, .dropdown:focus-within .drop-menu { display:flex; }
-.drop-menu-inner { display:flex; flex-direction:column; background:var(--paper); border:1px solid var(--edge); }
-.drop-menu .fbtn { width:100%; text-align:left; border:0; border-bottom:1px solid var(--rule); }
-.drop-menu .fbtn:last-child { border-bottom:0; }
-
-/* ---- words: the stream ---- */
 ul.words { list-style:none; border-top:1px solid var(--edge); }
 ul.words li {
   display:flex; align-items:baseline; gap:14px;
   padding:9px 2px; border-bottom:1px solid var(--rule);
 }
-ul.words li.hidden { display:none; }
 ul.words .date { color:var(--muted); min-width:46px; font-size:12px; }
 /* Archive lists keep the original date wording ("Summer 2008, Cannes",
    "2018-2019"), so their date column needs room the year-only stream does not. */
 ul.words.arch .date { min-width:132px; }
 ul.words.arch .main a { margin-right:2px; }
-/* Uniform hairline badges: the word already names the type, so fills are
-   reserved for state (active, hover) rather than category. */
-.badge {
-  font-size:10px; letter-spacing:.08em; text-transform:uppercase;
-  border:1px solid var(--edge); padding:2px 6px; cursor:pointer;
-  white-space:nowrap; min-width:66px; text-align:center;
-}
-.badge:hover { background:var(--ink); color:var(--paper); }
 ul.words .main { flex:1; }
-.tags { display:inline-flex; gap:8px; margin-left:8px; flex-wrap:wrap; }
-.tag { color:var(--muted); cursor:pointer; font-size:12px; }
-.tag::before { content:"#"; }
-.tag:hover { color:var(--ink); }
+/* Used by the mixes page's error message. */
 .empty { color:var(--ink); padding:20px 0; display:none; font-weight:700; }
 
 /* ---- article ---- */
@@ -219,7 +183,7 @@ footer.foot {
 /* ---- print ---- */
 @media print {
   @page { margin:18mm; }
-  .topnav, .back, .filters, .socials, .hint, .count, .empty { display:none !important; }
+  .topnav, .back, .socials, .hint, .count, .empty { display:none !important; }
   body { font-size:11pt; line-height:1.55; }
   .wrap { max-width:none; padding:0; }
   .lab-grid, .card { border-color:#000; }
