@@ -158,12 +158,17 @@ def render_article(entry):
 
 def render_words(entries):
     rows = []
+    prev_year = None
     for e in entries:
         href = e["external"] or f'/words/{e["slug"]}.html'
         ext = ' target="_blank" rel="noopener"' if e["external"] else ""
-        year = e["date"].year if e["date"] else "&mdash;"
+        year = e["date"].year if e["date"] else None
+        # The list is newest-first, so the year label lands on the latest
+        # entry of its year and the rest of the group leaves the cell empty.
+        label = "&mdash;" if year is None else (str(year) if year != prev_year else "")
+        prev_year = year
         rows.append(
-            f'<li><span class="date">{year}</span>'
+            f'<li><span class="date">{label}</span>'
             f'<span class="main"><a class="title-link" href="{href}"{ext}>{html.escape(e["title"])}</a>'
             f'</span></li>')
 
