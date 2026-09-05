@@ -20,6 +20,7 @@ import shutil
 import pathlib
 import datetime
 import unicodedata
+import urllib.parse
 
 try:
     import markdown as md_lib
@@ -35,6 +36,28 @@ KINDS = ["essay", "translation", "print"]
 # The TOPIC filter is built from whatever tags appear in front matter, so a typo
 # or a one-off word silently becomes a permanent dropdown row. Keep this closed.
 TAGS = ["career", "culture", "data", "hardware", "learning"]
+
+# Stream tags for entries that link out: a short source name per host.
+# Wayback-wrapped URLs are unwrapped first so an archived iv.hu piece still
+# tags as "iv.hu", not "web.archive.org". Hosts not listed fall back to
+# their bare domain.
+EXTERNAL_LABELS = {
+    "dataengineering.academy": "pipeline",
+    "filmvilag.hu": "filmvilag",
+    "artmagazin.hu": "artmagazin",
+    "iv.hu": "iv.hu",
+    "gist.github.com": "gist",
+    "ted.com": "ted",
+}
+
+
+def external_label(url):
+    m = re.match(r"https?://web\.archive\.org/web/\d+[a-z_]*/(https?://.+)", url)
+    inner = m.group(1) if m else url
+    host = urllib.parse.urlparse(inner).netloc.lower().split(":")[0]
+    if host.startswith("www."):
+        host = host[4:]
+    return EXTERNAL_LABELS.get(host, host)
 SITE = "https://soobrosa.info"
 CSS = "/assets/css/site.css"
 # Every hand-written page loads this; generated pages have to as well or the
@@ -167,10 +190,18 @@ def render_words(entries):
         # entry of its year and the rest of the group leaves the cell empty.
         label = "&mdash;" if year is None else (str(year) if year != prev_year else "")
         prev_year = year
+        tags = []
+        if e["kind"] == "translation":
+            tags.append("translation")
+        if e["external"].startswith("http"):
+            tags.append(external_label(e["external"]))
+        tag_html = ('<span class="tags">'
+                    + "".join(f'<span class="tag">{html.escape(t)}</span>' for t in tags)
+                    + "</span>") if tags else ""
         rows.append(
             f'<li><span class="date">{label}</span>'
             f'<span class="main"><a class="title-link" href="{href}"{ext}>{html.escape(e["title"])}</a>'
-            f'</span></li>')
+            f'{tag_html}</span></li>')
 
     body = f"""<h1 class="title">WORDS</h1>
 <ul class="words">

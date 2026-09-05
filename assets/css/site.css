@@ -116,6 +116,13 @@ ul.words .date { color:var(--muted); min-width:46px; font-size:12px; }
 ul.words.arch .date { min-width:132px; }
 ul.words.arch .main a { margin-right:2px; }
 ul.words .main { flex:1; }
+/* Entry tags on the stream: "translation" or the short name of the site an
+   entry links out to (pipeline, filmvilag, iv.hu, ...). */
+ul.words .tags { display:inline-flex; gap:5px; margin-left:10px; vertical-align:1px; }
+ul.words .tag {
+  font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--muted); border:1px solid var(--rule); padding:0 5px; white-space:nowrap;
+}
 /* Used by the mixes page's error message. */
 .empty { color:var(--ink); padding:20px 0; display:none; font-weight:700; }
 
