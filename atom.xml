@@ -189,6 +189,80 @@ This is peak Berlin bike snobbery: a frame built for you by a local builder.&lt;
    <category term="essay"/>
  </entry>
  <entry>
+   <title>Deep Learning on the Edge — First Impressions of the Movidius Neural Compute Stick</title>
+   <link href="https://soobrosa.info/words/2017-09-06-deep-learning-on-the-edge-first-impressions-of-the-movidius-neural-compute-stick.html"/>
+   <updated>2017-09-06T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/2017-09-06-deep-learning-on-the-edge-first-impressions-of-the-movidius-neural-compute-stick.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;h2&gt;tl;dr It is cheap, fast and low-powered.&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;(Updated with Raspberry PI and Tensorflow developments.)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I still remember my excitement in April 2016 when Movidius &lt;a href=&quot;https://www.movidius.com/news/movidius-announces-deep-learning-accelerator-and-fathom-software-framework&quot;&gt;announced&lt;/a&gt; the soon-availability of the Fathom Neural Compute Stick that promised low-power ML capabilities for end devices. I tried to move mountains to get hold of a piece to no avail. Intel seemed to be more interested than me as they &lt;a href=&quot;https://www.movidius.com/news/ceo-post-september-2016&quot;&gt;acquired&lt;/a&gt; the company in September — this definitely didn’t got me closer to grab the hardware. I waited patiently, hinted to my excitement of the possibility of distributed deep learning in my &lt;a href=&quot;https://speakerdeck.com/soobrosa/tensorflow-for-janitors&quot;&gt;Tensorflow for Janitors&lt;/a&gt; presentation at the &lt;a href=&quot;https://craft-conf.com/&quot;&gt;CRAFT Conference&lt;/a&gt;. Then on July 20th 2017 I managed to order one of the first few hundreds of sticks made available for the general audience.&lt;/p&gt;
+&lt;h1&gt;The good and the bad&lt;/h1&gt;
+&lt;p&gt;Opening the box and playing a lot came with the following pros and cons.&lt;/p&gt;
+&lt;p&gt;Pros:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;it’s a lovely piece of rugged hardware,&lt;/li&gt;
+&lt;li&gt;it delivers speed as it’s promised (although figuring that out was a bit trickier than expected),&lt;/li&gt;
+&lt;li&gt;Python binding (okay, it’s just Python 3)&lt;/li&gt;
+&lt;li&gt;full-fledged Raspberry PI support,&lt;/li&gt;
+&lt;li&gt;Tensorflow support besides Caffe,&lt;/li&gt;
+&lt;li&gt;open source, no GitHub repo,&lt;/li&gt;
+&lt;li&gt;documentation (more like a sparse reference).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Cons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;need Ubuntu host to compile neural network (no Windows, no OSX, although a VM could do wonders).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When I originally published this piece I had 3 more cons, now that’s the only one left.&lt;/p&gt;
+&lt;p&gt;I am really impressed by the idea of giving low-power end devices the chance to run neural networks so I set out to benchmark the finally released Movidius Neural Compute Stick with great hopes. I’m a big believer of hard facts so I wanted to benchmark this little beast.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/800/1*dSZglyBR0MoPGXu143RSqA.jpeg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Unfortunately it’s hard to come by to some kind of industry standard on ML speed benchmarks so after some considerations (NCS runs just &lt;a href=&quot;http://caffe.berkeleyvision.org/&quot;&gt;Caffe&lt;/a&gt; models for now) I wanted to see execution time for different devices seeing a cat in ‘cat.jpg’ with &lt;a href=&quot;https://github.com/DeepScale/SqueezeNet&quot;&gt;Squeezenet&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Getting Caffe running on plain vanilla OSX, Ubuntu and Raspbian Jessie is a horrible experience.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A major finding is the general sad state of software deployment related to Caffe. There are exactly none working installation scripts for OSX, Ubuntu and Raspbian Jessie, so I had to spend quite some time to cook up my own recipes. All OSes were either freshly installed or close to it, so these plain vanilla recipes should work for most. For now I don’t delve into how much crap do you really need to install to have things running although I tried to add dependencies one by one so this could be considered as a minimal setup.&lt;/p&gt;
+&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/soobrosa/cf53d484a4afafb8d9cb8601a5429bee&quot;&gt;Caffe install + benchmark script for OSX&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The Ubuntu 16.04 installation doc is just missing the following lines.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ find . -type f -exec sed -i -e ‘s^”hdf5.h”^”hdf5/serial/hdf5.h”^g’ -e ‘s^”hdf5_hl.h”^”hdf5/serial/hdf5_hl.h”^g’ ‘{}’ \;
+$ cd /usr/lib/x86_64-linux-gnu
+$ sudo ln -s libhdf5_serial.so.10.1.0 libhdf5.so
+$ sudo ln -s libhdf5_serial_hl.so.10.0.2 libhdf5_hl.so
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/soobrosa/bb068f8484edd112641c98e9d1771e28&quot;&gt;Caffe install + benchmark for RPi3&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Putting this aside I still wanted to see the hard numbers of milliseconds for devices seeing a cat in ‘cat.jpg’ with Squeezenet.&lt;/p&gt;
+&lt;p&gt;With Caffe on CPU gives me following averages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;150 ms (Macbook Air 13&quot;, early 2015, 1,6 Ghz Intel Core i5, 8Gb RAM running macOS Sierra)&lt;/li&gt;
+&lt;li&gt;190 ms (Lenovo Thinkpad T420S running Ubuntu 16.04)&lt;/li&gt;
+&lt;li&gt;1100 ms (RasPi 3 running Raspbian Jessie July 2017)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now hacking &lt;code&gt;ncapi/py_examples/classification_example.py&lt;/code&gt; as follows&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;print (str(datetime.now()))
+output, userobj = graph.GetResult()
+print (str(datetime.now()))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;the Movidius stick gives me from an Ubuntu averages of 307 ms on &lt;code&gt;cat.jpg&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/800/1*eouVIuXXLVW2P3U5-u9AHA.jpeg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Running this test on the Raspberry Pi involves installing OpenCV and compiling something like OpenCV on a RasPi is far from being instant. I posted my seminal results to the &lt;a href=&quot;https://ncsforum.movidius.com/discussion/146/raspberry-pi-3-benchmarks&quot;&gt;official forum&lt;/a&gt; and coming home from vacation I could carry on with the measurements.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Chrispete&lt;/em&gt; kindly served a working &lt;a href=&quot;https://ncsforum.movidius.com/discussion/comment/299/#Comment%5C_299&quot;&gt;OpenCV install script&lt;/a&gt; — I only had to pimp it with two extra lines to make it work on my device (&lt;a href=&quot;https://ahmedibrahimvt.wordpress.com/2017/02/19/fatal-error-hdf5-h-no-such-file-or-directory/&quot;&gt;source 1&lt;/a&gt;, &lt;a href=&quot;http://www.pyimagesearch.com/2015/07/20/install-opencv-3-0-and-python-3-4-on-ubuntu/&quot;&gt;source 2&lt;/a&gt;).&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ export CPATH=”/usr/include/hdf5/serial/”
+$ ln -s /usr/local/lib/python3.4/site-packages/cv2.cpython-34m.so cv2.so
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I finally got a working OpenCV on the Raspberry and I can confirm that the Movidius stick is behaving properly also showing the same timing benchmarks as testing from an Ubuntu.&lt;/p&gt;
+&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/soobrosa/7061661cd7bbea988ce470f9191bc1c1&quot;&gt;OpenCV install script for Raspbian Jessie&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://ncsforum.movidius.com/discussion/comment/307/#Comment%5C_307&quot;&gt;Tome&lt;/a&gt; revealed that changing batch size to 1 and using all 12 SHAVE processors simultaneously should speed up things.&lt;/p&gt;
+&lt;p&gt;In another forum post he &lt;a href=&quot;https://ncsforum.movidius.com/discussion/149/inference-performance&quot;&gt;shared&lt;/a&gt; some measurements and based on that this should be a 5(x)! speed-up — and “continous inference speed from webcam is about 9.5 FPS for GoogleNet.”&lt;/p&gt;
+&lt;p&gt;I changed in the &lt;code&gt;/ncapi/networks/Squeezenet/NetworkConfig.prototxt&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;input_param { shape: { dim: 10 dim: 3 dim: 227 dim: 227 } }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;to&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;input_param { shape: { dim: 1 dim: 3 dim: 227 dim: 227 } }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I added &lt;code&gt;-s12&lt;/code&gt; to all lines in &lt;code&gt;ncapi/tools/convert_models.sh&lt;/code&gt;. Double-checked all files are Squeezenet 1.1, recompiled, updated files on Raspberry.&lt;/p&gt;
+&lt;p&gt;I did some re-runs to believe what I see.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;41 ms is definitely impressive. That’s 4 times faster than my Macbook Air for 1/6th of the price with an energy consumption of 1/7th.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;(Macbook consumes approximately 35 Watts per hour, Raspberry and Movidius should end up at 4 W + 1 W = 5 W).&lt;/p&gt;
+&lt;p&gt;Soon after this write-up Tensorflow support arrived and it’s still on my to-do list to build a precompiled Raspbian Jessie image to be at hand for all this mess — Tensorflow already has &lt;a href=&quot;https://petewarden.com/2017/08/20/cross-compiling-tensorflow-for-the-raspberry-pi/&quot;&gt;cross-compiled versions.&lt;/a&gt;&lt;/p&gt;</content>
+ </entry>
+ <entry>
    <title>Venturing down the IoT Rabbit Hole</title>
    <link href="https://soobrosa.info/words/iot.html"/>
    <updated>2016-09-06T00:00:00+00:00</updated>
@@ -247,6 +321,35 @@ This is peak Berlin bike snobbery: a frame built for you by a local builder.&lt;
 * talking securely to remote services is hard — the OAuth dance is very outlandish to iOT (you have to have an own, exposed IP, maybe be able to handle web callbacks, even HTTPS),
 * there’s no de-facto communication model (push/pull, broadcast/poll) and developers are not even nudged in either direction with best practices,
 * the current state of the union is that IoT devices have to be considered as ‘dumb’, local sensors and you need a bridge (at least a RasPi) to connect them to the outer world.&lt;/p&gt;</content>
+ </entry>
+ <entry>
+   <title>My humble James Mickens Shrine a.k.a. the only real combined CS degree and MBA you will ever need</title>
+   <link href="https://soobrosa.info/words/2016-04-05-my-humble-james-mickens-shrine-aka-the-only-real-combined-cs-degree-and-mba-you-will-ever-need.html"/>
+   <updated>2016-04-05T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/2016-04-05-my-humble-james-mickens-shrine-aka-the-only-real-combined-cs-degree-and-mba-you-will-ever-need.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;Whenever I feel sad I just come here. Thank you, &lt;a href=&quot;https://twitter.com/markovmickens&quot;&gt;~James&lt;/a&gt;!&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/ajGX7odA87k&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://scholar.harvard.edu/files/mickens/files/towashitallaway.pdf&quot;&gt;To Wash It All Away&lt;/a&gt;&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/15RTC22Z2xI&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/mDwUJa4_IJE&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.usenix.org/system/files/1401_08-12_mickens.pdf&quot;&gt;This World of Ours&lt;/a&gt;&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/7Nj9ZjwOdFQ&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;iframe src=&quot;https://player.vimeo.com/video/95066828?h=2b5433dc49&amp;portrait=0&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; fullscreen; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;iframe src=&quot;https://player.vimeo.com/video/146524997?h=c6941020b7&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; fullscreen; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://scholar.harvard.edu/files/mickens/files/thenightwatch.pdf&quot;&gt;The Night Watch&lt;/a&gt;&lt;/p&gt;
+&lt;iframe src=&quot;https://player.vimeo.com/video/135347162?h=70be5b1cf9&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; fullscreen; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://scholar.harvard.edu/files/mickens/files/thesaddestmoment.pdf&quot;&gt;The Saddest Moment&lt;/a&gt;&lt;/p&gt;
+&lt;iframe src=&quot;https://player.vimeo.com/video/111122950?h=3cc6cbc66b&amp;color=ffffff&quot; width=&quot;640&quot; height=&quot;384&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; fullscreen; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://scholar.harvard.edu/files/mickens/files/theslowwinter.pdf&quot;&gt;The Slow Winter&lt;/a&gt;&lt;/p&gt;</content>
  </entry>
  <entry>
    <title>One Million Events Tracked in a Minute on a Raspberry Pi 3</title>
@@ -403,6 +506,206 @@ $ make tests/protobuf/n
    <updated>2016-02-05T00:00:00+00:00</updated>
    <id>https://gist.github.com/soobrosa/a6119b2ee35555c296f3</id>
    <category term="essay"/>
+ </entry>
+ <entry>
+   <title>Is Yelp international? — An excuse to roll data with the command line</title>
+   <link href="https://soobrosa.info/words/2016-02-02-is-yelp-international-an-excuse-to-roll-data-with-the-command-line.html"/>
+   <updated>2016-02-02T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/2016-02-02-is-yelp-international-an-excuse-to-roll-data-with-the-command-line.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;The recent Capstone project in the &lt;a href=&quot;https://www.coursera.org/specializations/jhu-data-science&quot;&gt;Coursera Data Science Specilization&lt;/a&gt; was based on the &lt;a href=&quot;http://www.yelp.com/dataset_challenge&quot;&gt;Yelp Dataset Challenge Round 6&lt;/a&gt;. As this specialization made me gain one major understanding — that I should do anything I can to avoid using R if I don’t want to go mad — I was eager to explore this dataset with only using the command line. Although my practice is not exactly what Jeroen Janssens rolls, I strongly recommend his book, &lt;a href=&quot;http://datascienceatthecommandline.com/&quot;&gt;Data Science at the Command Line&lt;/a&gt;, as an intro on the domain.&lt;/p&gt;
+&lt;p&gt;In our &lt;a href=&quot;https://speakerdeck.com/soobrosa/being-a-data-janitor-for-10m-plus-users&quot;&gt;daily data practice&lt;/a&gt; we rely on pretty oldschool technologies, like makefiles, bash and SQL, so I set out to try to test the limits of Unix commands, pipes and some special, self-contained tools, three of them altogether slightly bigger than 1 Mbyte. I believe getting to know in detail how this equipment work could be a better investment of yours.&lt;/p&gt;
+&lt;p&gt;I will use the following specimens:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/jehiah/json2csv&quot;&gt;json2csv&lt;/a&gt; (“converts a stream of newline separated json data to csv format”),&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://stedolan.github.io/jq/&quot;&gt;jq&lt;/a&gt; (“&lt;em&gt;sed&lt;/em&gt; for JSON data — you can use it to slice and filter and map and transform structured data with the same ease that &lt;em&gt;sed, awk, grep&lt;/em&gt; and friends let you play with text”),&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://harelba.github.io/q/&quot;&gt;q&lt;/a&gt; (“allows direct execution of SQL-like queries on CSVs/TSVs”),&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/tools/Rio&quot;&gt;Rio&lt;/a&gt; (turns CSV to CSV or PNG via R),&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/johnkerl/miller&quot;&gt;miller&lt;/a&gt; (“&lt;em&gt;sed, awk, cut, join,&lt;/em&gt; and &lt;em&gt;sort&lt;/em&gt; for name-indexed data such as CSV”)
+“Not unlike jq for JSON, Miller is written in modern C, and it has zero runtime dependencies. You can download or compile a single binary, scp it to a faraway machine, and expect it to work.” (&lt;a href=&quot;https://github.com/johnkerl/miller&quot;&gt;Source&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I’m slightly familiar with the domain as some years ago I’ve written &lt;a href=&quot;http://issuu.com/soobrosa/docs/soobrosa_thesis?e=0&quot;&gt;my thesis&lt;/a&gt; on the touristic effect of the location-based community activities in Hungary — it was a critical comparison of geocaching and Foursquare. I realised how much I got used to use both Foursquare and Yelp living in Germany. The German Qype sold to Yelp in 2012. Did this acquisition make Yelp international? Can we tell from the data whether this deal was worth it for Yelp? Based on the user generated contect metrics, not really.&lt;/p&gt;
+&lt;h1&gt;Blink that cursor&lt;/h1&gt;
+&lt;p&gt;Let’s shape the dataset to be explorable. For reproducability a &lt;a href=&quot;https://gist.github.com/soobrosa/4adf89ce197eb6299eb9&quot;&gt;Makefile&lt;/a&gt; is the best. Below I focus on the actual analysis, you can find more simple practicalities in the Makefile — like how to pretty print a JSON, how to get a random sample and so.&lt;/p&gt;
+&lt;p&gt;Let’s start with flattening lazily the JSONs to CSVs. For simpler cases &lt;a href=&quot;https://github.com/jehiah/json2csv&quot;&gt;json2csv&lt;/a&gt; is enough while &lt;a href=&quot;http://stedolan.github.io/jq/&quot;&gt;jq&lt;/a&gt; is your weapon to roll complex logic.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#
+# -p=true means &amp;quot;print csv header row&amp;quot;
+#
+# -c stands for &amp;quot;put each JSON object on a single line&amp;quot;
+#
+
+$ &amp;lt; source/yelp_academic_dataset_tip.json | json2csv -p=true -k business_id,date,likes,user_id &amp;gt; source_flattened/tip_no_text.csv
+$ &amp;lt; source/yelp_academic_dataset_review.json | json2csv -p=true -k business_id,date,review_id,stars,user_id &amp;gt; source_flattened/review_compact_no_text.csv
+$ &amp;lt; source/yelp_academic_dataset_business.json | jq -c ‘{business_id, category_main: .categories[0], category_sub: .categories[1], city, latitude, longitude, name, neighborhood: .neighborhoods[0], open, review_count, stars, state}’ | json2csv -p=true -k business_id,category_main,category_sub,city,latitude,longitude,name,neighborhood,open,review_count,stars,state &amp;gt; source_flattened/business.csv
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now that we have the data in CSVs, let’s query them in SQL with the help of &lt;a href=&quot;http://harelba.github.io/q/&quot;&gt;q&lt;/a&gt;. I counted the number of businesses per state and tried to get an estimate of their population from Wikipedia.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#
+# -H skips header row
+# -d, defines &amp;quot;,&amp;quot; as delimiter
+#
+
+$ ./q -H -d, \
+&amp;quot; SELECT state, COUNT(*)
+  FROM business.csv
+  GROUP BY 1
+  HAVING COUNT(*) &amp;gt; 100
+  ORDER BY 2 DESC &amp;quot;
+
+AZ,25230   --  Phoenix, AZ — capital, 1.5 m
+NV,16485   --  Las Vegas, NV — largest in state, 0.6 m
+NC,4963    --  Charlotte, NC — largest in state, 0.8 m
+QC,3921    --  Montreal — largest, 1.6 m
+PA,3041    --  Pittsburgh, PA — 0.3 m
+EDH,2971   --  Edinburgh, UK — capital — 0.5 m
+WI,2307    --  Madison, WI — 0.006 m
+BW,934     --  Karlsruhe — 0.3 m
+IL,627     --  Urbana-Champaign, IL — 0.003 m
+ON,351     --  Waterloo
+SC,189     --  Fort Mill == Charlotte, NC
+MLN,123    --  Edinburgh, UK
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I have chosen a small, a midsized and a larger city from both the US and abroad with almost equal population. I calculated the reviewing and tipping activity trends in the three segments.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# US:
+# + AZ,25230   --  Phoenix, AZ — capital, 1.5 m
+# + NV,16485   --  Las Vegas, NV — largest, 0.6 m
+# + PA,3041    --  Pittsburgh, PA — 0.3 m
+# Control:
+# + QC,3921    --  Montreal — largest, 1.6 m
+# + EDH,2971   --  Edinburgh, UK — capital — 0.5 m
+# + MLN,123    --  Edinburgh, UK
+# + BW,934     --  Karlsruhe — 0.3 m
+#
+# -H outputs header line
+#
+
+$ ./q -H -O -d, \
+&amp;quot; SELECT business_id, date, COUNT(*) AS reviews
+  FROM review_compact_no_text.csv
+  GROUP BY 1, 2 &amp;quot; \
+&amp;gt; temp1.csv
+
+$ ./q -H -O -d, \
+&amp;quot; SELECT t.date,
+  CASE WHEN b.state IN (‘AZ’, ‘NV’, ‘PA’) THEN ‘USA’
+  WHEN b.state IN (‘QC’, ‘EDH’, ‘MLN’, ‘BW’) THEN ‘Control’
+  ELSE ‘Others’ END AS state,
+  SUM(t.reviews) AS reviews
+  FROM temp1.csv AS t
+  JOIN business.csv AS b
+  ON (t.business_id = b.business_id)
+  GROUP BY 1, 2
+  ORDER BY 2, 1 &amp;quot; \
+&amp;gt; reviews_summed.csv
+
+$ ./q -H -O -d, \
+&amp;quot; SELECT business_id, date, COUNT(*) AS tips
+  FROM tip_no_text.csv
+  GROUP BY 1, 2 &amp;quot; \
+&amp;gt; temp2.csv
+
+$ ./q -H -O -d, \
+&amp;quot; SELECT t.date,
+  CASE WHEN b.state IN (‘AZ’, ‘NV’, ‘PA’) THEN ‘USA’
+  WHEN b.state IN (‘QC’, ‘EDH’, ‘MLN’, ‘BW’) THEN ‘Control’
+  ELSE ‘Others’ END AS state,
+  SUM(t.tips) AS tips
+  FROM temp2.csv AS t
+  JOIN business.csv AS b
+  ON (t.business_id = b.business_id)
+  GROUP BY 1, 2
+  ORDER BY 2, 1 &amp;quot; \
+&amp;gt; tips_summed.csv
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1&gt;Show and tell&lt;/h1&gt;
+&lt;p&gt;As in production or on the call let’s use a visual clue whether a linear correlation will be enough to say something most likely. &lt;a href=&quot;https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/tools/Rio&quot;&gt;Rio&lt;/a&gt; from Jeroen is the smallest possible interface to abuse R to draw charts. Don’t forget that you have to have R installed. On OSX you might struggle a bit to get it work this combination helped me:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ brew reinstall — with-libtiff — ignore-dependencies — with-x11 imagemagick
+$ sudo cp /opt/X11/lib/libfreetype.6.dylib /usr/local/lib/libfreetype.6.dylib
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Charting the change of user generated content does not show a rosy picture. The non-US control is way less productive than the US group.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ &amp;lt; reviews_summed.csv ../Rio.sh -ge &#x27;g+geom_line(aes(x=as.Date(date), y=reviews, group=state, color=state)) + labs(x=&amp;quot;Year&amp;quot;, title=&amp;quot;Reviewing activity trends in three segments&amp;quot;)&#x27; | display
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/800/1*Ds8CLx1sn9FvXkHDhUdRQQ.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ &amp;lt; tips_summed.csv ../Rio.sh -ge &#x27;g+geom_line(aes(x=as.Date(date), y=tips, group=state, color=state)) + labs(x=&amp;quot;Year&amp;quot;, title=&amp;quot;Tipping activity trends in three segments&amp;quot;)&#x27; | display
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/800/1*nRrMa3xbF7snDTKIGLvCSw.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Based on the reviews and tips timeline it’s inevitable that the control grows much slower and no specific uptick happened at the acquisition. You might say having Las Vegas skews the sample, but that could be a good starting exercise to check the dataset without it. :) Also if you got the taste, don’t stop here! It’s fairly easy to roll deeper statistical analysis like with &lt;a href=&quot;https://github.com/johnkerl/miller&quot;&gt;miller&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$ ./q -H -O -d, \
+&amp;quot; SELECT strftime(&#x27;%Y%m%d&#x27;,date) AS date, \
+  state, \
+  reviews \
+  FROM reviews_summed.csv &amp;quot; \
+&amp;gt; temp3.csv
+
+$ cat temp3.csv | ./mlr --csv --rs lf --opprint \
+  stats2 -a linreg-pca -f date,reviews -g state
+
+state date_reviews_pca_m date_reviews_pca_b date_reviews_pca_n date_reviews_pca_quality
+Control 0.000804 -16137.212616 2516 0.999999
+Others 0.001528 -30670.842174 3173 0.999999
+USA 0.012803 -256934.209362 3399 0.999974
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Have fun with data on the command line and don’t look back in anger at IDEs!&lt;/p&gt;</content>
+ </entry>
+ <entry>
+   <title>Presenting 101</title>
+   <link href="https://soobrosa.info/words/2015-11-13-presenting-101.html"/>
+   <updated>2015-11-13T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/2015-11-13-presenting-101.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;We have all seen the polished TED presentations involving months of preparation, consulting coaches and endless hours put into rehearsing. We all try to do our best to achieve maximum impact with the stories we share but how does one prepare a presentation with full workdays and jam-packed weekends spent with kids? Below you will find real world, battle tested tools and tricks of the trade.&lt;/p&gt;
+&lt;p&gt;Be honest with yourself — How much time are you willing to dedicate in preparation for a talk? Double that number.&lt;/p&gt;
+&lt;p&gt;Sometimes we don’t have that luxury. How much can one accomplish when given a limited amount of time to prepare for a talk? Surprisingly, a lot. Here’s what I mean.&lt;/p&gt;
+&lt;h2&gt;30 minutes&lt;/h2&gt;
+&lt;p&gt;I got home from work one afternoon and wondered what should I cook for dinner. While pondering, my phone ringed.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;“When will you be here?”&lt;/strong&gt; asked a friend.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;“Where?”&lt;/strong&gt; I answered blatantly.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;“You’re supposed to be speaking at this Meetup soon,”&lt;/strong&gt; he replied.&lt;/p&gt;
+&lt;p&gt;(I thought I wasn’t speaking until the next day.)&lt;/p&gt;
+&lt;p&gt;I said, &lt;strong&gt;“I’m on my way,”&lt;/strong&gt; and called a cab.&lt;/p&gt;
+&lt;p&gt;Getting into the cab, I grabbed a name card and tried to jot down the most important attributes of my topic on the back. On the top I scribbled “Intro, 5W + H”, any specifics I wanted to share definitely went in the middle — aka the message, followed by “Future, Recap, Questions”.&lt;/p&gt;
+&lt;p&gt;It helps if you know the topic you want to cover (as was my case). Let me explain. “5W + H” comes from the classic journalistic questions — Who? What? When? Where? Why? How? Be sure to address these questions so that they support your message and are appropriate for your audience. Mix in a few anecdotes and funny facts that come to your mind. Make a note in a form a short mnemonic you can hopefully remember — “What should the ‘fridge stunt’ mean?” Prepare some audience participation involvement questions up front — “Who here has ever used a Kinect?” Leave some open ended ones for the end of your talk in case your audience doesn’t have any good ones for you. You can answer a not-so-interesting-audience-question and then quickly follow by connecting your own question.&lt;/p&gt;
+&lt;p&gt;You will speak approximately 1 minute about each of the aforementioned sections and questions.&lt;/p&gt;
+&lt;p&gt;If you have anything visual on the Interwebs that’s related to your topic and the venue has internet connection, advise the audio/visual support folks to show it while you’re speaking. I was lucky at this particular Meetup. Once you arrive at the venue make a quick decision whether or not it would help to gulp some hard liquor before going on stage to lessen your nerves.&lt;/p&gt;
+&lt;p&gt;This is how it all looked like for me at the Budapest New Technology Meetup in March 2007 after the cab ride.&lt;/p&gt;
+&lt;iframe src=&quot;https://www.youtube.com/embed/FOT4sRaPFwo?feature=oembed&quot; width=&quot;640&quot; height=&quot;480&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
+
+&lt;h2&gt;2 hours&lt;/h2&gt;
+&lt;p&gt;You may find yourself in a situation where you want to communicate ideas, a project, a success or failure to more than a handful of people. We have such a venue at our company every week on Friday — we’ve named it Retro. After a hazy week of getting things done, you might reflect and decide to sketch up a presentation pretty quickly.&lt;/p&gt;
+&lt;p&gt;The back-of-a-name-card trick is a good start. As a next step, most of the time, I tear an A4 sheet of paper into smaller pieces and transcribe each bullet point from the name card onto those pieces of paper. I step back, make tea, glance at the chaos in front of me and try to re-order the pieces in a way that makes sense. This is my process for crafting a story. Once I’m in a good place, I reach for my iPad and pull up &lt;a href=&quot;https://www.haikudeck.com/&quot;&gt;Haiku Deck&lt;/a&gt; (free).&lt;/p&gt;
+&lt;p&gt;It doesn’t feel good to type too much on a slide in this tool — and that’s a feat. It’s easy to get lost in the tons of good quality Flicker CC photos you can add with a touch. Even so, it’s got the best value for investment ratio when compared to other products.&lt;/p&gt;
+&lt;p&gt;When your presentation is not quite finished, but close enough, show it to someone. Being strict with your time guarantees that your slides will have evident gaps, errors or typos. Someone with fresh eyes can help you correct those quickly. Fix what they’ve found and if you’re provided with any constructive suggestions that can be applied in five minutes or less, apply them. You’re done.&lt;/p&gt;
+&lt;p&gt;The visual CVish below was done like this years ago — the not-so-perfect screenshots were captured with my iPad’s old camera from a monitor screen.&lt;/p&gt;
+&lt;iframe class=&quot;speakerdeck-iframe&quot; frameborder=&quot;0&quot; src=&quot;https://speakerdeck.com/player/baeef7a7e24949e9800efc644defdc69&quot; title=&quot;Data Cook - A Visual CV (2013)&quot; allowfullscreen=&quot;true&quot; mozallowfullscreen=&quot;true&quot; webkitallowfullscreen=&quot;true&quot; style=&quot;border: 0px; background-color: rgba(0, 0, 0, 0.1); margin: 0px; padding: 0px; border-radius: 6px; -webkit-background-clip: padding-box; -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 560px; height: 420px;&quot; data-ratio=&quot;1.3333333333333333&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;For this presentation at the Budapest Database Meetup in September 2013 I added some proper screenshots done on a Mac and imported via Dropbox.&lt;/p&gt;
+&lt;iframe src=&quot;https://speakerdeck.com/player/cf1edc10fc3d01302f650ada113e7e19&quot; width=&quot;700&quot; height=&quot;588&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
+
+&lt;h2&gt;2 days&lt;/h2&gt;
+&lt;p&gt;If you’re planning to do a proper conference talk, plan to invest 15+ hours in preparation. By adding yet other layer of work to what was outlined in the first two sections, you are more likely to have better command over the details of the delivery itself. This is particularly important if your talk will be recorded.&lt;/p&gt;
+&lt;p&gt;You’ll want to have less text on each slide (preferably in a mnemonic way) and presentation notes that only you can see. You’ll want to use legal visuals (even on a shoestring budget). You’ll probably also want to prepare legible, reusable diagrams fast.&lt;/p&gt;
+&lt;p&gt;Keynote is generally the go-to tool but don’t underestimate a newcomer like &lt;a href=&quot;http://www.decksetapp.com/&quot;&gt;Deckset&lt;/a&gt; (trial or 30 USD) that translates Markdown to presentation. Here, at Wunderlist, we’re pretty much in love with it. You can readily edit Markdown and get pretty decent outcome with minimal effort.&lt;/p&gt;
+&lt;p&gt;To do your legal visual hunt on your own, consider using &lt;a href=&quot;https://www.flickr.com/explore/&quot;&gt;Flickr CC&lt;/a&gt; and &lt;a href=&quot;http://www.freeimages.com/&quot;&gt;Freeimages&lt;/a&gt;. Unfortunately the good ol’ &lt;a href=&quot;http://sxc.hu/&quot;&gt;stock.xchng&lt;/a&gt; is not available anymore.&lt;/p&gt;
+&lt;p&gt;When my colleague, Bence, talked at PyCon Ireland, he used Deckset for the presentation and &lt;a href=&quot;https://www.omnigroup.com/omnigraffle&quot;&gt;OmniGraffle&lt;/a&gt; (trial or 100 USD) for the diagrams.&lt;/p&gt;
+&lt;iframe src=&quot;https://speakerdeck.com/player/679d5dc19687435085ae2e65c5817fed&quot; width=&quot;700&quot; height=&quot;456&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;If you don’t want to spend money on OmniGraffle, consider &lt;a href=&quot;http://monodraw.helftone.com/&quot;&gt;MonoDraw&lt;/a&gt; (trial or 20USD) or &lt;a href=&quot;http://shaky.github.bushong.net/&quot;&gt;Shaky&lt;/a&gt; (free) for that nerdy touch in your diagrams. Sadly, a generic XKCD styler available for diagrams doesn’t exist (yet).&lt;/p&gt;
+&lt;p&gt;I made the presentation below in Keynote and wished I’d known about Deckset at the time. Diagrams were produced in &lt;a href=&quot;https://www.fiftythree.com/&quot;&gt;Paper&lt;/a&gt; (free) on an iPad with it’s magical autocorrect function.&lt;/p&gt;
+&lt;iframe class=&quot;speakerdeck-iframe&quot; frameborder=&quot;0&quot; src=&quot;https://speakerdeck.com/player/74a40dd5fb514ff184252c93ba3fb0c7&quot; title=&quot;Being a Data Janitor for 10m+ Users &quot; allowfullscreen=&quot;true&quot; mozallowfullscreen=&quot;true&quot; webkitallowfullscreen=&quot;true&quot; style=&quot;border: 0px; background-color: rgba(0, 0, 0, 0.1); margin: 0px; padding: 0px; border-radius: 6px; -webkit-background-clip: padding-box; -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 560px; height: 420px;&quot; data-ratio=&quot;1.3333333333333333&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Rehearse your presentation. Time it. Make notes. Change speed and accent accordingly. Record your presentation in video and watch it without sound in double speed. Recognise if you’re fidgeting and pay close attention to your hand movements. Try to control them. Rinse and repeat.&lt;/p&gt;
+&lt;p&gt;(Special thanks to Jenny for her meticulous copy-editing.)&lt;/p&gt;</content>
+ </entry>
+ <entry>
+   <title>Talk to Wunderlist in Python</title>
+   <link href="https://soobrosa.info/words/2015-05-13-talk-to-wunderlist-in-python.html"/>
+   <updated>2015-05-13T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/2015-05-13-talk-to-wunderlist-in-python.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;Today we’ve publicly released the &lt;a href=&quot;https://github.com/microsoftarchive/api&quot;&gt;Wunderlist API&lt;/a&gt; so you can programmatically talk to Wunderlist. Being a Python hacker I share some example code on how to do this in practice.&lt;/p&gt;
+&lt;p&gt;This &lt;a href=&quot;https://github.com/microsoftarchive/wunderlist-python&quot;&gt;Github repo&lt;/a&gt; contains a simple blueprint on talking to the Wunderlist API and two working examples on pulling your Coursera deadlines into Wunderlist as tasks with due dates and aggregating the Foursquare tips your friends left in your current city into a Wunderlist.&lt;/p&gt;
+&lt;p&gt;All code is tested on &lt;a href=&quot;https://www.pythonanywhere.com/&quot;&gt;pythonanywhere.com&lt;/a&gt; with a default Flask deployment on a Hacker account.&lt;/p&gt;
+&lt;p&gt;You maybe can find a working hosted version of the &lt;a href=&quot;http://soobrosa.pythonanywhere.com/coursera&quot;&gt;Coursera&lt;/a&gt; and the &lt;a href=&quot;http://soobrosa.pythonanywhere.com/foursquare&quot;&gt;Foursquare&lt;/a&gt; scripts at my PythonAnywhere account, but they could go offline without any further notice.&lt;/p&gt;
+&lt;p&gt;Thanks to &lt;a href=&quot;https://github.com/torsten&quot;&gt;Torsten&lt;/a&gt; for pointing in directions and &lt;a href=&quot;https://github.com/vsmart&quot;&gt;Franziska&lt;/a&gt; for the simple urllib-based approach on how to talk to the WL API.&lt;/p&gt;</content>
  </entry>
  <entry>
    <title>Product Usage Flows with Redshift</title>
@@ -598,77 +901,5 @@ LIMIT 20;
 
 &lt;p&gt;You can &lt;a href=&quot;http://www.ustream.tv/recorded/39892412&quot;&gt;watch it&lt;/a&gt; courtesy of Ustream.&lt;/p&gt;
 &lt;p&gt;Get &lt;a href=&quot;https://pypi.python.org/pypi/mETL/0.1.7.0dev&quot;&gt;mETL&lt;/a&gt; as Python package now after you&#x27;ve seen Bence&#x27;s &lt;a href=&quot;https://speakerdeck.com/bfaludi/extract-transform-load-using-metl&quot;&gt;presentation&lt;/a&gt; at PyData Berlin and checked out his &lt;a href=&quot;https://github.com/bfaludi/mETL-tutorials&quot;&gt;tutorial&lt;/a&gt;.&lt;/p&gt;</content>
- </entry>
- <entry>
-   <title>Export your Miso history</title>
-   <link href="https://soobrosa.info/words/miso-export.html"/>
-   <updated>2013-08-27T00:00:00+00:00</updated>
-   <id>https://soobrosa.info/words/miso-export.html</id>
-   <category term="essay"/>
-   <content type="html">&lt;p&gt;If you ever happen to feel like exporting your Miso history you can use my Python script&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://gist.github.com/soobrosa/6356520&quot;&gt;View the gist&lt;/a&gt;&lt;/p&gt;</content>
- </entry>
- <entry>
-   <title>Duna waterlevels from 2002</title>
-   <link href="https://soobrosa.info/words/duna-waterlevels.html"/>
-   <updated>2013-06-10T00:00:00+00:00</updated>
-   <id>https://soobrosa.info/words/duna-waterlevels.html</id>
-   <category term="essay"/>
-   <content type="html">&lt;p&gt;I didn&#x27;t remember flood in June, so checked out the data. Lighter blue is older data.&lt;/p&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;http://public.tableausoftware.com/javascripts/api/viz_v1.js&quot;&gt;&lt;/script&gt;
-&lt;div class=&quot;tableauPlaceholder&quot; style=&quot;width:654px; height:629px;&quot;&gt;&lt;noscript&gt;&lt;a href=&quot;#&quot;&gt;&lt;img alt=&quot;Dashboard 1 &quot; src=&quot;http:&amp;#47;&amp;#47;public.tableausoftware.com&amp;#47;static&amp;#47;images&amp;#47;du&amp;#47;duna_vize&amp;#47;Dashboard1&amp;#47;1_rss.png&quot; style=&quot;border: none&quot; /&gt;&lt;/a&gt;&lt;/noscript&gt;&lt;object class=&quot;tableauViz&quot; width=&quot;654&quot; height=&quot;629&quot; style=&quot;display:none;&quot;&gt;&lt;param name=&quot;host_url&quot; value=&quot;http%3A%2F%2Fpublic.tableausoftware.com%2F&quot; /&gt;&lt;param name=&quot;site_root&quot; value=&quot;&quot; /&gt;&lt;param name=&quot;name&quot; value=&quot;duna_vize&amp;#47;Dashboard1&quot; /&gt;&lt;param name=&quot;tabs&quot; value=&quot;no&quot; /&gt;&lt;param name=&quot;toolbar&quot; value=&quot;yes&quot; /&gt;&lt;param name=&quot;static_image&quot; value=&quot;http:&amp;#47;&amp;#47;public.tableausoftware.com&amp;#47;static&amp;#47;images&amp;#47;du&amp;#47;duna_vize&amp;#47;Dashboard1&amp;#47;1.png&quot; /&gt;&lt;param name=&quot;animate_transition&quot; value=&quot;yes&quot; /&gt;&lt;param name=&quot;display_static_image&quot; value=&quot;yes&quot; /&gt;&lt;param name=&quot;display_spinner&quot; value=&quot;yes&quot; /&gt;&lt;param name=&quot;display_overlay&quot; value=&quot;yes&quot; /&gt;&lt;param name=&quot;display_count&quot; value=&quot;yes&quot; /&gt;&lt;/object&gt;&lt;/div&gt;
-
-&lt;p&gt;I copied together the tables from &lt;a href=&quot;http://www.hydroinfo.hu/Html/archivum/archiv_tabla.html&quot;&gt;Hydroinfo&lt;/a&gt; to a text file and added the year before each table. A light ETL to reformat webdata from  to a TSV with date and value columns&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://gist.github.com/soobrosa/5747648&quot;&gt;View the gist&lt;/a&gt;&lt;/p&gt;</content>
- </entry>
- <entry>
-   <title>Otthontérkép - map-based real estate site</title>
-   <link href="https://soobrosa.info/words/otthonterkep.html"/>
-   <updated>2013-05-22T00:00:00+00:00</updated>
-   <id>https://soobrosa.info/words/otthonterkep.html</id>
-   <category term="essay"/>
-   <content type="html">&lt;p&gt;It&#x27;s fun to see that what used to be MVPs sketched by me like this:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;codename &lt;a href=&quot;/leaflet/leaflet/cluster.html&quot;&gt;cluster&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;codename &lt;a href=&quot;/leaflet/leaflet/cloro.html&quot;&gt;cloro&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;codename &lt;a href=&quot;/leaflet/leaflet/stress.html&quot;&gt;stress&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;codename &lt;a href=&quot;/leaflet/leaflet/stress_2.html&quot;&gt;stress dos&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;launches as a &lt;a href=&quot;http://otthonterkep.hu/&quot;&gt;proper product&lt;/a&gt; -- also on &lt;a href=&quot;https://www.behance.net/gallery/13288307/Otthontrkp&quot;&gt;Behance&lt;/a&gt;.&lt;/p&gt;</content>
- </entry>
- <entry>
-   <title>Hubway Data Challenge</title>
-   <link href="https://soobrosa.info/words/hubway-data-challenge.html"/>
-   <updated>2012-12-12T00:00:00+00:00</updated>
-   <id>https://soobrosa.info/words/hubway-data-challenge.html</id>
-   <category term="essay"/>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;http://hubwaydatachallenge.org/submission/38/&quot;&gt;Applied&lt;/a&gt; for &lt;a href=&quot;http://hubwaydatachallenge.org/&quot;&gt;Hubway Data Challenge&lt;/a&gt; with &lt;a href=&quot;http://dataeast.co/&quot;&gt;Balázs Krich&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Learned:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://mapbox.com/tilemill/&quot;&gt;Tilemill&lt;/a&gt; is good, but you need time and a plan,&lt;/li&gt;
-&lt;li&gt;titles are major on maps,&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://ned.usgs.gov/&quot;&gt;USGS NED&lt;/a&gt; and (ASTER)[http://gdem.ersdac.jspacesystems.or.jp/search.jsp] are geil if you go for topographic maps,&lt;/li&gt;
-&lt;li&gt;if your data has both timestamp and geocode go &lt;a href=&quot;http://blog.cartodb.com/post/32464928928/torque-big-data-meets-time-based-maps-bundled-with&quot;&gt;Torque&lt;/a&gt; to animate them. Some &lt;a href=&quot;https://developers.google.com/maps/documentation/directions/&quot;&gt;Google Directions API&lt;/a&gt; magic helps.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;br&gt;
-&lt;br&gt;&lt;/p&gt;
-&lt;iframe width=&quot;100%&quot; height=&quot;520&quot; frameborder=&quot;0&quot; src=&quot;//dataeast.cartodb.com/viz/80ab8d30-fbcb-11e3-b014-0e73339ffa50/embed_map?title=false&amp;amp;description=false&amp;amp;search=false&amp;amp;shareable=true&amp;amp;cartodb_logo=true&amp;amp;layer_selector=false&amp;amp;legends=false&amp;amp;scrollwheel=true&amp;amp;fullscreen=true&amp;amp;sublayer_options=1&amp;amp;sql=&amp;amp;sw_lat=42.33641946945544&amp;amp;sw_lon=-71.1731691381836&amp;amp;ne_lat=42.38538094930986&amp;amp;ne_lon=-71.00391102050781&quot; allowfullscreen=&quot;&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; oallowfullscreen=&quot;&quot; msallowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;/p&gt;
-&lt;p&gt;Anyway this way a real ramp up in digital mapping.&lt;/p&gt;</content>
- </entry>
- <entry>
-   <title>Thesis - Effect of Location Based Social Activities in Hungarian Tourism</title>
-   <link href="https://soobrosa.info/words/thesis.html"/>
-   <updated>2012-01-22T00:00:00+00:00</updated>
-   <id>https://soobrosa.info/words/thesis.html</id>
-   <category term="essay"/>
-   <content type="html">&lt;p&gt;Yes, there is an English extract.&lt;/p&gt;
-&lt;div&gt;&lt;object classid=&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000&quot; style=&quot;width: 420px; height: 272px;&quot; id=&quot;ed33b1f7-5881-d671-1a5d-3fbd51950e3e&quot;&gt;&lt;param name=&quot;movie&quot; value=&quot;http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf?mode=mini&amp;amp;backgroundColor=%23222222&amp;amp;documentId=120115095227-b7236e3b02f5438584a99a04c92099f9&quot; /&gt;&lt;param name=&quot;allowfullscreen&quot; value=&quot;true&quot; /&gt;&lt;param name=&quot;menu&quot; value=&quot;false&quot; /&gt;&lt;param name=&quot;wmode&quot; value=&quot;transparent&quot; /&gt;&lt;embed src=&quot;http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf&quot; type=&quot;application/x-shockwave-flash&quot; allowfullscreen=&quot;true&quot; menu=&quot;false&quot; wmode=&quot;transparent&quot; style=&quot;width: 420px; height: 272px;&quot; flashvars=&quot;mode=mini&amp;amp;backgroundColor=%23222222&amp;amp;documentId=120115095227-b7236e3b02f5438584a99a04c92099f9&quot; /&gt;&lt;/object&gt;&lt;/div&gt;
-
-&lt;p&gt;I also presented it and got promoted for the annual competition of the best thesis in tourism, but sometimes the daughter of the Prime Minister is just &lt;a href=&quot;http://444.hu/2013/05/10/csak-az-orban-rahe-palyazatanak-ertekelese-nyilvanos/&quot;&gt;better&lt;/a&gt; than you.&lt;/p&gt;
-&lt;div style=&quot;width: 595px;&quot; id=&quot;__ss_11138566&quot;&gt;&lt;iframe src=&quot;http://www.slideshare.net/slideshow/embed_code/11138566&quot; width=&quot;595&quot; height=&quot;497&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-
-&lt;p&gt;Here&#x27;s the full text in Hungarian.&lt;/p&gt;
-&lt;div&gt;&lt;object classid=&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000&quot; style=&quot;width: 420px; height: 272px;&quot; id=&quot;4e736efc-389a-11c2-bbfe-385f7e5acfaf&quot;&gt;&lt;param name=&quot;movie&quot; value=&quot;http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf?mode=mini&amp;amp;backgroundColor=%23222222&amp;amp;documentId=120130172845-438e62ce9a1c4343acfbbbf71472a026&quot; /&gt;&lt;param name=&quot;allowfullscreen&quot; value=&quot;true&quot; /&gt;&lt;param name=&quot;menu&quot; value=&quot;false&quot; /&gt;&lt;param name=&quot;wmode&quot; value=&quot;transparent&quot; /&gt;&lt;embed src=&quot;http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf&quot; type=&quot;application/x-shockwave-flash&quot; allowfullscreen=&quot;true&quot; menu=&quot;false&quot; wmode=&quot;transparent&quot; style=&quot;width: 420px; height: 272px;&quot; flashvars=&quot;mode=mini&amp;amp;backgroundColor=%23222222&amp;amp;documentId=120130172845-438e62ce9a1c4343acfbbbf71472a026&quot; /&gt;&lt;/object&gt;&lt;/div&gt;</content>
  </entry>
 </feed>

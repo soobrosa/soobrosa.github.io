@@ -1,6 +1,6 @@
 ---
-title: My humble James Mickens Shrine a.k.a. the only **real** combined CS degree and MBA you will ever need
-date: 
+title: My humble James Mickens Shrine a.k.a. the only real combined CS degree and MBA you will ever need
+date: 2016-04-05
 kind: essay
 tags: data
 ---

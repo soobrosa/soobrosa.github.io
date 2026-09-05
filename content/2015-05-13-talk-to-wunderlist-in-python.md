@@ -1,6 +1,6 @@
 ---
 title: Talk to Wunderlist in Python
-date: 
+date: 2015-05-13
 kind: essay
 tags: data
 ---

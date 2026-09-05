@@ -1,6 +1,6 @@
 ---
 title: Deep Learning on the Edge — First Impressions of the Movidius Neural Compute Stick
-date: 
+date: 2017-09-06
 kind: essay
 tags: data, hardware, career, culture, learning
 ---

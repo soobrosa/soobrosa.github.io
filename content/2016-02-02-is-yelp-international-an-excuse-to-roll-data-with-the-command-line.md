@@ -1,6 +1,6 @@
 ---
 title: Is Yelp international? — An excuse to roll data with the command line
-date: 
+date: 2016-02-02
 kind: essay
 tags: data, learning
 ---
