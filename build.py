@@ -40,7 +40,7 @@ CSS = "/assets/css/site.css"
 # T-key light theme silently stops working on articles only.
 THEME_JS = "/assets/js/theme.js"
 
-NAV_ITEMS = [("bio", "/index.html"), ("mixes", "/mixes.html"),
+NAV_ITEMS = [("about", "/index.html"), ("mixes", "/mixes.html"),
              ("words", "/words.html"), ("media", "/media.html"),
              ("lab", "/lab.html")]
 
