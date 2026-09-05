@@ -41,7 +41,8 @@ CSS = "/assets/css/site.css"
 THEME_JS = "/assets/js/theme.js"
 
 NAV_ITEMS = [("bio", "/index.html"), ("mixes", "/mixes.html"),
-             ("words", "/words.html"), ("lab", "/lab.html")]
+             ("words", "/words.html"), ("media", "/media.html"),
+             ("lab", "/lab.html")]
 
 
 def strip_accents(s):

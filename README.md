@@ -15,13 +15,13 @@ index.html              Bio / landing page (its counts + bars are build-written)
 mixes.html              DJ mix player (reads mixes.json, streams from R2)
 words.html              GENERATED: one chronological list of all writing
 words/<slug>.html       GENERATED: one page per markdown post
+media.html              Talks, interviews and slide decks archive
 lab.html                Apps & experiments (reads lab.json)
-musings.html            Static link archive (campervan / tinyhouse / houseboat)
-elearning.html          Static link archive (e-learning courses)
 404.html
 atom.xml                GENERATED: Atom feed of the newest 25 entries
-redirects.json          Old Jekyll URL -> new URL, one row per moved page
-post/, translation/     GENERATED: redirect stubs for the old Jekyll URLs
+redirects.json          Old URL -> new URL, one row per moved page
+post/, translation/     GENERATED: redirect stubs for the old Jekyll URLs,
+                        plus stubs at the root for retired pages
 
 content/*.md            SOURCE for writing — drop markdown here
 build.py                content/*.md -> words/<slug>.html + words.html,

@@ -112,11 +112,12 @@ h1.title {
 .panel p { margin-bottom:12px; } .panel p:last-child { margin-bottom:0; }
 
 /* ---- links ---- */
-a.inline, .post a, .count a, .title-link, footer.foot a {
+a.inline, .post a, .count a, .title-link, footer.foot a, ul.words .main a {
   color:var(--ink); text-decoration:underline; text-underline-offset:2px;
   text-decoration-thickness:1px;
 }
-a.inline:hover, .post a:hover, .title-link:hover, footer.foot a:hover {
+a.inline:hover, .post a:hover, .title-link:hover, footer.foot a:hover,
+ul.words .main a:hover {
   background:var(--ink); color:var(--paper); text-decoration:none;
 }
 
@@ -164,6 +165,10 @@ ul.words li {
 }
 ul.words li.hidden { display:none; }
 ul.words .date { color:var(--muted); min-width:46px; font-size:12px; }
+/* Archive lists keep the original date wording ("Summer 2008, Cannes",
+   "2018-2019"), so their date column needs room the year-only stream does not. */
+ul.words.arch .date { min-width:132px; }
+ul.words.arch .main a { margin-right:2px; }
 /* Uniform hairline badges: the word already names the type, so fills are
    reserved for state (active, hover) rather than category. */
 .badge {
