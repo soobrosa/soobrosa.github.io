@@ -5,14 +5,14 @@ kind: essay
 tags: data
 ---
 
-[Applied](http://hubwaydatachallenge.org/submission/38/) for [Hubway Data Challenge](http://hubwaydatachallenge.org/) with [Balázs Krich](http://dataeast.co/).
+[Applied](http://hubwaydatachallenge.org/submission/38/) for [Hubway Data Challenge](http://hubwaydatachallenge.org/) with [Balázs Krich](https://web.archive.org/web/20160110190417/http://dataeast.co/).
 
 Learned:
 
 * [Tilemill](http://mapbox.com/tilemill/) is good, but you need time and a plan,
 * titles are major on maps,
-* [USGS NED](http://ned.usgs.gov/) and (ASTER)[http://gdem.ersdac.jspacesystems.or.jp/search.jsp] are geil if you go for topographic maps,
-* if your data has both timestamp and geocode go [Torque](http://blog.cartodb.com/post/32464928928/torque-big-data-meets-time-based-maps-bundled-with) to animate them. Some [Google Directions API](https://developers.google.com/maps/documentation/directions/) magic helps.
+* [USGS NED](https://web.archive.org/web/20240410211619/https://ned.usgs.gov/) and (ASTER)[http://gdem.ersdac.jspacesystems.or.jp/search.jsp] are geil if you go for topographic maps,
+* if your data has both timestamp and geocode go [Torque](https://web.archive.org/web/20140711014757/http://blog.cartodb.com:80/post/32464928928/torque-big-data-meets-time-based-maps-bundled-with) to animate them. Some [Google Directions API](https://developers.google.com/maps/documentation/directions/) magic helps.
 
 <br>
 <br>

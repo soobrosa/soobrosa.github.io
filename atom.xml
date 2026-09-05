@@ -524,7 +524,7 @@ $ make tests/protobuf/n
 &lt;li&gt;&lt;a href=&quot;https://github.com/johnkerl/miller&quot;&gt;miller&lt;/a&gt; (“&lt;em&gt;sed, awk, cut, join,&lt;/em&gt; and &lt;em&gt;sort&lt;/em&gt; for name-indexed data such as CSV”)
 “Not unlike jq for JSON, Miller is written in modern C, and it has zero runtime dependencies. You can download or compile a single binary, scp it to a faraway machine, and expect it to work.” (&lt;a href=&quot;https://github.com/johnkerl/miller&quot;&gt;Source&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;I’m slightly familiar with the domain as some years ago I’ve written &lt;a href=&quot;http://issuu.com/soobrosa/docs/soobrosa_thesis?e=0&quot;&gt;my thesis&lt;/a&gt; on the touristic effect of the location-based community activities in Hungary — it was a critical comparison of geocaching and Foursquare. I realised how much I got used to use both Foursquare and Yelp living in Germany. The German Qype sold to Yelp in 2012. Did this acquisition make Yelp international? Can we tell from the data whether this deal was worth it for Yelp? Based on the user generated contect metrics, not really.&lt;/p&gt;
+&lt;p&gt;I’m slightly familiar with the domain as some years ago I’ve written &lt;a href=&quot;/words/thesis.html&quot;&gt;my thesis&lt;/a&gt; on the touristic effect of the location-based community activities in Hungary — it was a critical comparison of geocaching and Foursquare. I realised how much I got used to use both Foursquare and Yelp living in Germany. The German Qype sold to Yelp in 2012. Did this acquisition make Yelp international? Can we tell from the data whether this deal was worth it for Yelp? Based on the user generated contect metrics, not really.&lt;/p&gt;
 &lt;h1&gt;Blink that cursor&lt;/h1&gt;
 &lt;p&gt;Let’s shape the dataset to be explorable. For reproducability a &lt;a href=&quot;https://gist.github.com/soobrosa/4adf89ce197eb6299eb9&quot;&gt;Makefile&lt;/a&gt; is the best. Below I focus on the actual analysis, you can find more simple practicalities in the Makefile — like how to pretty print a JSON, how to get a random sample and so.&lt;/p&gt;
 &lt;p&gt;Let’s start with flattening lazily the JSONs to CSVs. For simpler cases &lt;a href=&quot;https://github.com/jehiah/json2csv&quot;&gt;json2csv&lt;/a&gt; is enough while &lt;a href=&quot;http://stedolan.github.io/jq/&quot;&gt;jq&lt;/a&gt; is your weapon to roll complex logic.&lt;/p&gt;
@@ -684,7 +684,7 @@ USA 0.012803 -256934.209362 3399 0.999974
 &lt;p&gt;If you’re planning to do a proper conference talk, plan to invest 15+ hours in preparation. By adding yet other layer of work to what was outlined in the first two sections, you are more likely to have better command over the details of the delivery itself. This is particularly important if your talk will be recorded.&lt;/p&gt;
 &lt;p&gt;You’ll want to have less text on each slide (preferably in a mnemonic way) and presentation notes that only you can see. You’ll want to use legal visuals (even on a shoestring budget). You’ll probably also want to prepare legible, reusable diagrams fast.&lt;/p&gt;
 &lt;p&gt;Keynote is generally the go-to tool but don’t underestimate a newcomer like &lt;a href=&quot;http://www.decksetapp.com/&quot;&gt;Deckset&lt;/a&gt; (trial or 30 USD) that translates Markdown to presentation. Here, at Wunderlist, we’re pretty much in love with it. You can readily edit Markdown and get pretty decent outcome with minimal effort.&lt;/p&gt;
-&lt;p&gt;To do your legal visual hunt on your own, consider using &lt;a href=&quot;https://www.flickr.com/explore/&quot;&gt;Flickr CC&lt;/a&gt; and &lt;a href=&quot;http://www.freeimages.com/&quot;&gt;Freeimages&lt;/a&gt;. Unfortunately the good ol’ &lt;a href=&quot;http://sxc.hu/&quot;&gt;stock.xchng&lt;/a&gt; is not available anymore.&lt;/p&gt;
+&lt;p&gt;To do your legal visual hunt on your own, consider using &lt;a href=&quot;https://www.flickr.com/explore/&quot;&gt;Flickr CC&lt;/a&gt; and &lt;a href=&quot;http://www.freeimages.com/&quot;&gt;Freeimages&lt;/a&gt;. Unfortunately the good ol’ &lt;a href=&quot;https://web.archive.org/web/20250420173041/http://www.sxc.hu/&quot;&gt;stock.xchng&lt;/a&gt; is not available anymore.&lt;/p&gt;
 &lt;p&gt;When my colleague, Bence, talked at PyCon Ireland, he used Deckset for the presentation and &lt;a href=&quot;https://www.omnigroup.com/omnigraffle&quot;&gt;OmniGraffle&lt;/a&gt; (trial or 100 USD) for the diagrams.&lt;/p&gt;
 &lt;iframe src=&quot;https://speakerdeck.com/player/679d5dc19687435085ae2e65c5817fed&quot; width=&quot;700&quot; height=&quot;456&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
 
@@ -764,7 +764,7 @@ USA 0.012803 -256934.209362 3399 0.999974
 from counted;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The only caveat with the Sankey Diagram is that your product flow must be acyclic.&lt;/p&gt;
-&lt;p&gt;How to handle cyclic product flows? You can pretty easily end up with a &lt;a href=&quot;http://gephi.github.io/users/supported-graph-formats/gdf-format/&quot;&gt;GDF-format&lt;/a&gt; graph descriptor that &lt;a href=&quot;http://gephi.github.io/&quot;&gt;Gephi&lt;/a&gt; can load if you concatenate the two product names with a comma and leave the weigh in the end.&lt;/p&gt;</content>
+&lt;p&gt;How to handle cyclic product flows? You can pretty easily end up with a &lt;a href=&quot;https://web.archive.org/web/20151103032118/http://gephi.github.io:80/users/supported-graph-formats/gdf-format/&quot;&gt;GDF-format&lt;/a&gt; graph descriptor that &lt;a href=&quot;http://gephi.github.io/&quot;&gt;Gephi&lt;/a&gt; can load if you concatenate the two product names with a comma and leave the weigh in the end.&lt;/p&gt;</content>
  </entry>
  <entry>
    <title>User Session Flows with Redshift</title>
@@ -791,7 +791,7 @@ from counted;
  SELECT 98 AS key, ‘Logout’ AS value
 );
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Let’s say you keep a segment table with &lt;strong&gt;segment_name&lt;/strong&gt; and &lt;strong&gt;user_id&lt;/strong&gt; rows and you have &lt;a href=&quot;http://chart.io/&quot;&gt;chart.io&lt;/a&gt; to filter them on. Let’s grab a random 10k sample.&lt;/p&gt;
+&lt;p&gt;Let’s say you keep a segment table with &lt;strong&gt;segment_name&lt;/strong&gt; and &lt;strong&gt;user_id&lt;/strong&gt; rows and you have &lt;a href=&quot;https://web.archive.org/web/20120915055400/http://chart.io:80/&quot;&gt;chart.io&lt;/a&gt; to filter them on. Let’s grab a random 10k sample.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;WITH universe AS
 (
  SELECT s.user_id
@@ -899,7 +899,7 @@ LIMIT 20;
    <content type="html">&lt;p&gt;My &lt;a href=&quot;https://www.haikudeck.com/p/clh5HKRIwf/metl-intro&quot;&gt;mETL intro presentation&lt;/a&gt; at last week&#x27;s &lt;a href=&quot;http://www.meetup.com/Budapest-Database-Meetup/&quot;&gt;Budapest Database Meetup&lt;/a&gt; (thanks to &lt;a href=&quot;https://github.com/ceumicrodata&quot;&gt;CEU Microdata&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://twitter.com/bfaludi&quot;&gt;@bfaludi&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://twitter.com/ceuhungary&quot;&gt;@ceuhungary&lt;/a&gt;)&lt;/p&gt;
 &lt;iframe src=&quot;https://www.haikudeck.com/e/clh5HKRIwf/?isUrlHashEnabled=false&amp;isPreviewEnabled=false&amp;isHeaderVisible=false&quot; width=&quot;640&quot; height=&quot;541&quot; frameborder=&quot;0&quot; marginheight=&quot;0&quot; marginwidth=&quot;0&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;You can &lt;a href=&quot;http://www.ustream.tv/recorded/39892412&quot;&gt;watch it&lt;/a&gt; courtesy of Ustream.&lt;/p&gt;
+&lt;p&gt;You can &lt;a href=&quot;https://web.archive.org/web/20150117182155/http://www.ustream.tv:80/recorded/39892412&quot;&gt;watch it&lt;/a&gt; courtesy of Ustream.&lt;/p&gt;
 &lt;p&gt;Get &lt;a href=&quot;https://pypi.python.org/pypi/mETL/0.1.7.0dev&quot;&gt;mETL&lt;/a&gt; as Python package now after you&#x27;ve seen Bence&#x27;s &lt;a href=&quot;https://speakerdeck.com/bfaludi/extract-transform-load-using-metl&quot;&gt;presentation&lt;/a&gt; at PyData Berlin and checked out his &lt;a href=&quot;https://github.com/bfaludi/mETL-tutorials&quot;&gt;tutorial&lt;/a&gt;.&lt;/p&gt;</content>
  </entry>
 </feed>

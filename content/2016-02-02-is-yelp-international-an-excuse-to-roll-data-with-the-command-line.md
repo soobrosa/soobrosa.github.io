@@ -18,7 +18,7 @@ I will use the following specimens:
 * [miller](https://github.com/johnkerl/miller) (“*sed, awk, cut, join,* and *sort* for name-indexed data such as CSV”)
 “Not unlike jq for JSON, Miller is written in modern C, and it has zero runtime dependencies. You can download or compile a single binary, scp it to a faraway machine, and expect it to work.” ([Source](https://github.com/johnkerl/miller))
 
-I’m slightly familiar with the domain as some years ago I’ve written [my thesis](http://issuu.com/soobrosa/docs/soobrosa_thesis?e=0) on the touristic effect of the location-based community activities in Hungary — it was a critical comparison of geocaching and Foursquare. I realised how much I got used to use both Foursquare and Yelp living in Germany. The German Qype sold to Yelp in 2012. Did this acquisition make Yelp international? Can we tell from the data whether this deal was worth it for Yelp? Based on the user generated contect metrics, not really.
+I’m slightly familiar with the domain as some years ago I’ve written [my thesis](/words/thesis.html) on the touristic effect of the location-based community activities in Hungary — it was a critical comparison of geocaching and Foursquare. I realised how much I got used to use both Foursquare and Yelp living in Germany. The German Qype sold to Yelp in 2012. Did this acquisition make Yelp international? Can we tell from the data whether this deal was worth it for Yelp? Based on the user generated contect metrics, not really.
 
 # Blink that cursor
 

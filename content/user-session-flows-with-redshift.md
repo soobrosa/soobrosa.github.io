@@ -32,7 +32,7 @@ CREATE TEMP TABLE event_dict AS (
 );
 ```
 
-Let’s say you keep a segment table with **segment_name** and **user_id** rows and you have [chart.io](http://chart.io/) to filter them on. Let’s grab a random 10k sample.
+Let’s say you keep a segment table with **segment_name** and **user_id** rows and you have [chart.io](https://web.archive.org/web/20120915055400/http://chart.io:80/) to filter them on. Let’s grab a random 10k sample.
 
 ```
 WITH universe AS

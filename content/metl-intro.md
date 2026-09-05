@@ -9,6 +9,6 @@ My [mETL intro presentation](https://www.haikudeck.com/p/clh5HKRIwf/metl-intro) 
 
 <iframe src="https://www.haikudeck.com/e/clh5HKRIwf/?isUrlHashEnabled=false&isPreviewEnabled=false&isHeaderVisible=false" width="640" height="541" frameborder="0" marginheight="0" marginwidth="0"></iframe>
 
-You can [watch it](http://www.ustream.tv/recorded/39892412) courtesy of Ustream.
+You can [watch it](https://web.archive.org/web/20150117182155/http://www.ustream.tv:80/recorded/39892412) courtesy of Ustream.
 
 Get [mETL](https://pypi.python.org/pypi/mETL/0.1.7.0dev) as Python package now after you've seen Bence's [presentation](https://speakerdeck.com/bfaludi/extract-transform-load-using-metl) at PyData Berlin and checked out his [tutorial](https://github.com/bfaludi/mETL-tutorials).

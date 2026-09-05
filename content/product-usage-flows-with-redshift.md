@@ -74,4 +74,4 @@ from counted;
 
 The only caveat with the Sankey Diagram is that your product flow must be acyclic.
 
-How to handle cyclic product flows? You can pretty easily end up with a [GDF-format](http://gephi.github.io/users/supported-graph-formats/gdf-format/) graph descriptor that [Gephi](http://gephi.github.io/) can load if you concatenate the two product names with a comma and leave the weigh in the end.
+How to handle cyclic product flows? You can pretty easily end up with a [GDF-format](https://web.archive.org/web/20151103032118/http://gephi.github.io:80/users/supported-graph-formats/gdf-format/) graph descriptor that [Gephi](http://gephi.github.io/) can load if you concatenate the two product names with a comma and leave the weigh in the end.
