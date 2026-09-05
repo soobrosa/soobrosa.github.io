@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static build: content/*.md -> /words/<slug>.html + /words.html
+"""Static build: content/*.md -> /words/<slug>.html + /index.html (the stream)
 
 Front matter (YAML-ish) per markdown file:
     ---
@@ -41,9 +41,9 @@ CSS = "/assets/css/site.css"
 # T-key light theme silently stops working on articles only.
 THEME_JS = "/assets/js/theme.js"
 
-NAV_ITEMS = [("about", "/index.html"), ("mixes", "/mixes.html"),
-             ("words", "/words.html"), ("media", "/media.html"),
-             ("lab", "/lab.html")]
+NAV_ITEMS = [("words", "/index.html"), ("lab", "/lab.html"),
+             ("media", "/media.html"), ("mixes", "/mixes.html"),
+             ("about", "/about.html")]
 
 
 def strip_accents(s):
@@ -147,7 +147,7 @@ def render_article(entry):
     body_html = md_lib.markdown(entry["body"], extensions=["fenced_code", "tables", "sane_lists"])
     d = entry["date"]
     meta = f'&gt; {d.strftime("%-d %b %Y").upper()} :: soobrosa' if d else "soobrosa"
-    inner = f"""<a class="back" href="/words.html">&lt;&lt; ALL WORDS</a>
+    inner = f"""<a class="back" href="/index.html">&lt;&lt; ALL WORDS</a>
 <article class="post">
 <h1>{html.escape(entry["title"])}</h1>
 <div class="meta">{meta}</div>
@@ -176,7 +176,8 @@ def render_words(entries):
 <ul class="words">
 {chr(10).join(rows)}
 </ul>"""
-    return page("WORDS // soobrosa", body, "words")
+    # The stream is the homepage, so the title tag is the bare site name.
+    return page("soobrosa", body, "words")
 
 
 REDIRECT_STUB = """<!DOCTYPE html>
@@ -268,10 +269,10 @@ def main():
             continue
         (WORDS_DIR / f'{e["slug"]}.html').write_text(render_article(e), encoding="utf-8")
         generated += 1
-    (ROOT / "words.html").write_text(render_words(entries), encoding="utf-8")
+    (ROOT / "index.html").write_text(render_words(entries), encoding="utf-8")
     (ROOT / "atom.xml").write_text(render_feed(entries), encoding="utf-8")
     redirects = write_redirects()
-    print(f"built words.html with {len(entries)} entries, {generated} article pages")
+    print(f"built index.html with {len(entries)} entries, {generated} article pages")
     print(f"wrote atom.xml and {redirects} redirect stubs")
 
 
