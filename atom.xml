@@ -154,13 +154,6 @@ This is peak Berlin bike snobbery: a frame built for you by a local builder.&lt;
    <category term="essay"/>
  </entry>
  <entry>
-   <title>Pipeline Academy on the Data Engineering Podcast Vol. 2</title>
-   <link href="https://dataengineering.academy/2021/06/29/pipeline-academy-on-the-data-engineering-podcast-vol2.html"/>
-   <updated>2021-06-29T00:00:00+00:00</updated>
-   <id>https://dataengineering.academy/2021/06/29/pipeline-academy-on-the-data-engineering-podcast-vol2.html</id>
-   <category term="talk"/>
- </entry>
- <entry>
    <title>Become a data engineer on a shoestring</title>
    <link href="https://dataengineering.academy/2020/12/15/become-a-data-engineer-on-a-shoestring.html"/>
    <updated>2020-12-15T00:00:00+00:00</updated>
@@ -173,13 +166,6 @@ This is peak Berlin bike snobbery: a frame built for you by a local builder.&lt;
    <updated>2020-10-03T00:00:00+00:00</updated>
    <id>https://dataengineering.academy/2020/10/03/presenting-and-teaching-via-zoom-101.html</id>
    <category term="essay"/>
- </entry>
- <entry>
-   <title>Data Engineering Podcast With The Data Janitor</title>
-   <link href="https://dataengineering.academy/2020/09/23/data-engineering-podcast-pipeline-academy.html"/>
-   <updated>2020-09-23T00:00:00+00:00</updated>
-   <id>https://dataengineering.academy/2020/09/23/data-engineering-podcast-pipeline-academy.html</id>
-   <category term="talk"/>
  </entry>
  <entry>
    <title>I&#x27;m not an expert, I have experience</title>
@@ -196,46 +182,11 @@ This is peak Berlin bike snobbery: a frame built for you by a local builder.&lt;
    <category term="essay"/>
  </entry>
  <entry>
-   <title>What Makes or Breaks a Data Engineer</title>
-   <link href="https://speakerdeck.com/soobrosa/what-makes-or-breaks-a-data-engineer-96635240-6633-4e30-9ed2-9bbfc547a09d"/>
-   <updated>2020-06-01T00:00:00+00:00</updated>
-   <id>https://speakerdeck.com/soobrosa/what-makes-or-breaks-a-data-engineer-96635240-6633-4e30-9ed2-9bbfc547a09d</id>
-   <category term="talk"/>
- </entry>
- <entry>
    <title>Own Your Data - like fo&#x27; real.</title>
    <link href="https://dataengineering.academy/2020/05/17/own-your-data-like-fo-real.html"/>
    <updated>2020-05-17T00:00:00+00:00</updated>
    <id>https://dataengineering.academy/2020/05/17/own-your-data-like-fo-real.html</id>
    <category term="essay"/>
- </entry>
- <entry>
-   <title>The Data Janitor Returns</title>
-   <link href="https://www.youtube.com/watch?v=LTJNnlBBzuw"/>
-   <updated>2018-06-01T00:00:00+00:00</updated>
-   <id>https://www.youtube.com/watch?v=LTJNnlBBzuw</id>
-   <category term="talk"/>
- </entry>
- <entry>
-   <title>POSTER: Towards an IoT platform with long-range wireless communication for atmospheric sensing (EGU 2018)</title>
-   <link href="https://meetingorganizer.copernicus.org/EGU2018/EGU2018-12200.pdf"/>
-   <updated>2018-04-10T00:00:00+00:00</updated>
-   <id>https://meetingorganizer.copernicus.org/EGU2018/EGU2018-12200.pdf</id>
-   <category term="talk"/>
- </entry>
- <entry>
-   <title>Tensorflow for Janitors</title>
-   <link href="https://www.youtube.com/watch?v=OSkL7AXu6tY"/>
-   <updated>2017-06-01T00:00:00+00:00</updated>
-   <id>https://www.youtube.com/watch?v=OSkL7AXu6tY</id>
-   <category term="talk"/>
- </entry>
- <entry>
-   <title>Data Janitor 101</title>
-   <link href="https://www.youtube.com/watch?v=oKWmg3oBJgc"/>
-   <updated>2016-11-01T00:00:00+00:00</updated>
-   <id>https://www.youtube.com/watch?v=oKWmg3oBJgc</id>
-   <category term="talk"/>
  </entry>
  <entry>
    <title>Venturing down the IoT Rabbit Hole</title>
@@ -296,13 +247,6 @@ This is peak Berlin bike snobbery: a frame built for you by a local builder.&lt;
 * talking securely to remote services is hard — the OAuth dance is very outlandish to iOT (you have to have an own, exposed IP, maybe be able to handle web callbacks, even HTTPS),
 * there’s no de-facto communication model (push/pull, broadcast/poll) and developers are not even nudged in either direction with best practices,
 * the current state of the union is that IoT devices have to be considered as ‘dumb’, local sensors and you need a bridge (at least a RasPi) to connect them to the outer world.&lt;/p&gt;</content>
- </entry>
- <entry>
-   <title>Migrating a data stack from AWS to Azure (via Raspberry Pi)</title>
-   <link href="https://www.youtube.com/watch?v=QhXPANTd9nE"/>
-   <updated>2016-06-01T00:00:00+00:00</updated>
-   <id>https://www.youtube.com/watch?v=QhXPANTd9nE</id>
-   <category term="talk"/>
  </entry>
  <entry>
    <title>One Million Events Tracked in a Minute on a Raspberry Pi 3</title>
@@ -461,13 +405,6 @@ $ make tests/protobuf/n
    <category term="essay"/>
  </entry>
  <entry>
-   <title>Being a Data Janitor for 10m+ Users</title>
-   <link href="https://speakerdeck.com/soobrosa/being-a-data-janitor-for-10m-plus-users"/>
-   <updated>2015-06-01T00:00:00+00:00</updated>
-   <id>https://speakerdeck.com/soobrosa/being-a-data-janitor-for-10m-plus-users</id>
-   <category term="talk"/>
- </entry>
- <entry>
    <title>Product Usage Flows with Redshift</title>
    <link href="https://soobrosa.info/words/product-usage-flows-with-redshift.html"/>
    <updated>2015-03-09T00:00:00+00:00</updated>
@@ -624,5 +561,114 @@ LIMIT 20;
    <category term="essay"/>
    <content type="html">&lt;p&gt;Keeping track of which Tableau workbook depends on which database can be cumbersome.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://gist.github.com/soobrosa/430188859dfd4ac88df8&quot;&gt;View the gist&lt;/a&gt;&lt;/p&gt;</content>
+ </entry>
+ <entry>
+   <title>Interview: Olvastuk Gibsont, volt Tetsuonk...</title>
+   <link href="http://www.artmagazin.hu/artmagazin_hirek/olvastuk_gibsont_volt_tetsuonk_ezerrel_ment_az_electronic_body_music_kezdodott_a_rave..2440.html"/>
+   <updated>2014-08-01T00:00:00+00:00</updated>
+   <id>http://www.artmagazin.hu/artmagazin_hirek/olvastuk_gibsont_volt_tetsuonk_ezerrel_ment_az_electronic_body_music_kezdodott_a_rave..2440.html</id>
+   <category term="print"/>
+ </entry>
+ <entry>
+   <title>CSV to Google Sheets</title>
+   <link href="https://soobrosa.info/words/csv-to-google-sheets.html"/>
+   <updated>2014-03-02T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/csv-to-google-sheets.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;If you need to share a CSV via Google Sheets use this Python command line tool.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://gist.github.com/soobrosa/910ffb99607402fb6bfd&quot;&gt;View the gist&lt;/a&gt;&lt;/p&gt;</content>
+ </entry>
+ <entry>
+   <title>Berlin KITAs</title>
+   <link href="https://soobrosa.info/words/berlin-kitas.html"/>
+   <updated>2014-02-03T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/berlin-kitas.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;Preparing on how to find KITA places for the kids -- a quick scrape from the official Berlin site with minimal styling goes to CartoDB.&lt;/p&gt;
+&lt;iframe width=&#x27;100%&#x27; height=&#x27;520&#x27; frameborder=&#x27;0&#x27; src=&#x27;http://dmolnar.cartodb.com/viz/74e161f2-7717-11e3-b519-3085a9a956e8/embed_map?title=true&amp;description=false&amp;search=false&amp;shareable=true&amp;cartodb_logo=true&amp;layer_selector=false&amp;legends=false&amp;scrollwheel=true&amp;sublayer_options=1&amp;sql=&amp;sw_lat=52.39990521956092&amp;sw_lon=13.1781005859375&amp;ne_lat=52.6047155934752&amp;ne_lon=13.8372802734375&#x27; allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen&gt;&lt;/iframe&gt;</content>
+ </entry>
+ <entry>
+   <title>mETL intro presentation</title>
+   <link href="https://soobrosa.info/words/metl-intro.html"/>
+   <updated>2013-10-21T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/metl-intro.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;My &lt;a href=&quot;https://www.haikudeck.com/p/clh5HKRIwf/metl-intro&quot;&gt;mETL intro presentation&lt;/a&gt; at last week&#x27;s &lt;a href=&quot;http://www.meetup.com/Budapest-Database-Meetup/&quot;&gt;Budapest Database Meetup&lt;/a&gt; (thanks to &lt;a href=&quot;https://github.com/ceumicrodata&quot;&gt;CEU Microdata&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://twitter.com/bfaludi&quot;&gt;@bfaludi&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://twitter.com/ceuhungary&quot;&gt;@ceuhungary&lt;/a&gt;)&lt;/p&gt;
+&lt;iframe src=&quot;https://www.haikudeck.com/e/clh5HKRIwf/?isUrlHashEnabled=false&amp;isPreviewEnabled=false&amp;isHeaderVisible=false&quot; width=&quot;640&quot; height=&quot;541&quot; frameborder=&quot;0&quot; marginheight=&quot;0&quot; marginwidth=&quot;0&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;You can &lt;a href=&quot;http://www.ustream.tv/recorded/39892412&quot;&gt;watch it&lt;/a&gt; courtesy of Ustream.&lt;/p&gt;
+&lt;p&gt;Get &lt;a href=&quot;https://pypi.python.org/pypi/mETL/0.1.7.0dev&quot;&gt;mETL&lt;/a&gt; as Python package now after you&#x27;ve seen Bence&#x27;s &lt;a href=&quot;https://speakerdeck.com/bfaludi/extract-transform-load-using-metl&quot;&gt;presentation&lt;/a&gt; at PyData Berlin and checked out his &lt;a href=&quot;https://github.com/bfaludi/mETL-tutorials&quot;&gt;tutorial&lt;/a&gt;.&lt;/p&gt;</content>
+ </entry>
+ <entry>
+   <title>Export your Miso history</title>
+   <link href="https://soobrosa.info/words/miso-export.html"/>
+   <updated>2013-08-27T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/miso-export.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;If you ever happen to feel like exporting your Miso history you can use my Python script&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://gist.github.com/soobrosa/6356520&quot;&gt;View the gist&lt;/a&gt;&lt;/p&gt;</content>
+ </entry>
+ <entry>
+   <title>Duna waterlevels from 2002</title>
+   <link href="https://soobrosa.info/words/duna-waterlevels.html"/>
+   <updated>2013-06-10T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/duna-waterlevels.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;I didn&#x27;t remember flood in June, so checked out the data. Lighter blue is older data.&lt;/p&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://public.tableausoftware.com/javascripts/api/viz_v1.js&quot;&gt;&lt;/script&gt;
+&lt;div class=&quot;tableauPlaceholder&quot; style=&quot;width:654px; height:629px;&quot;&gt;&lt;noscript&gt;&lt;a href=&quot;#&quot;&gt;&lt;img alt=&quot;Dashboard 1 &quot; src=&quot;http:&amp;#47;&amp;#47;public.tableausoftware.com&amp;#47;static&amp;#47;images&amp;#47;du&amp;#47;duna_vize&amp;#47;Dashboard1&amp;#47;1_rss.png&quot; style=&quot;border: none&quot; /&gt;&lt;/a&gt;&lt;/noscript&gt;&lt;object class=&quot;tableauViz&quot; width=&quot;654&quot; height=&quot;629&quot; style=&quot;display:none;&quot;&gt;&lt;param name=&quot;host_url&quot; value=&quot;http%3A%2F%2Fpublic.tableausoftware.com%2F&quot; /&gt;&lt;param name=&quot;site_root&quot; value=&quot;&quot; /&gt;&lt;param name=&quot;name&quot; value=&quot;duna_vize&amp;#47;Dashboard1&quot; /&gt;&lt;param name=&quot;tabs&quot; value=&quot;no&quot; /&gt;&lt;param name=&quot;toolbar&quot; value=&quot;yes&quot; /&gt;&lt;param name=&quot;static_image&quot; value=&quot;http:&amp;#47;&amp;#47;public.tableausoftware.com&amp;#47;static&amp;#47;images&amp;#47;du&amp;#47;duna_vize&amp;#47;Dashboard1&amp;#47;1.png&quot; /&gt;&lt;param name=&quot;animate_transition&quot; value=&quot;yes&quot; /&gt;&lt;param name=&quot;display_static_image&quot; value=&quot;yes&quot; /&gt;&lt;param name=&quot;display_spinner&quot; value=&quot;yes&quot; /&gt;&lt;param name=&quot;display_overlay&quot; value=&quot;yes&quot; /&gt;&lt;param name=&quot;display_count&quot; value=&quot;yes&quot; /&gt;&lt;/object&gt;&lt;/div&gt;
+
+&lt;p&gt;I copied together the tables from &lt;a href=&quot;http://www.hydroinfo.hu/Html/archivum/archiv_tabla.html&quot;&gt;Hydroinfo&lt;/a&gt; to a text file and added the year before each table. A light ETL to reformat webdata from  to a TSV with date and value columns&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://gist.github.com/soobrosa/5747648&quot;&gt;View the gist&lt;/a&gt;&lt;/p&gt;</content>
+ </entry>
+ <entry>
+   <title>Otthontérkép - map-based real estate site</title>
+   <link href="https://soobrosa.info/words/otthonterkep.html"/>
+   <updated>2013-05-22T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/otthonterkep.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;It&#x27;s fun to see that what used to be MVPs sketched by me like this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;codename &lt;a href=&quot;/leaflet/leaflet/cluster.html&quot;&gt;cluster&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;codename &lt;a href=&quot;/leaflet/leaflet/cloro.html&quot;&gt;cloro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;codename &lt;a href=&quot;/leaflet/leaflet/stress.html&quot;&gt;stress&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;codename &lt;a href=&quot;/leaflet/leaflet/stress_2.html&quot;&gt;stress dos&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;launches as a &lt;a href=&quot;http://otthonterkep.hu/&quot;&gt;proper product&lt;/a&gt; -- also on &lt;a href=&quot;https://www.behance.net/gallery/13288307/Otthontrkp&quot;&gt;Behance&lt;/a&gt;.&lt;/p&gt;</content>
+ </entry>
+ <entry>
+   <title>Hubway Data Challenge</title>
+   <link href="https://soobrosa.info/words/hubway-data-challenge.html"/>
+   <updated>2012-12-12T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/hubway-data-challenge.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;http://hubwaydatachallenge.org/submission/38/&quot;&gt;Applied&lt;/a&gt; for &lt;a href=&quot;http://hubwaydatachallenge.org/&quot;&gt;Hubway Data Challenge&lt;/a&gt; with &lt;a href=&quot;http://dataeast.co/&quot;&gt;Balázs Krich&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Learned:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://mapbox.com/tilemill/&quot;&gt;Tilemill&lt;/a&gt; is good, but you need time and a plan,&lt;/li&gt;
+&lt;li&gt;titles are major on maps,&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://ned.usgs.gov/&quot;&gt;USGS NED&lt;/a&gt; and (ASTER)[http://gdem.ersdac.jspacesystems.or.jp/search.jsp] are geil if you go for topographic maps,&lt;/li&gt;
+&lt;li&gt;if your data has both timestamp and geocode go &lt;a href=&quot;http://blog.cartodb.com/post/32464928928/torque-big-data-meets-time-based-maps-bundled-with&quot;&gt;Torque&lt;/a&gt; to animate them. Some &lt;a href=&quot;https://developers.google.com/maps/documentation/directions/&quot;&gt;Google Directions API&lt;/a&gt; magic helps.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br&gt;
+&lt;br&gt;&lt;/p&gt;
+&lt;iframe width=&quot;100%&quot; height=&quot;520&quot; frameborder=&quot;0&quot; src=&quot;//dataeast.cartodb.com/viz/80ab8d30-fbcb-11e3-b014-0e73339ffa50/embed_map?title=false&amp;amp;description=false&amp;amp;search=false&amp;amp;shareable=true&amp;amp;cartodb_logo=true&amp;amp;layer_selector=false&amp;amp;legends=false&amp;amp;scrollwheel=true&amp;amp;fullscreen=true&amp;amp;sublayer_options=1&amp;amp;sql=&amp;amp;sw_lat=42.33641946945544&amp;amp;sw_lon=-71.1731691381836&amp;amp;ne_lat=42.38538094930986&amp;amp;ne_lon=-71.00391102050781&quot; allowfullscreen=&quot;&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; oallowfullscreen=&quot;&quot; msallowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/p&gt;
+&lt;p&gt;Anyway this way a real ramp up in digital mapping.&lt;/p&gt;</content>
+ </entry>
+ <entry>
+   <title>Thesis - Effect of Location Based Social Activities in Hungarian Tourism</title>
+   <link href="https://soobrosa.info/words/thesis.html"/>
+   <updated>2012-01-22T00:00:00+00:00</updated>
+   <id>https://soobrosa.info/words/thesis.html</id>
+   <category term="essay"/>
+   <content type="html">&lt;p&gt;Yes, there is an English extract.&lt;/p&gt;
+&lt;div&gt;&lt;object classid=&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000&quot; style=&quot;width: 420px; height: 272px;&quot; id=&quot;ed33b1f7-5881-d671-1a5d-3fbd51950e3e&quot;&gt;&lt;param name=&quot;movie&quot; value=&quot;http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf?mode=mini&amp;amp;backgroundColor=%23222222&amp;amp;documentId=120115095227-b7236e3b02f5438584a99a04c92099f9&quot; /&gt;&lt;param name=&quot;allowfullscreen&quot; value=&quot;true&quot; /&gt;&lt;param name=&quot;menu&quot; value=&quot;false&quot; /&gt;&lt;param name=&quot;wmode&quot; value=&quot;transparent&quot; /&gt;&lt;embed src=&quot;http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf&quot; type=&quot;application/x-shockwave-flash&quot; allowfullscreen=&quot;true&quot; menu=&quot;false&quot; wmode=&quot;transparent&quot; style=&quot;width: 420px; height: 272px;&quot; flashvars=&quot;mode=mini&amp;amp;backgroundColor=%23222222&amp;amp;documentId=120115095227-b7236e3b02f5438584a99a04c92099f9&quot; /&gt;&lt;/object&gt;&lt;/div&gt;
+
+&lt;p&gt;I also presented it and got promoted for the annual competition of the best thesis in tourism, but sometimes the daughter of the Prime Minister is just &lt;a href=&quot;http://444.hu/2013/05/10/csak-az-orban-rahe-palyazatanak-ertekelese-nyilvanos/&quot;&gt;better&lt;/a&gt; than you.&lt;/p&gt;
+&lt;div style=&quot;width: 595px;&quot; id=&quot;__ss_11138566&quot;&gt;&lt;iframe src=&quot;http://www.slideshare.net/slideshow/embed_code/11138566&quot; width=&quot;595&quot; height=&quot;497&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+
+&lt;p&gt;Here&#x27;s the full text in Hungarian.&lt;/p&gt;
+&lt;div&gt;&lt;object classid=&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000&quot; style=&quot;width: 420px; height: 272px;&quot; id=&quot;4e736efc-389a-11c2-bbfe-385f7e5acfaf&quot;&gt;&lt;param name=&quot;movie&quot; value=&quot;http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf?mode=mini&amp;amp;backgroundColor=%23222222&amp;amp;documentId=120130172845-438e62ce9a1c4343acfbbbf71472a026&quot; /&gt;&lt;param name=&quot;allowfullscreen&quot; value=&quot;true&quot; /&gt;&lt;param name=&quot;menu&quot; value=&quot;false&quot; /&gt;&lt;param name=&quot;wmode&quot; value=&quot;transparent&quot; /&gt;&lt;embed src=&quot;http://static.issuu.com/webembed/viewers/style1/v2/IssuuReader.swf&quot; type=&quot;application/x-shockwave-flash&quot; allowfullscreen=&quot;true&quot; menu=&quot;false&quot; wmode=&quot;transparent&quot; style=&quot;width: 420px; height: 272px;&quot; flashvars=&quot;mode=mini&amp;amp;backgroundColor=%23222222&amp;amp;documentId=120130172845-438e62ce9a1c4343acfbbbf71472a026&quot; /&gt;&lt;/object&gt;&lt;/div&gt;</content>
  </entry>
 </feed>

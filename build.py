@@ -5,7 +5,7 @@ Front matter (YAML-ish) per markdown file:
     ---
     title: Some Title
     date: 2016-09-06
-    kind: essay            # essay | talk | translation | print
+    kind: essay            # essay | translation | print
     tags: data, hardware
     external: https://...  # optional; if set, item links out and no page is generated
     summary: one line       # optional
@@ -30,7 +30,8 @@ ROOT = pathlib.Path(__file__).parent
 CONTENT = ROOT / "content"
 WORDS_DIR = ROOT / "words"
 
-KINDS = ["essay", "talk", "translation", "print"]
+# Talks live on media.html, not in the stream, so "talk" is not a kind here.
+KINDS = ["essay", "translation", "print"]
 # The TOPIC filter is built from whatever tags appear in front matter, so a typo
 # or a one-off word silently becomes a permanent dropdown row. Keep this closed.
 TAGS = ["career", "culture", "data", "hardware", "learning"]
@@ -123,7 +124,8 @@ def load_entries():
         title = meta.get("title") or path.stem
         kind = meta.get("kind", "essay").strip().lower()
         if kind not in KINDS:
-            kind = "essay"
+            sys.exit(f"{path.name}: unknown kind '{kind}'. "
+                     f"Add to KINDS in build.py or fix the front matter.")
         tags = [t.strip().lower() for t in meta.get("tags", "").split(",") if t.strip()]
         unknown = [t for t in tags if t not in TAGS]
         if unknown:

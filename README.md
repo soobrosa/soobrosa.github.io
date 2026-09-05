@@ -60,7 +60,7 @@ Drop a markdown file into `content/`. Front matter:
 ---
 title: My Post Title
 date: 2026-06-21
-kind: essay            # essay | talk | translation | print
+kind: essay            # essay | translation | print
 tags: data, career     # from the closed TAGS list in build.py
 external:              # optional — if set, the item links out and no page is built
 summary:               # optional
@@ -77,9 +77,10 @@ Body in **markdown**...
 - `kind` and `tags` are both closed vocabularies (`KINDS` and `TAGS` in
   `build.py`). An unknown value fails the build rather than silently adding
   a permanent dropdown row for a typo.
-- `external:` is for talks, podcasts, print pieces, etc. that live
+- `external:` is for essays, translations and print pieces that live
   elsewhere — they appear in the list but link out instead of generating
-  a page.
+  a page. Talks, podcasts, videos and slide decks go on media.html, not in
+  the stream.
 
 ## Add an app to the lab
 
